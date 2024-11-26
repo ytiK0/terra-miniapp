@@ -10,7 +10,9 @@ export function BottomMenu() {
         <MenuButton buttonName={"rating"} />
       </div>
       <Link to={"/home"}>
-        <div className={"home-button"}>H</div>
+        <div className={"home-button"}>
+          <img src="menu-buttons/home.png" alt="menu button" width={50}/>
+        </div>
       </Link>
       <div className={"button-group"}>
         <MenuButton buttonName={"levels"} />
