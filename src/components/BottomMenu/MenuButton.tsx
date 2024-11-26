@@ -3,7 +3,7 @@ import {useLocation} from "react-router-dom";
 
 export interface BottomMenuButtonProps {
   width?: number,
-  buttonName: "levels" | "profile" | "rating" | "wallet"
+  buttonName: "levels" | "profile" | "rating" | "wallet" | "home"
 }
 
 export function MenuButton({ width, buttonName }: BottomMenuButtonProps) {
