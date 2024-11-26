@@ -1,5 +1,5 @@
 .button-container {
-    /*position: fixed;*/
+    /*position: absolute;*/
     /*bottom: 17px;*/
     display: flex;
     justify-content: space-between;
@@ -14,12 +14,21 @@
     gap: 50px;
 }
 
+.button-img {
+    display: block;
+    width: min(6vw, 30px);
+}
+
+.home-button_img {
+    width: min(50px, 10vw);
+}
+
 .home-button {
     position: absolute;
     display: flex;
     transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
+    width: min(18vw, 80px);
+    height: min(18vw, 80px);
     background-color: #f89007;
     border-radius: 50%;
     justify-content: center;

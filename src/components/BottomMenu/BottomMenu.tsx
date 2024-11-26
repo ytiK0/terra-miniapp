@@ -11,7 +11,7 @@ export function BottomMenu() {
       </div>
       <Link to={"/home"}>
         <div className={"home-button"}>
-          <img src="menu-buttons/home.png" alt="menu button" width={50}/>
+          <img className={"home-button_img"} src="menu-buttons/home.png" alt="menu button"/>
         </div>
       </Link>
       <div className={"button-group"}>

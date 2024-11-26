@@ -1,6 +1,6 @@
 import type { ComponentType, JSX } from 'react';
 
-import { HomePage } from '@/pages/HomePage.tsx';
+import { HomePage } from '@/pages/HomePage/HomePage.tsx';
 import { FaqPage } from "@/pages/FaqPage.tsx";
 import { InformationPage } from "@/pages/InformationPage.tsx";
 import {LevelsPage} from "@/pages/LevelsPage.tsx";

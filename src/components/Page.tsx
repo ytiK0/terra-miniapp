@@ -3,7 +3,7 @@ import { backButton } from '@telegram-apps/sdk-react';
 import { PropsWithChildren, useEffect } from 'react';
 import {BottomMenu} from "@/components/BottomMenu/BottomMenu.tsx";
 
-export function Page({ children, back = false, hasBottomMenu = true }: PropsWithChildren<{
+export function Page({ children, back = false, hasBottomMenu = true}: PropsWithChildren<{
   back?: boolean,
   hasBottomMenu?: boolean
 }>) {

@@ -12,7 +12,7 @@ export function MenuButton({ width, buttonName }: BottomMenuButtonProps) {
 
   return (
     <Link to={`/${buttonName}`} className={"button"}>
-      <img src={src} alt={"btn"} width={width || 30} />
+      <img className={"button-img"} src={src} alt={"btn"} width={width || 30} />
     </Link>
   );
 }

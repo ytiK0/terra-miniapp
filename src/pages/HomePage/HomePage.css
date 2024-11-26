@@ -1,0 +1,7 @@
+.statistic-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 30px;
+}
+

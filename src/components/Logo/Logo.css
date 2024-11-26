@@ -4,6 +4,6 @@
 }
 
 .logo {
-    width: 28vw;
+    width: min(28vw, 200px);
     text-align: center;
 }
