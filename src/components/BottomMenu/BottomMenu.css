@@ -1,0 +1,27 @@
+.button-container {
+    position: fixed;
+    bottom: 17px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #26272d;
+    border-radius: 20px;
+    padding: 15px 20px;
+}
+
+.button-group {
+    display: flex;
+    gap: 50px;
+}
+
+.home-button {
+    position: absolute;
+    display: flex;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-color: #f89007;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
