@@ -5,7 +5,7 @@ import {
   miniApp,
   initData,
   $debug,
-  init as initSDK, swipeBehavior,
+  init as initSDK,
 } from '@telegram-apps/sdk-react';
 
 /**
@@ -29,17 +29,7 @@ export function init(debug: boolean): void {
   miniApp.mount();
   themeParams.mount();
 
-  if (swipeBehavior.mount.isAvailable()) {
-    swipeBehavior.mount();
-    swipeBehavior.isMounted(); // true
-  }
-
   initData.restore();
-
-  if (swipeBehavior.disableVertical.isAvailable()) {
-    swipeBehavior.disableVertical();
-    swipeBehavior.isVerticalEnabled(); // false
-  }
   void viewport
     .mount()
     .catch(e => {
