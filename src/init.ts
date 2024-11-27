@@ -29,12 +29,17 @@ export function init(debug: boolean): void {
   miniApp.mount();
   themeParams.mount();
 
+  if (swipeBehavior.mount.isAvailable()) {
+    swipeBehavior.mount();
+    swipeBehavior.isMounted(); // true
+  }
+
+  initData.restore();
+
   if (swipeBehavior.disableVertical.isAvailable()) {
     swipeBehavior.disableVertical();
     swipeBehavior.isVerticalEnabled(); // false
   }
-
-  initData.restore();
   void viewport
     .mount()
     .catch(e => {
