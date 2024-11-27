@@ -36,6 +36,8 @@ export function init(debug: boolean): void {
     })
     .then(() => {
       viewport.bindCssVars();
+      const root = document.documentElement;
+      root.style.setProperty('--viewport-height', viewport.height.toString());
     });
 
   // Define components-related CSS variables.

@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     max-width: 540px;
-    height: 100vh;
+    height: var(--viewport-height);
     margin: 0 auto;
     background: url("background.jpg");
     background-size: 100% 100%;
