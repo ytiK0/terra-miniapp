@@ -39,6 +39,7 @@
 
 .faqAnswer  p {
     padding-bottom: 10px;
+    text-align: left;
 }
 
 .faqAnswer:last-child {
