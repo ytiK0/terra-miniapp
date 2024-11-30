@@ -3,8 +3,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: center;
     max-width: 540px;
-    height: var(--viewport-height);
+    height: 100vh;
     margin: 0 auto;
     background: url("background.jpg");
     background-size: 100% 100%;

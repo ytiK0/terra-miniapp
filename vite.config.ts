@@ -23,5 +23,10 @@ export default defineConfig({
     // Exposes your dev server and makes it accessible for the devices in the same network.
     host: true,
   },
+  css: {
+    modules: {
+      generateScopedName: '[name]_[local]_[hash:base64:3]'
+    }
+  }
 });
 
