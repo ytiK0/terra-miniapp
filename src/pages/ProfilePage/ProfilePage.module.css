@@ -1,0 +1,32 @@
+.headWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.headProfileImg {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.headProfileImgBg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background-color: #f89007;
+}
+
+.headSignWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.headSign {
+    text-align: left;
+    color: #D5D5D5;
+    font-size: 28px;
+}
