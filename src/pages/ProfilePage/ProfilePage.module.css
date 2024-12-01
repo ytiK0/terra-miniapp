@@ -30,3 +30,115 @@
     color: #D5D5D5;
     font-size: 28px;
 }
+
+.referralSection {
+    margin: 0 15px;
+}
+
+.referralSectionHeader {
+    color: #F89007;
+    font-size: 24px;
+}
+
+.referralLinkWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    background-color: #2a2c2f;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.referralLinkBox {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    color: #989898;
+}
+
+.referralCopyButton {
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #F89007;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.profitSection {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px;
+}
+
+.profitBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 0;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 20px;
+    background-color: #2a2c2f;
+}
+
+.profitLabel {
+    padding: 5px;
+    border-radius: 10px;
+    color: #0f0f0f;
+    background-color: #F89007;
+}
+
+.externResSection {
+    display: flex;
+    gap: 10px;
+    margin: 0 15px;
+}
+
+.externResBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+    background-color: #2f2f2f;
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.helpSection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.helpContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 15px;
+    margin: 0 15px;
+    padding: 10px;
+    background-color: #2a2c2f;
+}
+
+.helpElement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #F89007;
+    color: black;
+    cursor: pointer;
+}

@@ -7,6 +7,8 @@ import {LevelsPage} from "@/pages/LevelsPage.tsx";
 import {ProfilePage} from "@/pages/ProfilePage/ProfilePage.tsx";
 import {RatingPage} from "@/pages/RatingPage.tsx";
 import {WalletPage} from "@/pages/WalletPage.tsx";
+import {WithdrawPage} from "@/pages/WithdrawPage.tsx";
+import {ReviewsPage} from "@/pages/ReviewsPage.tsx";
 
 interface Route {
   path: string;
@@ -23,5 +25,6 @@ export const routes: Route[] = [
   { path: '/profile', Component: ProfilePage },
   { path: '/rating', Component: RatingPage },
   { path: '/wallet', Component: WalletPage },
-
+  { path: '/withdraw', Component: WithdrawPage },
+  { path: '/reviews', Component: ReviewsPage }
 ];
