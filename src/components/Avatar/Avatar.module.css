@@ -1,0 +1,14 @@
+.avatarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #F89007;
+    border-radius: 50%;
+}
+
+.avatarImg {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+}

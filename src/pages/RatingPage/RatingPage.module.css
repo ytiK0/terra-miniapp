@@ -1,0 +1,71 @@
+.spinner {
+    --g-color-line-brand: white;
+    margin: 0 auto;
+}
+
+.topSection {
+    display: flex;
+    gap: 10px;
+    margin: 10px auto 0;
+}
+
+.topUser {
+    align-self: flex-end;
+    max-width: 80px;
+}
+
+.topUserBig {
+    max-width: 100px;
+}
+
+.topUsername {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+}
+
+.userStatSection {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px 0;
+}
+
+.userStatBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topListSection {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    gap: 5px;
+    margin: 10px 20px 0;
+    min-height: 30vh;
+}
+
+.topLine {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2a2c2f;
+    border-radius: 10px;
+    padding: 10px 0 10px 10px;
+}
+
+.topLineName {
+    display: block;
+    width: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+    text-align: left;
+}
+
+.topLineCoins {
+    flex-grow: 0.7;
+    background-color: #F89007;
+    color: black;
+    border-radius: 10px;
+}

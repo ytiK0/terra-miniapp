@@ -1,0 +1,70 @@
+.moreInformationBtn {
+    position: absolute;
+    left: 15px;
+    top: 35%;
+    width: 40px;
+    height: 40px;
+    /*transform: translate(0, -30%);*/
+}
+
+.subtitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 15px 40px 0;
+}
+
+.subtitleHead {
+    font-size: 38px;
+}
+
+.levelBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2A2E33;
+    border-radius: 15px;
+    padding: 5px 30px;
+    margin: 0 20px;
+}
+
+.levelImg {
+    width: 15%;
+    max-height: 70px;
+    object-fit: contain;
+}
+
+.levelWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.levelsSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: .4;
+}
+
+.levelName {
+    color: #F89007;
+    font-size: 16px;
+}
+
+.levelGain {
+    color: #989898;
+}
+
+.levelGainActive {
+    color: white;
+}
+
+.level {
+    min-width: 80px;
+    background-color: #F89007;
+    border-radius: 20px;
+    color: black;
+    padding: 5px 15px;
+}

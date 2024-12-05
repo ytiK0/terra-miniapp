@@ -1,9 +1,10 @@
 import {PropsWithChildren} from "react";
 
 import "./Badge.css"
+import {classNames} from "@telegram-apps/sdk-react";
 
-export function Badge({children}: PropsWithChildren) {
+export function Badge({children, className}: PropsWithChildren<{className?: string}>) {
   return (
-    <div className="bage">{children}</div>
+    <div className={classNames(className, "bage")}>{children}</div>
   );
 }

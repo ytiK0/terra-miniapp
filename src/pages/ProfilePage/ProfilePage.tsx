@@ -122,30 +122,28 @@ export function ProfilePage() {
           <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}} />
         </Link>
       </section>
-      <section className={styles.helpSection}>
-        <div className={styles.helpContainer} onClick={openChannel}>
-          <div className={styles.helpElement}>
-            <LogoTelegram />
-            @{import.meta.env.VITE_TERRA_CHANEL_NAME}
-          </div>
-          <div className={styles.helpElement} onClick={openX}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M15.7512 0H18.818L12.1179 8.4718L20 20H13.8284L8.99458 13.0082L3.46359 20H0.394938L7.5613 10.9385L0 0H6.32828L10.6976 6.39077L15.7512 0ZM14.6748 17.9692H16.3742L5.4049 1.9241H3.58133L14.6748 17.9692Z"
-                fill="black"/>
-            </svg>
-            @terrachannel
-          </div>
+      <section className={styles.helpContainer} onClick={openChannel}>
+        <div className={styles.helpElement}>
+          <LogoTelegram />
+          @{import.meta.env.VITE_TERRA_CHANEL_NAME}
         </div>
-        <div className={styles.helpContainer}>
-          <div style={{flexGrow: 1, fontSize:14}}>
-            Technical
-            <br/>
-            Support
-          </div>
-          <div className={styles.helpElement} onClick={openSupport}>
-            @support
-          </div>
+        <div className={styles.helpElement} onClick={openX}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M15.7512 0H18.818L12.1179 8.4718L20 20H13.8284L8.99458 13.0082L3.46359 20H0.394938L7.5613 10.9385L0 0H6.32828L10.6976 6.39077L15.7512 0ZM14.6748 17.9692H16.3742L5.4049 1.9241H3.58133L14.6748 17.9692Z"
+              fill="black"/>
+          </svg>
+          @terrachannel
+        </div>
+      </section>
+      <section className={styles.helpContainer}>
+        <div style={{flexGrow: 1, fontSize:14}}>
+          Technical
+          <br/>
+          Support
+        </div>
+        <div className={styles.helpElement} onClick={openSupport}>
+          @support
         </div>
       </section>
     </Page>

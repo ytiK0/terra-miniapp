@@ -1,9 +1,9 @@
 import "./StatisticBox.css"
 import {PropsWithChildren} from "react";
 
-export function StatisticBox({ children }:PropsWithChildren) {
+export function StatisticBox({ children, className }:PropsWithChildren<{className?: string}>) {
   return (
-    <div className={"statistic-box"}>
+    <div className={[className, "statistic-box"].filter((e) => e).join(" ")}>
       {children}
     </div>
   );

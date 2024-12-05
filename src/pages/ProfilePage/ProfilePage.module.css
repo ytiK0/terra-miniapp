@@ -114,12 +114,6 @@
     cursor: pointer;
 }
 
-.helpSection {
-    display: flex;
-    flex-direction: column;
-    gap: 5px
-}
-
 .helpContainer {
     display: flex;
     justify-content: space-between;

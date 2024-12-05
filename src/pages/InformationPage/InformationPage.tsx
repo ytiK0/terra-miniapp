@@ -63,7 +63,7 @@ export function InformationPage() {
   const [openAccordion, setOpenCategory] = useState<null | string>(null)
 
   return (
-    <Page back={false}>
+    <Page back={true}>
       <div className={styles.headerWrapper}>
         <h1 className={styles.header}>Information</h1>
         <span style={{color: "#D5D5D5", fontSize: "16px", width: "70%", display: "flex"}}>The user receives points equivalent to 50% of the recharge amount</span>
