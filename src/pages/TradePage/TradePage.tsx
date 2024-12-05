@@ -1,12 +1,12 @@
 import {Page} from "@/components/Page.tsx";
 
 import style from "./TradePage.module.css"
-import {useState} from "react";
-
-type Currency = "TERRA" | "USDT";
+// import {useState} from "react";
+//
+// type Currency = "TERRA" | "USDT";
 
 export function TradePage() {
-  const [enterCurrency, setEnterCurrency] = useState<Currency>("TERRA")
+  // const [enterCurrency, setEnterCurrency] = useState<Currency>("TERRA")
 
   return (
     <Page back={true}>
@@ -18,7 +18,7 @@ export function TradePage() {
         <div className={style.result}></div>
       </section>
       <section className={style.exchangeRateSectiom}>
-        
+
       </section>
       <section className={style.numpad}>
 

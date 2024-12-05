@@ -6,7 +6,7 @@ import { InformationPage } from "@/pages/InformationPage/InformationPage.tsx";
 import {LevelsPage} from "@/pages/LevelsPage/LevelsPage.tsx";
 import {ProfilePage} from "@/pages/ProfilePage/ProfilePage.tsx";
 import {RatingPage} from "@/pages/RatingPage/RatingPage.tsx";
-import {WalletPage} from "@/pages/WalletPage.tsx";
+// import {WalletPage} from "@/pages/WalletPage.tsx";
 import {WithdrawPage} from "@/pages/WithdrawPage.tsx";
 import {ReviewsPage} from "@/pages/ReviewsPage.tsx";
 import {TradePage} from "@/pages/TradePage/TradePage.tsx";
