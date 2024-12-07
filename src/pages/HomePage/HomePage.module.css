@@ -1,0 +1,25 @@
+.statisticContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 30px;
+}
+
+.value {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #D5D5D5;
+}
+
+.lionImg {
+    width: 100%;
+    max-height: max(45vh, 250px);
+    flex-shrink: 1;
+    object-fit: contain;
+}
+
+.lionSection {
+    display: flex;
+    flex-direction: column;
+}

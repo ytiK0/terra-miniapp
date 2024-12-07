@@ -28,6 +28,10 @@ export function calcLevel(coins: number) {
     { level: 26, coins: 25000 }
   ];
 
+  if (coins === 0) {
+    return 0
+  }
+
   for (let i = levels.length - 1; i >= 0; i--) {
     if (coins >= levels[i].coins) {
       return levels[i].level;

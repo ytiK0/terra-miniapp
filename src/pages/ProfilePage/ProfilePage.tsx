@@ -5,24 +5,9 @@ import styles from "./ProfilePage.module.css"
 import {ArrowShapeTurnUpRight, Copy, LogoTelegram} from "@gravity-ui/icons";
 import {useCallback} from "react";
 import {Link} from "@/components/Link/Link.tsx";
+import {getStatus} from "@/helpers/getStatus.ts";
 
-function getStatusByCoinCount(coinCount: number) {
-  if (coinCount <= 500) {
-    return "Kid"
-  }
-  else if (coinCount <= 1500) {
-    return "Teen"
-  }
-  else if (coinCount <= 5000) {
-    return "Adult"
-  }
-  else if (coinCount <= 25000) {
-    return "Boss"
-  }
-  else {
-    return "Godfather"
-  }
-}
+
 
 export function ProfilePage() {
   const user = useSignal(initData.user)
@@ -91,7 +76,7 @@ export function ProfilePage() {
         </div>
       </section>
       <section style={{textAlign:"left", marginLeft:"15px"}}>
-        <span style={{}}>Status: <span style={{color:"#F89007"}}>{getStatusByCoinCount(userCoinCount)}</span></span>
+        <span style={{}}>Status: <span style={{color:"#F89007"}}>{getStatus(userCoinCount)}</span></span>
       </section>
       <section className={styles.profitSection}>
         <div className={styles.profitBox}>

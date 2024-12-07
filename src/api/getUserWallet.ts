@@ -6,6 +6,7 @@ export interface UserBackend {
   name: string
   link: string
   coins: number
+  usdt: number
   level: number
   referId: number
   createdAt: Date
@@ -20,5 +21,5 @@ export async function getUserWallet(id: string) {
   if (resJson.coins === undefined) {
     throw new Error("Request failed") ;
   }
-  return { usdt: 0, terroCoins: resJson.coins } as UserWallet;
+  return { usdt: resJson.usdt, terroCoins: resJson.coins } as UserWallet;
 }
