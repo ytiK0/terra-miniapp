@@ -6,9 +6,10 @@ import { InformationPage } from "@/pages/InformationPage/InformationPage.tsx";
 import {LevelsPage} from "@/pages/LevelsPage/LevelsPage.tsx";
 import {ProfilePage} from "@/pages/ProfilePage/ProfilePage.tsx";
 import {RatingPage} from "@/pages/RatingPage/RatingPage.tsx";
-// import {WalletPage} from "@/pages/WalletPage.tsx";
+import {WalletPage} from "@/pages/WalletPage/WalletPage.tsx";
 import {WithdrawPage} from "@/pages/WithdrawPage.tsx";
 import {ReviewsPage} from "@/pages/ReviewsPage.tsx";
+import {ReceiveUsdtPage, SendUsdtPage} from "@/pages/ManipulateBalance/ManipulateBalance.tsx";
 import {TradePage} from "@/pages/TradePage/TradePage.tsx";
 
 interface Route {
@@ -25,8 +26,10 @@ export const routes: Route[] = [
   { path: '/levels', Component: LevelsPage },
   { path: '/profile', Component: ProfilePage },
   { path: '/rating', Component: RatingPage },
-  // { path: '/wallet', Component: WalletPage },
+  { path: '/wallet', Component: WalletPage },
   { path: '/withdraw', Component: WithdrawPage },
-  { path: '/wallet', Component: TradePage },
+  { path: '/trade', Component: TradePage },
+  { path: '/receive', Component: ReceiveUsdtPage },
+  { path: '/send', Component: SendUsdtPage },
   { path: '/reviews', Component: ReviewsPage }
 ];

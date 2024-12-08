@@ -11,7 +11,7 @@ interface TradeInputProps {
 }
 
 export function TradeInput({value, currency, isShowingResult}: TradeInputProps) {
-  const coefficient = !isShowingResult ? 1 : currency === "TERRA" ? 2 : 0.5
+  const coefficient = !isShowingResult ? 1 : currency === "TERRA" ? 0.5 : 2
 
   return (
     <div className={style.inputWrapper}>

@@ -6,11 +6,11 @@ export interface UserWallet {
 }
 
 interface AppState {
-  userWallet: UserWallet | undefined
+  userWallet: UserWallet
   setUserWallet: (w: UserWallet) => void
 }
 
 export const useAppStore = create<AppState>()((set) => ({
-  userWallet: undefined,
+  userWallet: {usdt: 0, terroCoins: 0},
   setUserWallet: (userWallet) => set(() => ({ userWallet }))
 }))

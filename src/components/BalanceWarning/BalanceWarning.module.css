@@ -1,0 +1,11 @@
+.warning {
+    width: min(75vw, 400px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F89007;
+    border-radius: 16px;
+    color: black;
+    padding: 16px;
+}
