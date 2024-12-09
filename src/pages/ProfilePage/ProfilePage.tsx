@@ -6,13 +6,23 @@ import {ArrowShapeTurnUpRight, Copy, LogoTelegram} from "@gravity-ui/icons";
 import {useCallback} from "react";
 import {Link} from "@/components/Link/Link.tsx";
 import {getStatus} from "@/helpers/getStatus.ts";
+import {Avatar} from "@/components/Avatar/Avatar.tsx";
 
-
+const stacking: Record<string, number> = {
+  "young": 0.005,
+  "teen": 0.01,
+  "adult": 0.015,
+  "boss": 0.2,
+  "goodfather": 0.3
+}
 
 export function ProfilePage() {
   const user = useSignal(initData.user)
-  const userCoinCount = 600 // TODO: it will be loaded from api
-  const referralLink = `https://t.me/${import.meta.env.VITE_TERRA_BOTNAME}/?start=${user?.id}`
+  const {terroCoins} = {terroCoins: 3};
+  const referralLink = `https://t.me/${import.meta.env.VITE_TERRA_BOTNAME}/?start=${user?.id}`;
+
+  const status = getStatus(terroCoins);
+  const stackingPercent = stacking[status.toLowerCase()];
 
   const copyRefLinkToClipboard = useCallback( async () => {
     try {
@@ -55,9 +65,7 @@ export function ProfilePage() {
   return (
     <Page>
       <header className={styles.headWrapper}>
-        <div className={styles.headProfileImgBg}>
-          <img className={styles.headProfileImg} src={user?.photoUrl} alt="user profil photo"/>
-        </div>
+        <Avatar className={styles.headProfileImg} width={70} imgUrl={user?.photoUrl} alt="user profil photo"/>
         <div className={styles.headSignWrapper}>
           <span className={styles.headSign}>Personal</span>
           <span className={styles.headSign}>cabinet</span>
@@ -76,23 +84,23 @@ export function ProfilePage() {
         </div>
       </section>
       <section style={{textAlign:"left", marginLeft:"15px"}}>
-        <span style={{}}>Status: <span style={{color:"#F89007"}}>{getStatus(userCoinCount)}</span></span>
+        <span style={{fontSize: 24}}>Status: <span style={{color:"#F89007"}}>{status}</span></span>
       </section>
       <section className={styles.profitSection}>
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>1 Day</span>
-          <div className={styles.profitLabel}>??? USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((terroCoins * stackingPercent).toFixed(2))} USDT</div>
         </div>
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>7 Days</span>
-          <div className={styles.profitLabel}>??? USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((terroCoins * stackingPercent * 7).toFixed(2))} USDT</div>
         </div>
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>30 Days</span>
-          <div className={styles.profitLabel}>??? USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((terroCoins * stackingPercent * 30).toFixed(2))} USDT</div>
         </div>
       </section>
       <section className={styles.externResSection}>
@@ -122,7 +130,7 @@ export function ProfilePage() {
         </div>
       </section>
       <section className={styles.helpContainer}>
-        <div style={{flexGrow: 1, fontSize:14}}>
+        <div style={{flexGrow: 1, fontSize:16}}>
           Technical
           <br/>
           Support

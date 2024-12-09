@@ -6,7 +6,7 @@
 .topSection {
     display: flex;
     gap: 10px;
-    margin: 10px auto 0;
+    margin: 0 auto;
 }
 
 .topUser {
@@ -28,30 +28,37 @@
 .userStatSection {
     display: flex;
     justify-content: space-between;
-    margin: 10px 20px 0;
+    gap: 12px;
+    margin: 5px 20px 0;
 }
 
 .userStatBox {
+    min-width: 160px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    background-color: #272A2F;
+    border-radius: 17px;
+    padding: 10px 15px;
 }
 
 .topListSection {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    gap: 5px;
-    margin: 10px 20px 0;
+    gap: 10px;
+    margin: 10px 25px 0;
     min-height: 30vh;
 }
 
 .topLine {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
     background-color: #2a2c2f;
     border-radius: 10px;
-    padding: 10px 0 10px 10px;
+    padding: 5px 0;
 }
 
 .topLineName {
@@ -64,8 +71,17 @@
 }
 
 .topLineCoins {
-    flex-grow: 0.7;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     background-color: #F89007;
     color: black;
     border-radius: 10px;
+    padding: 6px 20px;
+    font-size: 24px;
 }

@@ -4,12 +4,13 @@ import styles from "./Avatar.module.css";
 import {Person} from "@gravity-ui/icons";
 
 interface AvatarProps {
-  imgUrl: string
+  imgUrl?: string
   alt: string
   width: number
+  className?: string
 }
 
-export function Avatar({ imgUrl, alt, width, children }: PropsWithChildren<AvatarProps>) {
+export function Avatar({ imgUrl, alt, width, children, className }: PropsWithChildren<AvatarProps>) {
   const [isErrored, setIsErrored] = useState(false);
 
   const handleError = useCallback(() => {
@@ -21,7 +22,7 @@ export function Avatar({ imgUrl, alt, width, children }: PropsWithChildren<Avata
     setIsErrored(false);
   }, [imgUrl]);
 
-  if (isErrored) {
+  if (isErrored || imgUrl === undefined) {
     return (
       <div>
         <div className={styles.avatarContainer} style={{width: width + "px", height: width + "px"}}>
@@ -35,7 +36,7 @@ export function Avatar({ imgUrl, alt, width, children }: PropsWithChildren<Avata
 
   return (
     <div>
-      <div className={styles.avatarContainer} style={{width: width + "px", height: width + "px"}}>
+      <div className={`${styles.avatarContainer} ${className}`} style={{width: width + "px", height: width + "px"}}>
         <img
           className={styles.avatarImg}
           src={imgUrl}

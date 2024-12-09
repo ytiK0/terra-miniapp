@@ -1,0 +1,60 @@
+.header {
+    font-size: 40px;
+}
+
+.reviewsWrapper {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    margin: 0 50px;
+    flex-grow: .8;
+}
+
+.reviewBox {
+    display: flex;
+    flex-direction: column;
+    background-color: #232527;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.reviewHeaderWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviewHeaderUser {
+    display: flex;
+    gap: 5px;
+}
+
+.reviewerUsername {
+
+}
+
+.reviewWithdrawWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.withdrawBadge {
+    font-size: 12px;
+    color: black;
+    background-color: #F89007;
+    border-radius: 8px;
+}
+
+.reviewTextWrapper {
+    background-color: #212326;
+    border-radius: 10px;
+    color: #989898;
+    font-size: 9px;
+    padding: 6px;
+    text-align: left;
+    margin-top: 10px;
+    max-height: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

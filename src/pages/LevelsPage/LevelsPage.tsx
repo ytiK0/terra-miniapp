@@ -59,14 +59,14 @@ export function LevelsPage() {
 
   return (
     <Page>
-      <header style={{position: "relative", margin: "0 15px"}}>
+      <header style={{position: "relative", margin: "15px 0 0"}}>
         <Link to={"/information"} className={styles.moreInformationBtn}>
           <CircleInfo width={30} height={30} color={"#F89007"}/>
         </Link>
         <Logo/>
         <div className={styles.subtitle}>
           <span className={styles.subtitleHead}>Levels</span>
-          <Badge>+5% / DAILY</Badge>
+          <Badge className={styles.badge}>+5% / DAILY</Badge>
         </div>
       </header>
 
@@ -82,10 +82,12 @@ export function LevelsPage() {
                 </span>
               </div>
               <div className={styles.level}>
-                <span>
+                <span style={{fontSize: 20, lineHeight: "100%"}}>
                   {levels[levelName].level}
                   <br/>
-                  LVL
+                  <span style={{fontSize: 18}}>
+                    LVL
+                  </span>
                 </span>
               </div>
             </div>

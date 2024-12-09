@@ -13,7 +13,7 @@ export function WalletPage() {
 
   return (
     <Page>
-      <header>
+      <header style={{marginTop: 25}}>
         <Logo />
       </header>
       <main className={style.walletContainer}>

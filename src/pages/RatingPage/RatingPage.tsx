@@ -10,7 +10,6 @@ import {useAppStore} from "@/state/appState.ts";
 import {Badge} from "@/components/Badge/Badge.tsx";
 import {Link} from "@/components/Link/Link.tsx";
 import {ChevronRight} from "@gravity-ui/icons";
-import {StatisticBox} from "@/components/StatisticBox/StatisticBox.tsx";
 import {getUserPlace} from "@/api/getUserPlace.ts";
 import {initData, useSignal} from "@telegram-apps/sdk-react";
 
@@ -42,7 +41,7 @@ export function RatingPage() {
 
   return (
     <Page>
-      <header>
+      <header style={{marginTop: 25}}>
         <Logo />
       </header>
       <section className={styles.topSection}>
@@ -73,22 +72,30 @@ export function RatingPage() {
         </div>
       </section>
       <section className={styles.userStatSection}>
-        <StatisticBox className={styles.userStatBox}>
-          <Badge>{userCoins}T</Badge>
+        <div className={styles.userStatBox}>
+          <Badge>
+            <span style={{fontSize: 36}}>
+              {userCoins}T
+            </span>
+          </Badge>
           <Link to={"/wallet"}>
-            <span style={{display: "flex", alignItems: "center", color: "white"}}>
-              BALANCE <ChevronRight/>
+            <span style={{display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: 20}}>
+              BALANCE <ChevronRight width={21} height={21}/>
             </span>
           </Link>
-        </StatisticBox>
-        <StatisticBox className={styles.userStatBox}>
-          <Badge>#{userPlace}</Badge>
+        </div>
+        <div className={styles.userStatBox}>
+          <Badge>
+            <span style={{fontSize: 35}}>
+              #{userPlace}
+            </span>
+          </Badge>
           <Link to={"/balance"}>
-            <span style={{display: "flex", alignItems: "center", color: "white"}}>
-              RATING <ChevronRight/>
+            <span style={{display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: 20}}>
+              RATING <ChevronRight width={21} height={21}/>
             </span>
           </Link>
-        </StatisticBox>
+        </div>
       </section>
       <section className={styles.topListSection}>
         {

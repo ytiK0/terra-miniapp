@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 
 import { Page } from '@/components/Page.tsx';
-import {StatisticBox} from "@/components/StatisticBox/StatisticBox.tsx";
 
 import style from "./HomePage.module.css"
 import {Logo} from "@/components/Logo/Logo.tsx";
@@ -18,13 +17,15 @@ export const HomePage: FC = () => {
 
   return (
     <Page>
-      <header>
+      <header style={{marginTop:15}}>
         <Logo />
         <div className={style.statisticContainer}>
-          <StatisticBox>
+          <div className={style.statisticBox}>
             <Badge>
-            <UsdtIcon />
-              USDT
+              <UsdtIcon />
+              <span style={{fontSize:20}}>
+                USDT
+              </span>
             </Badge>
             <div className={style.value}>
               <span style={{fontSize:"44px", lineHeight: "100%"}}>
@@ -32,15 +33,17 @@ export const HomePage: FC = () => {
               </span>
               <span style={{fontSize: 14, color: "#989898"}}>N% / daily</span>
             </div>
-          </StatisticBox>
-          <StatisticBox>
-            <Badge>TERRA</Badge>
+          </div>
+          <div className={style.statisticBox}>
+            <Badge>
+              <span style={{fontSize: 20}}>TERRA</span>
+            </Badge>
             <div className={style.value}>
               <span style={{fontSize: 42, lineHeight: "100%"}}>{terroCoins}</span>
               <span style={{fontSize: 16}}>POINTS</span>
               <span style={{fontSize: 14, color: "#989898"}}>N% / daily</span>
             </div>
-          </StatisticBox>
+          </div>
         </div>
       </header>
       <section className={style.lionSection}>

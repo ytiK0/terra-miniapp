@@ -1,18 +1,21 @@
 .moreInformationBtn {
     position: absolute;
-    left: 15px;
-    top: 35%;
+    left: 10%;
+    top: 40%;
     width: 40px;
     height: 40px;
-    /*transform: translate(0, -30%);*/
+    transform: translate(0, -50%);
 }
 
 .subtitle {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
+}
 
-    margin: 15px 40px 0;
+.badge {
+    margin: 0;
 }
 
 .subtitleHead {
@@ -21,17 +24,18 @@
 
 .levelBox {
     display: flex;
+    height: 80px;
     justify-content: space-between;
     align-items: center;
     background-color: #2A2E33;
     border-radius: 15px;
-    padding: 5px 30px;
+    padding: 5px 0 5px 30px;
     margin: 0 20px;
 }
 
 .levelImg {
-    width: 15%;
-    max-height: 70px;
+    width: 20%;
+    max-height: 100%;
     object-fit: contain;
 }
 
@@ -44,17 +48,17 @@
 .levelsSection {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex-grow: .4;
+    gap: .7vh;
 }
 
 .levelName {
     color: #F89007;
-    font-size: 16px;
+    font-size: 22px;
 }
 
 .levelGain {
     color: #989898;
+    font-size: 19px;
 }
 
 .levelGainActive {
@@ -66,5 +70,5 @@
     background-color: #F89007;
     border-radius: 20px;
     color: black;
-    padding: 5px 15px;
+    padding: 5px 0;
 }

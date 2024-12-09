@@ -8,17 +8,22 @@
 
 .header {
     font-size: 48px;
-    margin-top: 15px;
+    margin-top: 12px;
 }
 
 .informationWrapper {
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     flex-grow: 1;
+    margin: 20px 20px 0;
 }
 
 .categoryHeader {
     background-color: #232527 !important;
     border-radius: 16px;
+    text-transform: uppercase;
 }
 
 .categoryHeader[aria-expanded=true] {
@@ -29,22 +34,30 @@
     color: #F89007
 }
 
-.categoryInformation > div {
+.accordionWrapper {
+
+}
+
+.gridWrapper {
     display: grid;
     grid-template-columns: 50% 50%;
     justify-items: left;
+    background-color: #1E2022;
+    border-radius: 12px;
+    padding: 15px 10px;
+    margin: 0 10px 10px;
 }
 
 .categoryInformation {
-    padding: 0 30px;
-    margin-bottom: 15px;
     font-size: 10px;
     background-color: #232527 !important;
     border-radius: 0 0 16px 16px;
 }
 
 .infoItem {
-    font-size: min(calc(16px + 0.1vw), 32px);
+    font-size: 160%;
+    line-height: 24px;
+    color: #D5D5D5;
 }
 
 .gray {

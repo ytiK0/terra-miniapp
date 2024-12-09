@@ -8,13 +8,20 @@ import {useWarning} from "@/hooks/useWarning.ts";
 import {useCallback} from "react";
 import {useAppStore} from "@/state/appState.ts";
 import {BalanceWarning} from "@/components/BalanceWarning/BalanceWarning.tsx";
+import {initData, openTelegramLink, useSignal} from "@telegram-apps/sdk-react";
+import {createTransaction} from "@/api/createTransaction.ts";
 
 function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const {usdt} = useAppStore((s) => s.userWallet)
+  const user = useSignal(initData.user)
   const [enterValue, handleNumpadBtnClick] = useNumpad()
   const [isWarningVisible, toggleWarning] = useWarning()
 
-  const handelConfirm = useCallback(() => {
+  if (user === undefined) {
+    throw new Error("Invalid User")
+  }
+
+  const handelSend= useCallback(() => {
     const value = parseFloat(enterValue);
     if (value === 0) {
       toggleWarning()
@@ -29,6 +36,25 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
     }
   }, [])
 
+  const handelReceive = useCallback(async () => {
+    const value = parseFloat(enterValue);
+    console.log(value)
+    if (value === 0) {
+      toggleWarning()
+      return
+    }
+
+    const {payUrl} = await createTransaction(user.id, enterValue)
+
+    if (openTelegramLink.isAvailable()) {
+      openTelegramLink(payUrl)
+    }
+    else {
+      throw new Error("can`t open telegram link (")
+    }
+
+  }, [enterValue])
+
   return (
     <Page back={true}>
       <header className={style.header}>
@@ -41,7 +67,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       </section>
       <section className={style.numpadWrapper}>
         <Numpad onBtnClick={handleNumpadBtnClick}/>
-        <div className={style.confirmBtn} onClick={handelConfirm}>CONFIRM</div>
+        <div className={style.confirmBtn} onClick={type === "receive" ? handelReceive : handelSend}>CONFIRM</div>
       </section>
       <BalanceWarning hidden={isWarningVisible} currency={"USDT"} />
     </Page>

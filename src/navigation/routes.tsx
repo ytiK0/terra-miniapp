@@ -7,8 +7,8 @@ import {LevelsPage} from "@/pages/LevelsPage/LevelsPage.tsx";
 import {ProfilePage} from "@/pages/ProfilePage/ProfilePage.tsx";
 import {RatingPage} from "@/pages/RatingPage/RatingPage.tsx";
 import {WalletPage} from "@/pages/WalletPage/WalletPage.tsx";
-import {WithdrawPage} from "@/pages/WithdrawPage.tsx";
-import {ReviewsPage} from "@/pages/ReviewsPage.tsx";
+import {WithdrawPage} from "@/pages/WithdrawPage/WithdrawPage.tsx";
+import {ReviewsPage} from "@/pages/ReviewsPage/ReviewsPage.tsx";
 import {ReceiveUsdtPage, SendUsdtPage} from "@/pages/ManipulateBalance/ManipulateBalance.tsx";
 import {TradePage} from "@/pages/TradePage/TradePage.tsx";
 
