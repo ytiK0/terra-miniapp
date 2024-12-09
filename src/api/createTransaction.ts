@@ -1,5 +1,5 @@
 async function getLastActiveTransaction(id: number) {
-  const res = await fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/payment/findOne?tgId=${id}`);
+  const res = await fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/payment/findByTg?tgId=${id}`);
 
   if (!res.ok) {
     throw new Error(`Create transaction failed with ${res.status}`);

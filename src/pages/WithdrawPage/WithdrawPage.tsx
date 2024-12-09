@@ -1,4 +1,4 @@
-import style from "./WithdrawPage.module.css"
+// import style from "./WithdrawPage.module.css"
 import {Page} from "@/components/Page.tsx";
 
 export function WithdrawPage() {

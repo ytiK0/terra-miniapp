@@ -18,7 +18,7 @@ export function ReviewsPage() {
 
   useEffect(() => {
     getReviews()
-      .then((reviews) => {})
+      .then((reviews) => setReviews((prev) => prev.concat(reviews)))
       .then(() => setIsLoading(false))
       .catch((er) => {throw new Error(er)})
   }, [])

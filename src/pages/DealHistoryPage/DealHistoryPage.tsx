@@ -1,4 +1,4 @@
-import style from "./DealHistoryPage.module.css";
+// import style from "./DealHistoryPage.module.css";
 
 export function DealHistoryPage() {
   return (
