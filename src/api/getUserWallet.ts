@@ -16,10 +16,13 @@ export async function getUserWallet(id: string) {
   const params = new URLSearchParams({
     tgId: id
   })
-  const response = await fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/user/findOneByTg?${params.toString()}`);
-  const resJson: UserBackend = await response.json();
+  const res = await fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/user/findOneByTg?${params.toString()}`);
+
+  const resJson = await res.json();
+  console.log(resJson)
+
   if (resJson.coins === undefined) {
-    throw new Error("Request failed") ;
+    throw resJson;
   }
   return { usdt: resJson.usdt, terroCoins: resJson.coins } as UserWallet;
 }

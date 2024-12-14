@@ -9,6 +9,8 @@ import {useNumpad} from "@/hooks/useNumpad.ts";
 import {Numpad} from "@/components/Numpad/Numpad.tsx";
 import {useWarning} from "@/hooks/useWarning.ts";
 import {BalanceWarning} from "@/components/BalanceWarning/BalanceWarning.tsx";
+import {makeExchange} from "@/api/makeExchange.ts";
+import {initData, useSignal} from "@telegram-apps/sdk-react";
 
 
 function getOppCurrency(currency: Currency): Currency {
@@ -19,18 +21,24 @@ function getOppCurrency(currency: Currency): Currency {
 }
 
 export function TradePage() {
+  const user = useSignal(initData.user)
   const { usdt, terroCoins } = useAppStore((s) => s.userWallet)
+  const setUserWallet = useAppStore((s) => s.setUserWallet)
   const [enterCurrency, setEnterCurrency] = useState<Currency>("TERRA");
-  const [enterValue, handleNumpadBtnClick] = useNumpad();
-  const [isWarningVisible, toggleVisible] = useWarning()
+  const [enterValue, handleNumpadBtnClick, setEnterValue] = useNumpad();
+  const [isWarningVisible, toggleVisible] = useWarning(1500)
+
+  if (user === undefined) {
+    throw new Error("Invalid user")
+  }
 
   const toggleCurrency = useCallback(() => {
-    setEnterCurrency((currency) => {
-      return getOppCurrency(currency)
-    })
-  }, []);
+    setEnterValue((parseFloat(enterValue) * (enterCurrency !== "TERRA" ? 0.5 : 2)).toString())
 
-  const handleConfirmClick = useCallback(() => {
+    setEnterCurrency(getOppCurrency(enterCurrency))
+  }, [enterValue, enterCurrency]);
+
+  const handleConfirmClick = useCallback(async () => {
     const value = parseFloat(enterValue);
     if (value === 0) {
       toggleVisible()
@@ -40,20 +48,17 @@ export function TradePage() {
     if (enterCurrency === "USDT") {
       if (value > usdt) {
         toggleVisible()
+      } else {
+        setUserWallet(await makeExchange(user.id.toString(), value))
       }
-      else {
-        // make request
-      }
-    }
-    else {
+    } else {
       if (value > terroCoins) {
         toggleVisible()
-      }
-      else {
+      } else {
         // make request
       }
     }
-  }, [])
+  }, [enterValue, enterCurrency, usdt, terroCoins])
 
   return (
     <Page back={true}>

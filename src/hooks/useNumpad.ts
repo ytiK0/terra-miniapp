@@ -36,5 +36,5 @@ export function useNumpad() {
     }
   }, []);
 
-  return [enterValue, handleNumpadBtnClick] as const;
+  return [enterValue, handleNumpadBtnClick, setEnterValue] as const;
 }

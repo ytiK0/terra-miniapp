@@ -1,14 +1,6 @@
 import {Page} from "@/components/Page.tsx";
 
-import styles from "./InformationPage.module.css"
-import {useState} from "react";
-import {Accordion} from "@telegram-apps/telegram-ui";
-import {
-  AccordionSummary
-} from "@telegram-apps/telegram-ui/dist/components/Blocks/Accordion/components/AccordionSummary/AccordionSummary";
-import {
-  AccordionContent
-} from "@telegram-apps/telegram-ui/dist/components/Blocks/Accordion/components/AccordionContent/AccordionContent";
+import styles from "./InformationPage.module.css";
 
 
 const information: Record<string, Record<string, number | null | string>> = {
@@ -60,7 +52,6 @@ const categoryGain: Record<string, string> = {
 }
 
 export function InformationPage() {
-  const [openAccordion, setOpenCategory] = useState<null | string>(null)
 
   return (
     <Page back={true}>
@@ -70,27 +61,27 @@ export function InformationPage() {
       </div>
       <div className={styles.informationWrapper}>
         {
-          Object.keys(information).map((categoryName, i) =>
-            <div className={styles.accordionWrapper}>
-              <Accordion key={i} expanded={categoryName === openAccordion} onChange={(expanded) => { expanded ? setOpenCategory(categoryName) : setOpenCategory(null)}}>
-                <AccordionSummary className={styles.categoryHeader}>
-                  {categoryName}  <span className={styles.orange}>{categoryGain[categoryName]}</span>
-                </AccordionSummary>
-                <AccordionContent className={styles.categoryInformation}>
-                  <div className={styles.gridWrapper}>
-                    {
-                      Object.keys(information[categoryName]).map((infoIndex, i) =>
-                        <div key={`${infoIndex}-${i}`} className={styles.infoItem}>
-                          {infoIndex === "empty" || <><span className={styles.orange}>{infoIndex}</span> <span className={styles.gray}>-</span> </>}
-                          {information[categoryName][infoIndex]}
-                          <span className={styles.gray}> Terro</span>
-                        </div>
-                      )
-                    }
-                  </div>
-                </AccordionContent>
-              </Accordion>
-            </div>
+          Object.keys(information).map((categoryName) =>
+            <details name={"info"} key={categoryName} >
+              <summary className={styles.categoryHeader}>
+                {categoryName}
+                <span className={styles.orange}>{categoryGain[categoryName]}</span>
+                <div className={styles.marker}></div>
+              </summary>
+              <div className={styles.categoryInformation}>
+                <div className={styles.gridWrapper}>
+                  {
+                    Object.keys(information[categoryName]).map((infoIndex, i) =>
+                      <div key={`${infoIndex}-${i}`} className={styles.infoItem}>
+                        {infoIndex === "empty" || <><span className={styles.orange}>{infoIndex}</span> <span className={styles.gray}>-</span> </>}
+                        {information[categoryName][infoIndex]}
+                        <span className={styles.gray}> Terro</span>
+                      </div>
+                    )
+                  }
+                </div>
+              </div>
+            </details>
           )
         }
       </div>

@@ -45,8 +45,8 @@
 .allBalanceWrapper {
     display: flex;
     flex-direction: column;
-    gap: 13px;
-    margin: 0 30px  ;
+    gap: min(13px, 1vh);
+    margin: 0 30px;
 }
 
 .terroBalance {
@@ -70,7 +70,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     align-items: center;
-    row-gap: 20px;
+    row-gap: min(20px, .1vh);
     color: #F89007;
     font-size: 20px;
 }
@@ -86,7 +86,7 @@
     height: 1px;
     background-color: #989898;
     border-radius: 1px;
-    margin: 20px 0;
+    margin: min(20px, .1vh) 0;
 }
 
 .result {

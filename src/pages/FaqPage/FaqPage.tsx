@@ -2,14 +2,6 @@ import {Page} from "@/components/Page.tsx";
 import {Logo} from "@/components/Logo/Logo.tsx";
 
 import styles from "./FaqPage.module.css"
-import {Accordion} from "@telegram-apps/telegram-ui";
-import {
-  AccordionSummary
-} from "@telegram-apps/telegram-ui/dist/components/Blocks/Accordion/components/AccordionSummary/AccordionSummary";
-import {
-  AccordionContent
-} from "@telegram-apps/telegram-ui/dist/components/Blocks/Accordion/components/AccordionContent/AccordionContent";
-import {useState} from "react";
 
 const questions: Record<string, string> = {
   "What is the main purpose of the app?": "Our app is designed for depositing and withdrawing funds with a profit calculation of 0.25% to 0.4% per day. We aim to provide our users with stable income by using their funds for trading on various exchanges.",
@@ -26,8 +18,6 @@ const questions: Record<string, string> = {
 
 
 export function FaqPage() {
-  const [openQuestion, setOpenQuestion] = useState<null | string>(null)
-
   return (
     <Page back={true}>
       <div className={ styles.headWrapper }>
@@ -38,14 +28,17 @@ export function FaqPage() {
       <div className={styles.questionsContainer}>
         {
           Object.keys(questions).map((question, i) =>
-            <Accordion expanded={question === openQuestion} onChange={(expanded) => { expanded ? setOpenQuestion(question) : setOpenQuestion(null)}} key={i}>
-              <AccordionSummary className={styles.faqHeader} multiline={true} >
-                {question}
-              </AccordionSummary>
-              <AccordionContent className={styles.faqAnswer}>
-                <p>{questions[question]}</p>
-              </AccordionContent>
-            </Accordion>
+            <details name={"faq"} key={i}>
+              <summary className={styles.faqHeader} >
+                <div className={styles.faqQuestion}>
+                  {question}
+                </div>
+                <div className={styles.marker}></div>
+              </summary>
+              <p className={styles.faqAnswer}>
+                {questions[question]}
+              </p>
+            </details>
           )
         }
       </div>

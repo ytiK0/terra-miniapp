@@ -5,17 +5,20 @@ import { TradeInput } from "@/components/TradeInput/TradeInput.tsx";
 import {Numpad} from "@/components/Numpad/Numpad.tsx";
 import {useNumpad} from "@/hooks/useNumpad.ts";
 import {useWarning} from "@/hooks/useWarning.ts";
-import {useCallback} from "react";
+import {useCallback, useState} from "react";
 import {useAppStore} from "@/state/appState.ts";
-import {BalanceWarning} from "@/components/BalanceWarning/BalanceWarning.tsx";
+import {AlreadyHasPaymentWarning, BalanceWarning} from "@/components/BalanceWarning/BalanceWarning.tsx";
 import {initData, openTelegramLink, useSignal} from "@telegram-apps/sdk-react";
 import {createTransaction} from "@/api/createTransaction.ts";
+import {getTransactionStatus} from "@/api/getTransactionStatus.ts";
 
 function ManipulateBalance({type}: {type: "receive"|"send"}) {
-  const {usdt} = useAppStore((s) => s.userWallet)
-  const user = useSignal(initData.user)
-  const [enterValue, handleNumpadBtnClick] = useNumpad()
-  const [isWarningVisible, toggleWarning] = useWarning()
+  const {usdt} = useAppStore((s) => s.userWallet);
+  const user = useSignal(initData.user);
+  const [enterValue, handleNumpadBtnClick] = useNumpad();
+  const [isBalanceWarningVisible, toggleWarning] = useWarning(1500);
+  const [isPaymentWarningVisible, togglePayment] = useWarning(null);
+  const [lostPayUrl, setLostPatUrl] = useState<string | null>(null)
 
   if (user === undefined) {
     throw new Error("Invalid User")
@@ -24,12 +27,12 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const handelSend= useCallback(() => {
     const value = parseFloat(enterValue);
     if (value === 0) {
-      toggleWarning()
-      return
+      toggleWarning();
+      return;
     }
 
     if (value > usdt) {
-      toggleWarning()
+      toggleWarning();
     }
     else {
       // make request
@@ -38,22 +41,29 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
 
   const handelReceive = useCallback(async () => {
     const value = parseFloat(enterValue);
-    console.log(value)
     if (value === 0) {
-      toggleWarning()
+      toggleWarning();
+      return;
+    }
+
+    const transactionStatus = await getTransactionStatus(user.id.toString());
+
+    if (transactionStatus.status === "active") {
+      setLostPatUrl(transactionStatus.payUrl)
+      togglePayment()
       return
     }
 
     const {payUrl} = await createTransaction(user.id, enterValue)
 
     if (openTelegramLink.isAvailable()) {
-      openTelegramLink(payUrl)
+      openTelegramLink(payUrl);
     }
     else {
-      throw new Error("can`t open telegram link (")
+      throw new Error("can`t open telegram link");
     }
 
-  }, [enterValue])
+  }, [enterValue]);
 
   return (
     <Page back={true}>
@@ -69,7 +79,8 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
         <Numpad onBtnClick={handleNumpadBtnClick}/>
         <div className={style.confirmBtn} onClick={type === "receive" ? handelReceive : handelSend}>CONFIRM</div>
       </section>
-      <BalanceWarning hidden={isWarningVisible} currency={"USDT"} />
+      <BalanceWarning hidden={isBalanceWarningVisible} currency={"USDT"} />
+      <AlreadyHasPaymentWarning hidden={isPaymentWarningVisible} payUrl={lostPayUrl} />
     </Page>
   );
 }

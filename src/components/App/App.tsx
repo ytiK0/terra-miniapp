@@ -8,6 +8,7 @@ import "./App.css"
 import {useEffect, useState} from "react";
 import {useAppStore} from "@/state/appState.ts";
 import {getUserWallet} from "@/api/getUserWallet.ts";
+import {createUser} from "@/api/createUser.ts";
 
 export function App() {
   const lp = useLaunchParams();
@@ -17,14 +18,31 @@ export function App() {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  console.log(user)
-
   async function loadUser () {
     if (user === undefined || user.id === undefined) {
       throw new Error("Invalid user!")
     }
-    const wallet = await getUserWallet(user.id.toString())
-    setUserWallet(wallet)
+    try {
+      const wallet = await getUserWallet(user.id.toString());
+
+      setUserWallet(wallet);
+    }
+    catch (err) {
+      if ((err as {message: string}).message === "User was not found") {
+        const createdUser = await createUser({
+          telegramId: user.id,
+          photoURL: user.photoUrl || "",
+          link: user.username || "",
+          name: user.firstName,
+          referId: user.id
+        })
+
+        setUserWallet({terroCoins: createdUser.coins, usdt: createdUser.usdt})
+      }
+      else {
+        throw err
+      }
+    }
   }
 
   useEffect(()=>{

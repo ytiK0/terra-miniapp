@@ -7,18 +7,19 @@ import {useCallback} from "react";
 import {Link} from "@/components/Link/Link.tsx";
 import {getStatus} from "@/helpers/getStatus.ts";
 import {Avatar} from "@/components/Avatar/Avatar.tsx";
+import {useAppStore} from "@/state/appState.ts";
 
 const stacking: Record<string, number> = {
-  "young": 0.005,
-  "teen": 0.01,
-  "adult": 0.015,
-  "boss": 0.2,
-  "goodfather": 0.3
+  "young": 1.005,
+  "teen": 1.01,
+  "adult": 1.015,
+  "boss": 1.2,
+  "goodfather": 1.3
 }
 
 export function ProfilePage() {
   const user = useSignal(initData.user)
-  const {terroCoins} = {terroCoins: 3};
+  const {terroCoins} = useAppStore((s) => s.userWallet);
   const referralLink = `https://t.me/${import.meta.env.VITE_TERRA_BOTNAME}/?start=${user?.id}`;
 
   const status = getStatus(terroCoins);
