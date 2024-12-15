@@ -11,11 +11,14 @@ import {calcLevel} from "@/helpers/calcLevel.ts";
 import {getStatus} from "@/helpers/getStatus.ts";
 import {CircleInfo, CircleQuestion} from "@gravity-ui/icons";
 import {Link} from "@/components/Link/Link.tsx";
+import {useUpdateWallet} from "@/hooks/useUpdateWallet.ts";
 
 export const HomePage: FC = () => {
   const {terroCoins, usdt} = useAppStore((s) => s.userWallet) || {terroCoins: 0, usdt: 0};
   const level = calcLevel(terroCoins);
   const lion = terroCoins === 0 ? "0" : getStatus(terroCoins).toLowerCase();
+
+  useUpdateWallet()
 
   return (
     <Page>
@@ -23,27 +26,27 @@ export const HomePage: FC = () => {
         <Logo />
         <div className={style.statisticContainer}>
           <div className={style.statisticBox}>
-            <Badge>
+            <Badge className={style.badge}>
               <UsdtIcon />
-              <span style={{fontSize:20}}>
+              <span>
                 USDT
               </span>
             </Badge>
             <div className={style.value}>
-              <span style={{fontSize:"44px", lineHeight: "100%"}}>
-                {usdt}<span style={{fontSize: 33}}>$</span>
+              <span style={{fontSize:"2.75em", lineHeight: "100%"}}>
+                {usdt}<span style={{fontSize: "0.75em"}}>$</span>
               </span>
-              <span style={{fontSize: 14, color: "#989898"}}>N% / daily</span>
+              <span style={{fontSize: "0.875em", color: "#989898"}}>N% / daily</span>
             </div>
           </div>
           <div className={style.statisticBox}>
-            <Badge>
-              <span style={{fontSize: 20}}>TERRA</span>
+            <Badge className={style.badge}>
+              <span>TERRA</span>
             </Badge>
             <div className={style.value}>
-              <span style={{fontSize: 42, lineHeight: "100%"}}>{terroCoins}</span>
-              <span style={{fontSize: 16}}>POINTS</span>
-              <span style={{fontSize: 14, color: "#989898"}}>N% / daily</span>
+              <span style={{fontSize: "2.625em", lineHeight: "100%"}}>{terroCoins}</span>
+              <span style={{fontSize: "1em"}}>POINTS</span>
+              <span style={{fontSize: "0.875em", color: "#989898"}}>N% / daily</span>
             </div>
           </div>
         </div>

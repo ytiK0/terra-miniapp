@@ -20,6 +20,7 @@
     flex-direction: column;
     justify-content: space-between;
     color: #D5D5D5;
+    font-size: 16px;
 }
 
 .lionImg {
@@ -34,8 +35,22 @@
     flex-direction: column;
 }
 
+.badge {
+    font-size: 20px;
+}
+
 .statisticBox {
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 18px 22px 8px;
+}
+
+@media (max-height: 600px) {
+    .value {
+        font-size: 14px;
+    }
+
+    .badge {
+        font-size: 14px;
+    }
 }

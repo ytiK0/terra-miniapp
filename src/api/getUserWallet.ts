@@ -10,6 +10,7 @@ export interface UserBackend {
   level: number
   referId: number
   createdAt: Date
+  photoURL: string
 }
 
 export async function getUserWallet(id: string) {

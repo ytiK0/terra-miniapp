@@ -24,6 +24,7 @@ export function init(debug: boolean): void {
     throw new Error('ERR_NOT_SUPPORTED');
   }
 
+
   // Mount all components used in the project.
   backButton.mount();
   miniApp.mount();

@@ -7,9 +7,14 @@ import style from "./WalletPage.module.css"
 import {useAppStore} from "@/state/appState.ts";
 import {ArrowDown, ArrowsRotateRight, ArrowUp} from "@gravity-ui/icons";
 import {Link} from "@/components/Link/Link.tsx";
+import {useUpdateWallet} from "@/hooks/useUpdateWallet.ts";
+
+
 
 export function WalletPage() {
-  const {terroCoins, usdt} = useAppStore((s) => s.userWallet) || {terroCoins: 0, usdt: 0}
+  const {terroCoins, usdt} = useAppStore((s) => s.userWallet);
+
+  useUpdateWallet();
 
   return (
     <Page>
@@ -17,9 +22,9 @@ export function WalletPage() {
         <Logo />
       </header>
       <main className={style.walletContainer}>
-        <Badge>
+        <Badge className={style.topBadge}>
           <UsdtIcon />
-          <span style={{marginLeft: 5, fontSize: 26}}>USDT</span>
+          <span style={{marginLeft: 5}}>USDT</span>
         </Badge>
         <div className={style.balanceWrapper}>
           {usdt}$

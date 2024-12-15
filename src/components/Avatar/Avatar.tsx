@@ -11,6 +11,10 @@ interface AvatarProps {
 }
 
 export function Avatar({ imgUrl, alt, width, children, className }: PropsWithChildren<AvatarProps>) {
+  if (imgUrl === "") {
+    imgUrl = "#"
+  }
+
   const [isErrored, setIsErrored] = useState(false);
 
   const handleError = useCallback(() => {
@@ -24,18 +28,18 @@ export function Avatar({ imgUrl, alt, width, children, className }: PropsWithChi
 
   if (isErrored || imgUrl === undefined) {
     return (
-      <div>
-        <div className={styles.avatarContainer} style={{width: width + "px", height: width + "px"}}>
+      <>
+        <div className={styles.avatarContainer} style={{width: width + "px"}}>
           <Person className={styles.avatarImg} color={"#1f2022"} style={{backgroundColor: "#27282B"}}/>
         </div>
-          {children}
-      </div>
+        {children}
+      </>
 
     )
   }
 
   return (
-    <div>
+    <>
       <div className={`${styles.avatarContainer} ${className}`} style={{width: width + "px", height: width + "px"}}>
         <img
           className={styles.avatarImg}
@@ -45,7 +49,7 @@ export function Avatar({ imgUrl, alt, width, children, className }: PropsWithChi
         />
       </div>
       {children}
-    </div>
+    </>
 
   );
 }

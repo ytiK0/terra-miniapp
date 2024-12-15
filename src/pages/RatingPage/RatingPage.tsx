@@ -16,7 +16,7 @@ import {initData, useSignal} from "@telegram-apps/sdk-react";
 export function RatingPage() {
   const userId = useSignal(initData.user)?.id;
   const userCoins = useAppStore((s) => s.userWallet?.terroCoins) || 0;
-  const [topUsers, setTopUsers] = useState<{name: string, coins: number, id: string}[]>([]);
+  const [topUsers, setTopUsers] = useState<{name: string, coins: number, id: string, photoURL: string}[]>([]);
   const [userPlace, setUserPlace] = useState<number | string>("+999");
   const [isLoading, setIsLoading] = useState(true)
 
@@ -27,6 +27,7 @@ export function RatingPage() {
 
     const topUsers = await getTopUsers()
     const userPlace = await getUserPlace(userId)
+    console.log(topUsers)
     setTopUsers(topUsers)
     setUserPlace(userPlace)
   }
@@ -46,7 +47,7 @@ export function RatingPage() {
       </header>
       <section className={styles.topSection}>
         <div className={styles.topUser}>
-          <Avatar width={80} imgUrl="lions_mini/teen" alt="user profil img">
+          <Avatar width={80} imgUrl={topUsers[1] ? topUsers[1].photoURL : "#"} alt="user profil img">
             <span style={{fontSize: 20}}>2</span>
           </Avatar>
           <span className={styles.topUsername}>
@@ -55,7 +56,7 @@ export function RatingPage() {
           </span>
         </div>
         <div className={styles.topUserBig}>
-          <Avatar width={100} imgUrl="#" alt="user profil img">
+          <Avatar width={100} imgUrl={topUsers[0] ? topUsers[0].photoURL : "#"} alt="user profil img">
             <span style={{fontSize: 26}}>1</span>
           </Avatar>
           <span className={styles.topUsername}>
@@ -63,7 +64,7 @@ export function RatingPage() {
           </span>
         </div>
         <div className={styles.topUser}>
-          <Avatar width={80} imgUrl="#" alt="user profil img">
+          <Avatar width={80} imgUrl={topUsers[2] ? topUsers[2].photoURL : "#"} alt="user profil img">
             <span style={{fontSize: 20}}>3</span>
           </Avatar>
           <span className={styles.topUsername}>
@@ -73,25 +74,25 @@ export function RatingPage() {
       </section>
       <section className={styles.userStatSection}>
         <div className={styles.userStatBox}>
-          <Badge>
-            <span style={{fontSize: 36}}>
+          <Badge className={styles.statBoxBadge}>
+            <span >
               {userCoins}T
             </span>
           </Badge>
           <Link to={"/wallet"}>
-            <span style={{display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: 20}}>
+            <span className={styles.statBoxLink}>
               BALANCE <ChevronRight width={21} height={21}/>
             </span>
           </Link>
         </div>
         <div className={styles.userStatBox}>
-          <Badge>
-            <span style={{fontSize: 35}}>
+          <Badge className={styles.statBoxBadge}>
+            <span>
               #{userPlace}
             </span>
           </Badge>
           <Link to={"/balance"}>
-            <span style={{display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: 20}}>
+            <span className={styles.statBoxLink}>
               RATING <ChevronRight width={21} height={21}/>
             </span>
           </Link>

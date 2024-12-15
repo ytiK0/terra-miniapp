@@ -35,6 +35,12 @@
 }
 
 .categoryHeader::marker {
+    display: none;
+    content: "";
+}
+
+.categoryHeader::-webkit-details-marker {
+    display: none;
     content: "";
 }
 

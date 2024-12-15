@@ -13,14 +13,14 @@ import {createUser} from "@/api/createUser.ts";
 export function App() {
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
-  const { setUserWallet } = useAppStore()
+  const { setUserWallet } = useAppStore();
   const user = useSignal(initData.user);
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   async function loadUser () {
     if (user === undefined || user.id === undefined) {
-      throw new Error("Invalid user!")
+      throw new Error("Invalid user!");
     }
     try {
       const wallet = await getUserWallet(user.id.toString());

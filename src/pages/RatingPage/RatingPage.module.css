@@ -43,6 +43,19 @@
     padding: 10px 15px;
 }
 
+.statBoxBadge {
+    font-size: 36px;
+}
+
+.statBoxLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px
+}
+
+
 .topListSection {
     display: flex;
     flex-direction: column;
@@ -88,4 +101,14 @@
     border-radius: 10px;
     padding: 5px 20px;
     font-size: 24px;
+}
+
+@media (max-height: 600px) {
+    .statBoxBadge {
+        font-size: 28px;
+    }
+
+    .statBoxLink {
+        font-size: 14px;
+    }
 }

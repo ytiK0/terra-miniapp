@@ -23,6 +23,12 @@
 }
 
 .faqHeader::marker {
+    display: none;
+    content: "";
+}
+
+.faqHeader::-webkit-details-marker {
+    display: none;
     content: "";
 }
 

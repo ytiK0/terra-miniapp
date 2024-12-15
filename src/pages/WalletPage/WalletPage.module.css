@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
     width: 60px;
-    height: 60px;
+    aspect-ratio: 1 / 1;
     background-color: #F89007;
     border-radius: 50%;
 }
@@ -92,4 +92,22 @@
 .result {
     text-align: right;
     font-size: 20px;
+}
+
+.topBadge {
+    font-size: 26px;
+}
+
+@media (max-height: 600px) {
+    .walletBtnIconWrapper {
+        width: 40px;
+    }
+
+    .balanceWrapper {
+        font-size: 46px;
+    }
+
+    .topBadge {
+        font-size: 20px;
+    }
 }
