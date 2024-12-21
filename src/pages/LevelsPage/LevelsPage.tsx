@@ -9,23 +9,23 @@ import {useAppStore} from "@/state/appState.ts";
 
 const levels: Record<string, {gain: string, level: string}> = {
   "YOUNG": {
-    gain: "+0.5% +10T",
+    gain: "+0.5%T/DALY",
     level: "1-10"
   },
   "TEEN": {
-    gain: "+1% +10T",
+    gain: "+1%T/DALY",
     level: "11-15"
   },
   "ADULT": {
-    gain: "+1.5% +10T",
+    gain: "+1.5%T/DALY",
     level: "16-20"
   },
   "BOSS": {
-    gain: "+2% +10T",
+    gain: "+2%T/DALY",
     level: "21-25"
   },
   "GOODFATHER": {
-    gain: "+3% +10T",
+    gain: "+3%T/DALY",
     level: "26+"
   }
 }
@@ -66,7 +66,7 @@ export function LevelsPage() {
         <Logo/>
         <div className={styles.subtitle}>
           <span className={styles.subtitleHead}>Levels</span>
-          <Badge className={styles.badge}>+5% / DAILY</Badge>
+          <Badge className={styles.badge}>{levels[userLevelName].gain.split("T/").join(" / ")}</Badge>
         </div>
       </header>
 

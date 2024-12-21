@@ -8,6 +8,7 @@ export function useNumpad() {
 
     const addPiece = target.dataset["numpadValue"];
 
+
     if (addPiece === undefined) {
       return;
     }
@@ -19,7 +20,10 @@ export function useNumpad() {
       })
     }
     else if (addPiece === ".") {
-      setEnterValue((val) => val.includes(".") ? val : val + ".");
+      setEnterValue((val) => {
+        console.log(val)
+        return  val.includes(".") ? val : val + "."
+      });
     }
     else {
       setEnterValue((val) => {

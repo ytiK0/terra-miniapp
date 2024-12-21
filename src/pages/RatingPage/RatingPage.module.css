@@ -72,16 +72,18 @@
 .topLine {
     position: relative;
     display: flex;
+    align-items: center;
     gap: 10px;
     background-color: #2a2c2f;
     border-radius: 10px;
-    padding: 5px 0;
+    padding: 5px 0 5px 10px;
 }
 
 .topLineName {
     display: block;
     width: 70%;
     overflow: hidden;
+    line-height: 1.2;
     white-space: nowrap;
     text-overflow: clip;
     text-align: left;

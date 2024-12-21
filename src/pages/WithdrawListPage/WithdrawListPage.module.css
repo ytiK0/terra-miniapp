@@ -1,0 +1,74 @@
+.header {
+    margin-top: 15px;
+}
+
+.headerSubtitle {
+    font-size:45px;
+    line-height: 100%;
+    margin-top: 8px
+}
+
+.time {
+    font-size: 10px;
+    color: #989898;
+}
+
+.withdrawSection {
+    margin: 10px 45px auto;
+    overflow-y: scroll;
+}
+
+.withdrawElementWrapper {
+    display: flex;
+    background: #232527E5;
+    border-radius: 14px;
+    padding: 10px 6px;
+}
+
+.userWrapper {
+    color: #D5D5D5;
+    flex-grow: 1;
+
+}
+
+.userWalletWrapper {
+    max-width: 145px;
+    font-size: 10px;
+    background-color: #212326F2;
+    padding: 4px 6px;
+    border-radius: 12px;
+    backdrop-filter: blur(1px)
+}
+
+.userWalletWrapper > span {
+    background: linear-gradient(90deg, rgba(152, 152, 152, 0.2) 0%, rgba(62, 61, 61, 0.1788) 99.99%, rgba(52, 52, 52, 0) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.amountBadge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #191B1F;
+    background-color: #F89007;
+    line-height: 100%;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 9px 13px;
+}
+
+.divideLine {
+    background: #89858166;
+    margin-top: 12px;
+    height: 2px;
+}
+
+@media (max-height: 700px) {
+    .headerSubtitle {
+        font-size: 34px;
+    }
+    .header {
+        margin-top: 10px;
+    }
+}

@@ -123,4 +123,21 @@
     .input {
         font-size: 20px;
     }
+
+    .valuePreview {
+        font-size: 16px;
+    }
+
+    .inputBadge {
+        font-size: 16px;
+    }
+
+    .numpadWrapper {
+        padding: 16px;
+    }
+
+    .confirmBtn {
+        padding: 14px 12px;
+        margin-top: 8px;
+    }
 }

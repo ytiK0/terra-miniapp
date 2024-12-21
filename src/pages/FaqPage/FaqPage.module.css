@@ -20,16 +20,7 @@
     border-radius: 16px;
     text-align: left;
     padding: 15px;
-}
-
-.faqHeader::marker {
-    display: none;
-    content: "";
-}
-
-.faqHeader::-webkit-details-marker {
-    display: none;
-    content: "";
+    list-style: none;
 }
 
 details[open] .faqHeader {

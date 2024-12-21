@@ -1,0 +1,29 @@
+.headerSubtitle {
+    font-size: 45px;
+    line-height: 100%;
+}
+
+.headerSubtitle > span {
+    color: #989898;
+    font-size: 32px;
+}
+
+.activeDealSection > span {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 27px;
+}
+
+.dealContainer {
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+    background-color: #272728;
+    padding: 4px 16px;
+    border-radius: 9px;
+}
+
+.ethPriceBadge {
+    color: #191B1F;
+    font-size: 27px;
+}

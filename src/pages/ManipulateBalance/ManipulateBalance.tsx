@@ -11,6 +11,7 @@ import {AlreadyHasPaymentWarning, BalanceWarning} from "@/components/BalanceWarn
 import {initData, openTelegramLink, useSignal} from "@telegram-apps/sdk-react";
 import {createTransaction} from "@/api/createTransaction.ts";
 import {getTransactionStatus} from "@/api/getTransactionStatus.ts";
+import {createWithdraw} from "@/api/createWithdraw.ts";
 
 function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const {usdt} = useAppStore((s) => s.userWallet);
@@ -24,7 +25,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
     throw new Error("Invalid User")
   }
 
-  const handelSend= useCallback(() => {
+  const handelSend= useCallback( async () => {
     const value = parseFloat(enterValue);
     if (value === 0) {
       toggleWarning();
@@ -35,7 +36,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       toggleWarning();
     }
     else {
-      // make request
+      await createWithdraw(user.id, enterValue)
     }
   }, [])
 

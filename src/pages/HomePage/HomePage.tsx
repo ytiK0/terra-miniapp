@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import {FC} from 'react';
 
 import { Page } from '@/components/Page.tsx';
 
@@ -12,18 +12,27 @@ import {getStatus} from "@/helpers/getStatus.ts";
 import {CircleInfo, CircleQuestion} from "@gravity-ui/icons";
 import {Link} from "@/components/Link/Link.tsx";
 import {useUpdateWallet} from "@/hooks/useUpdateWallet.ts";
+import ActiveDeal from "@/components/ActiveDeal/ActiveDeal.tsx";
+import {useEthPrice} from "@/hooks/useEthPrice.ts";
 
 export const HomePage: FC = () => {
-  const {terroCoins, usdt} = useAppStore((s) => s.userWallet) || {terroCoins: 0, usdt: 0};
+  const {terroCoins, usdt} = useAppStore((s) => s.userWallet);
   const level = calcLevel(terroCoins);
   const lion = terroCoins === 0 ? "0" : getStatus(terroCoins).toLowerCase();
-
   useUpdateWallet()
+
+  const ethPrice = useEthPrice();
 
   return (
     <Page>
       <header className={style.header} style={{marginTop:15}}>
         <Logo />
+        {
+          ethPrice &&
+            <Link to={"/deals"} className={style.dealContainer}>
+              <ActiveDeal ethPrice={ethPrice} />
+            </Link>
+        }
         <div className={style.statisticContainer}>
           <div className={style.statisticBox}>
             <Badge className={style.badge}>
@@ -56,7 +65,7 @@ export const HomePage: FC = () => {
       </header>
       <section className={style.lionSection}>
         <img className={style.lionImg} src={`lions/${lion}.png`} alt="lion"/>
-        <span style={{fontSize: 22}}>
+        <span style={{fontSize: 22, lineHeight: "100%"}}>
           <span style={{fontSize: 44,  color: "#F88F07"}}>{level}</span>
           <span style={{display: "inline-block", marginLeft: 5}}>LVL</span>
           <Link to={"/information"} style={{marginLeft: 5}}>

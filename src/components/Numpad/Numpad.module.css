@@ -12,3 +12,14 @@
     cursor: pointer;
     user-select: none;
 }
+
+@media (max-height: 650px) {
+    .numpad {
+        gap: 3px;
+        grid-template-rows: repeat(4, 50px);
+    }
+
+    .numpadBtn {
+        font-size: 30px;
+    }
+}

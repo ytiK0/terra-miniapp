@@ -35,3 +35,22 @@
     border-radius: 10px;
     font-size: 20px;
 }
+
+@media (max-height: 650px) {
+    .inputWrapper {
+        padding: 8px;
+    }
+
+    .input {
+        font-size: 36px;
+    }
+
+    .valuePreview {
+        font-size: 16px;
+    }
+
+    .inputBadge {
+        padding: 12px 8px;
+        font-size: 16px;
+    }
+}

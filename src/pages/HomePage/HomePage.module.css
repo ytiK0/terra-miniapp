@@ -2,6 +2,7 @@
     position: relative;
 }
 
+
 .faqLink {
     position: absolute;
     right: 5%;
@@ -33,6 +34,7 @@
 .lionSection {
     display: flex;
     flex-direction: column;
+    margin-bottom: auto;
 }
 
 .badge {
@@ -45,12 +47,31 @@
     padding: 18px 22px 8px;
 }
 
-@media (max-height: 600px) {
+@media (max-height: 721px) {
     .value {
         font-size: 14px;
     }
 
     .badge {
         font-size: 14px;
+    }
+
+    .ethPriceBadge {
+        font-size: 16px;
+    }
+    .dealProcessWrapper {
+        font-size: 12px;
+    }
+
+    .statisticContainer {
+        margin-top: 0;
+    }
+
+    .statisticBox {
+        padding: 12px 18px 4px;
+    }
+
+    .lionImg {
+        max-height: 38vh;
     }
 }

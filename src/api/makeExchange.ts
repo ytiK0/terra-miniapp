@@ -12,5 +12,5 @@ export async function makeExchange(tgId: string, usdt: number) {
 
   const resJson = await res.json();
 
-  return {terroCoins: resJson, usdt: resJson.usdt};
+  return {terroCoins: resJson.terroCoins, usdt: resJson.usdt};
 }

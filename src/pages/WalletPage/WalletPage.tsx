@@ -82,7 +82,7 @@ export function WalletPage() {
               <span className={style.gray} style={{textAlign: "right"}}>{usdt}USDT</span>
             </div>
             <div className={style.line}></div>
-            <div className={style.result}>{usdt}<span style={{color: "#F89007"}}>USDT</span></div>
+            <div className={style.result}><span style={{color: "#F89007"}}>{usdt}</span>USDT</div>
           </div>
         </div>
       </main>

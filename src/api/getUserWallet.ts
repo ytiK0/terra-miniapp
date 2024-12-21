@@ -20,7 +20,6 @@ export async function getUserWallet(id: string) {
   const res = await fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/user/findOneByTg?${params.toString()}`);
 
   const resJson = await res.json();
-  console.log(resJson)
 
   if (resJson.coins === undefined) {
     throw resJson;

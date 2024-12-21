@@ -12,43 +12,6 @@
     margin: 0 35px;
 }
 
-.arrowsContainer {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    color: black;
-    background-color: #F89007;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.arrows {
-    width: 100%;
-    height: 100%;
-}
-
-.exchangeRateSection {
-    margin: 0 32px;
-    color: #989898;
-}
-
-.exchangeRateSection > span {
-    display: inline-block;
-    margin-top: 5px;
-}
-
-.line {
-    width: 100%;
-    height: 5px;
-    border-radius: 2px;
-    background-color: #989898;
-    opacity: .6;
-}
-
 .numpadWrapper {
     padding: 20px;
     background-color: #232527e6;
@@ -85,4 +48,33 @@
 .delIcon {
     width: 50%;
     height: 50%;
+}
+
+@media (max-height: 650px) {
+    .header {
+        font-size: 35px;
+        line-height: 40px;
+        margin-top: 15px;
+    }
+
+    .inputSection {
+        gap: 8px;
+    }
+
+    .numpadWrapper {
+        padding: 10px;
+    }
+
+    .numpad {
+        gap: 3px;
+    }
+
+    .numpadBtn {
+        font-size: 35px;
+    }
+
+    .confirmBtn {
+        padding: 14px 12px;
+        margin-top: 8px;
+    }
 }

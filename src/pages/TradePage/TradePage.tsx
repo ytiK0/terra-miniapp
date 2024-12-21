@@ -67,7 +67,7 @@ export function TradePage() {
       </header>
       <section className={style.inputSection}>
         <TradeInput value={enterValue} currency={enterCurrency}/>
-        <TradeInput value={enterValue} currency={getOppCurrency(enterCurrency)} isShowingResult/>
+        <TradeInput value={parseFloat(enterValue) * (enterCurrency === "TERRA" ? 0.5 : 1)} currency={getOppCurrency(enterCurrency)}/>
 
         <div className={style.arrowsContainer} onClick={toggleCurrency}>
           <ArrowUpArrowDown className={style.arrows}/>

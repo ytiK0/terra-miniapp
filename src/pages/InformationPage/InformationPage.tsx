@@ -31,12 +31,11 @@ const information: Record<string, Record<string, number | null | string>> = {
     "20": 5000
   },
   "Boss": {
-    "20": 10000,
-    "21": 12000,
-    "22": 15000,
-    "23": 17500,
-    "24": 20000,
-    "25": 25000
+    "21": 10000,
+    "22": 12000,
+    "23": 15000,
+    "24": 17500,
+    "25": 20000,
   },
   "Godfather": {
     "empty": "+25000"
@@ -64,8 +63,9 @@ export function InformationPage() {
           Object.keys(information).map((categoryName) =>
             <details name={"info"} key={categoryName} >
               <summary className={styles.categoryHeader}>
-                {categoryName}
-                <span className={styles.orange}>{categoryGain[categoryName]}</span>
+                <span>
+                  {categoryName} <span className={styles.orange}>{categoryGain[categoryName]}</span>
+                </span>
                 <div className={styles.marker}></div>
               </summary>
               <div className={styles.categoryInformation}>
