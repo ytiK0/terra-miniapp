@@ -27,7 +27,6 @@ export function RatingPage() {
 
     const topUsers = await getTopUsers(signal)
     const userPlace = await getUserPlace(userId)
-    console.log(topUsers)
     setTopUsers(topUsers)
     setUserPlace(userPlace)
   }

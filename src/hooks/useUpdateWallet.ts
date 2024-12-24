@@ -22,6 +22,6 @@ export function useUpdateWallet() {
   }
 
   useEffect(() => {
-    updateWallet(user.id.toString()).then(() => console.log("balance updated"))
+    updateWallet(user.id.toString()).then()
   }, [])
 }
