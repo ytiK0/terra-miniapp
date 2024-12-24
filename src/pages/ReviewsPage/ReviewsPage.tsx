@@ -17,10 +17,15 @@ export function ReviewsPage() {
   const [reviews, setReviews] = useState<Review[]>([{id: 1, text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum enim repellat harum debitis aliquam voluptas dolores magnam provident veniam unde. Excepturi tempora asperiores perferendis possimus magnam accusamus rerum obcaecati distinctio cupiditate quaerat numquam similique ratione, labore temporibus ea ullam hic "}])
 
   useEffect(() => {
-    getReviews()
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    getReviews(signal)
       .then((reviews) => setReviews((prev) => prev.concat(reviews)))
       .then(() => setIsLoading(false))
       .catch((er) => {throw new Error(er)})
+
+    return () => controller.abort("Load canceled")
   }, [])
 
   return (

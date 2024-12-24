@@ -13,16 +13,18 @@ export interface UserBackend {
   photoURL: string
 }
 
-export async function getUserWallet(id: string) {
+export async function getUserWallet(id: string, signal?: AbortSignal) {
   const params = new URLSearchParams({
     tgId: id
   })
-  const res = await fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/user/findOneByTg?${params.toString()}`);
+  return fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/user/findOneByTg?${params.toString()}`, {signal})
+    .then((res) => res.json())
+    .then((resJson) => {
+      if (resJson.coins === undefined) {
+        throw resJson;
+      }
+      return { usdt: resJson.usdt, terroCoins: resJson.coins } as UserWallet;
+    });
 
-  const resJson = await res.json();
 
-  if (resJson.coins === undefined) {
-    throw resJson;
-  }
-  return { usdt: resJson.usdt, terroCoins: resJson.coins } as UserWallet;
 }

@@ -3,14 +3,8 @@ export async function getTransactionStatus(tgId: string) {
     tgId
   });
 
-  const res = await fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/payment/checkStatusPay?${params.toString()}`);
-
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
-
-  const resJson = await res.json();
-
-  return { status: resJson.status, payUrl: resJson.payURL };
+  return fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/payment/checkStatusPay?${params.toString()}`)
+    .then((res) => res.json())
+    .then((resJson) => ({ status: resJson.status, payUrl: resJson.payURL }));
 }
 

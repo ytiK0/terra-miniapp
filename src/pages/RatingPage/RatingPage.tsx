@@ -20,12 +20,12 @@ export function RatingPage() {
   const [userPlace, setUserPlace] = useState<number | string>("+999");
   const [isLoading, setIsLoading] = useState(true)
 
-  async function loadTop() {
+  async function loadTop(signal?: AbortSignal) {
     if (userId === undefined) {
       throw new Error("Telegram id is undefined!")
     }
 
-    const topUsers = await getTopUsers()
+    const topUsers = await getTopUsers(signal)
     const userPlace = await getUserPlace(userId)
     console.log(topUsers)
     setTopUsers(topUsers)
@@ -33,7 +33,12 @@ export function RatingPage() {
   }
 
   useEffect(() => {
-    loadTop().then(() => {setIsLoading(() => false)})
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    loadTop(signal).then(() => {setIsLoading(() => false)});
+
+    return () => controller.abort("Load canceled")
   }, [])
 
   if (isLoading) {

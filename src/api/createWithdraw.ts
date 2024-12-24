@@ -1,4 +1,4 @@
-export function createWithdraw(tgId: number, amount: string) {
+export async function createWithdraw(tgId: number, amount: string) {
   return fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/cash-out/create`, {
     method: "POST",
     body: JSON.stringify({tgId, amount}),

@@ -18,12 +18,13 @@ export function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  async function loadUser () {
+  async function loadUser (signal?: AbortSignal) {
     if (user === undefined || user.id === undefined) {
       throw new Error("Invalid user!");
     }
+
     try {
-      const wallet = await getUserWallet(user.id.toString());
+      const wallet = await getUserWallet(user.id.toString(), signal);
 
       setUserWallet(wallet);
     }
@@ -46,7 +47,11 @@ export function App() {
   }
 
   useEffect(()=>{
-    loadUser().then(() => setIsLoading(false))
+    const controller = new AbortController();
+    const signal = controller.signal;
+    loadUser(signal).then(() => setIsLoading(false));
+
+    return () => controller.abort("Page unmount");
   }, [])
 
   return (

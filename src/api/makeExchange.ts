@@ -4,13 +4,7 @@ export async function makeExchange(tgId: string, usdt: number) {
     usdt: usdt.toString()
   })
 
-  const res = await fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/user/exchange?${params.toString()}`);
-
-  if (!res.ok) {
-    throw new Error("Can not to exchange")
-  }
-
-  const resJson = await res.json();
-
-  return {terroCoins: resJson.terroCoins, usdt: resJson.usdt};
+  return fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/user/exchange?${params.toString()}`)
+    .then((res) => res.json())
+    .then((resJson) => ({ terroCoins: resJson.terroCoins, usdt: resJson.usdt }));
 }
