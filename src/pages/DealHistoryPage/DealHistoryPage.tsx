@@ -8,8 +8,8 @@ import {useLoading} from "@/hooks/useLoading.ts";
 import {getLastExecuted} from "@/api/getLastExecuted.ts";
 import {Spinner} from "@telegram-apps/telegram-ui";
 import {getETHData} from "@/api/getEthPrice.ts";
-import {ArrowUp} from "@gravity-ui/icons";
 import SuccessArrow from "@/components/SuccessArrow.tsx";
+import FailureArrow from "@/components/FailureArrow.tsx";
 
 export function DealHistoryPage() {
   const ethPrice = useEthPrice();
@@ -55,8 +55,13 @@ export function DealHistoryPage() {
                       <div className={style.dealResultBox}>
                         {
                           deal.profitPercent < 0 ?
-                          <div className={style.failResultBox}>Failure {deal.profitPercent}% <ArrowUp className={style.failArrow} /></div>
-                            :
+                            <div className={style.failResultBox}>
+                              <span>
+                                Failure {deal.profitPercent}%
+                              </span>
+                              <FailureArrow className={style.failArrow} />
+                            </div>
+                              :
                             <div className={style.successResultBox}>
                               <span>Success</span>
                               <span className={style.percent}>{deal.profitPercent}%</span>

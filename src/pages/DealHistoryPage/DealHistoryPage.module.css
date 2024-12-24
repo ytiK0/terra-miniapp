@@ -82,6 +82,10 @@
     justify-content: center;
 }
 
+.failResultBox > span {
+    color: #989898;
+}
+
 .failArrow {
     rotate: 45deg;
 }
