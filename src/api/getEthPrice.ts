@@ -6,23 +6,22 @@ export async function getEthPrice() {
     })
 }
 
-type Candle = [Date, string]
+type Candle = [number, string, string, string];
+export type EthData = {time: number, open: string};
 
 export async function getETHData(signal?: AbortSignal) {
-  const now = Date.now();
-  const threeHoursAgo = now - 24 * 60 * 60 * 1000;
+  const end = Date.now();
+  const start = end - 6 * 60 * 60 * 1000;
 
-  const url = `https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1m&startTime=${threeHoursAgo}&endTime=${now}`;
+  const url = `https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=1m&startTime=${start}&endTime=${end}&timeZone=3`;
 
-  const response = await fetch(url, { signal });
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error('Ошибка: ' + JSON.stringify(data));
-  }
-
-  return data.map((candle: Candle) => ({
-    time: candle[0],
-    open: candle[1],
-  })) as {time: Date, open: string}[];
+  return fetch(url, { signal})
+    .then((res) => res.json() as Promise<Candle[]>)
+    .then((ethData: Candle[]) => {
+       return ethData.map((candle: Candle) => ({
+          time: candle[0],
+          open: parseFloat(candle[3]).toFixed(2),
+        }) as EthData
+      ).reverse()
+    });
 }

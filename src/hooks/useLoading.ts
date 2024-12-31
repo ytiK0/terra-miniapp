@@ -1,21 +1,28 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
-export function useLoading<T>(callback: (signal?: AbortSignal) => Promise<T>): [boolean, T|undefined] {
-  const [isLoading, setIsLoading] = useState(true);
+type LoadingState<T> =
+  | { isLoading: true; loadData: undefined }
+  | { isLoading: false; loadData: T };
 
-  const [loadData, setLoadData] = useState<T>();
+export function useLoading<T>(
+  callback: (signal?: AbortSignal) => Promise<T>
+): LoadingState<T> {
+  const [state, setState] = useState<LoadingState<T>>({
+    isLoading: true,
+    loadData: undefined,
+  });
 
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    callback(signal).then((data) => {
-      setLoadData(data);
-      setIsLoading(false);
-    });
+    callback(signal)
+      .then((data) => {
+        setState({ isLoading: false, loadData: data });
+      })
 
-    return () => controller.abort("Load canceled")
-  }, [])
+    return () => controller.abort();
+  }, [callback]);
 
-  return [isLoading, loadData];
+  return state;
 }

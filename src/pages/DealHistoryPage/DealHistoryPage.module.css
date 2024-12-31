@@ -42,17 +42,13 @@
 }
 
 .completedDealsSection {
-    overflow-y: scroll;
-    margin: 0 0 auto;
+    margin: 0 20px auto;
+    flex-grow: 0.8;
 }
 
 .completedDealsSectionHeading {
     font-size: 24px;
     color: #EAEAEACC;
-}
-
-.dealWrapper {
-    margin: 0 30px;
 }
 
 .dealDate {

@@ -5,22 +5,59 @@ import {Logo} from "@/components/Logo/Logo.tsx";
 import {useEthPrice} from "@/hooks/useEthPrice.ts";
 import {Badge} from "@/components/Badge/Badge.tsx";
 import {useLoading} from "@/hooks/useLoading.ts";
-import {getLastExecuted} from "@/api/getLastExecuted.ts";
+import {Deal, getLastExecuted} from "@/api/getLastExecuted.ts";
 import {Spinner} from "@telegram-apps/telegram-ui";
-import {getETHData} from "@/api/getEthPrice.ts";
+import {EthData, getETHData} from "@/api/getEthPrice.ts";
+import {FixedSizeList as List, ListChildComponentProps} from "react-window";
 import SuccessArrow from "@/components/SuccessArrow.tsx";
 import FailureArrow from "@/components/FailureArrow.tsx";
+import AutoSizer from "react-virtualized-auto-sizer";
+
+const padDate = (component: number) => component.toString().padStart(2, "0");
+
+function DealListRow({ index, data, style: listItemStyles }: ListChildComponentProps<{deals: Deal[], ethData: EthData[]}>) {
+  const deal = data.deals[index];
+  const ethData = data.ethData[index];
+  const dealTime = new Date(ethData.time);
+
+  return (
+    <div className={style.dealWrapper} key={deal.id} style={listItemStyles}>
+      <div className={style.dealDate}>
+        {padDate(dealTime.getDate())}.{padDate(dealTime.getMonth() + 1)} {padDate(dealTime.getHours())}:{padDate(dealTime.getMinutes())}
+      </div>
+      <div className={style.dealBox}>
+        <span className={style.dealActualPrice}><span style={{color: "white"}}>ETH</span> {parseFloat(ethData.open)}$</span>
+        <div className={style.dealResultBox}>
+          {
+            deal.profitPercent < 0 ?
+              <div className={style.failResultBox}>
+                <span>
+                  Failure {deal.profitPercent}%
+                </span>
+                <FailureArrow className={style.failArrow}/>
+              </div>
+              :
+              <div className={style.successResultBox}>
+                <span>Success</span>
+                <span className={style.percent}>{deal.profitPercent}%</span>
+                <SuccessArrow className={style.successArrow}/>
+              </div>
+          }
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export function DealHistoryPage() {
   const ethPrice = useEthPrice();
-  const [isLoading, deals] = useLoading(getLastExecuted);
-  const [isDataLoading, ethData] = useLoading(getETHData);
-
+  const {isLoading, loadData:deals} = useLoading(getLastExecuted);
+  const {isLoading: isDataLoading, loadData:ethData} = useLoading(getETHData);
 
   return (
     <Page back={true}>
       <header>
-        <Logo />
+        <Logo/>
         <h2 className={style.headerSubtitle}>History <span>24H</span></h2>
       </header>
       <section>
@@ -29,53 +66,27 @@ export function DealHistoryPage() {
           <div className={style.dealContainer}>
             <Badge className={style.ethPriceBadge}>ETH {ethPrice}$</Badge>
             <div className={style.processSign}>
-                Process
+              Process
             </div>
           </div>
         </div>
       </section>
       <section className={style.completedDealsSection}>
         <h3 className={style.completedDealsSectionHeading}>Completed Transactions</h3>
-        <div className={style.completedDealsWrapper}>
-          {
-            isLoading && isDataLoading && ethData === undefined ? <Spinner size={"l"} /> :
-              (deals || []).map((deal, i) => {
-                if (ethData === undefined) {
-                  throw new Error("Eth data is undefined")
-                }
-
-
-                return (
-                  <div className={style.dealWrapper} key={deal.id}>
-                    <div className={style.dealDate}>
-                      {`01.01`} {`00:00`}
-                    </div>
-                    <div className={style.dealBox}>
-                      <span className={style.dealActualPrice}><span style={{color: "white"}}>ETH</span> {parseFloat(ethData[i].open)}$</span>
-                      <div className={style.dealResultBox}>
-                        {
-                          deal.profitPercent < 0 ?
-                            <div className={style.failResultBox}>
-                              <span>
-                                Failure {deal.profitPercent}%
-                              </span>
-                              <FailureArrow className={style.failArrow} />
-                            </div>
-                              :
-                            <div className={style.successResultBox}>
-                              <span>Success</span>
-                              <span className={style.percent}>{deal.profitPercent}%</span>
-                              <SuccessArrow className={style.successArrow} />
-                            </div>
-                        }
-                      </div>
-                    </div>
-                  </div>
-                )
-                }
-              )
-          }
-        </div>
+        {
+          isLoading || isDataLoading ? <Spinner size={"l"} /> :
+            <AutoSizer>
+              {({width, height})=>
+                <List  width={width}
+                       height={height}
+                       itemSize={84}
+                       itemData={{deals, ethData}}
+                       itemCount={deals.length}>
+                  {DealListRow}
+                </List>
+              }
+            </AutoSizer>
+        }
       </section>
     </Page>
   );
