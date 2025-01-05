@@ -9,23 +9,23 @@ import {useAppStore} from "@/state/appState.ts";
 
 const levels: Record<string, {gain: string, level: string}> = {
   "YOUNG": {
-    gain: "+0.5%T/DALY",
+    gain: "+0.5%T/DAILY",
     level: "1-10"
   },
   "TEEN": {
-    gain: "+1%T/DALY",
+    gain: "+1%T/DAILY",
     level: "11-15"
   },
   "ADULT": {
-    gain: "+1.5%T/DALY",
+    gain: "+1.5%T/DAILY",
     level: "16-20"
   },
   "BOSS": {
-    gain: "+2%T/DALY",
+    gain: "+2%T/DAILY",
     level: "21-25"
   },
   "GOODFATHER": {
-    gain: "+3%T/DALY",
+    gain: "+3%T/DAILY",
     level: "26+"
   }
 }

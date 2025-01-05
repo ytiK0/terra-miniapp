@@ -75,7 +75,7 @@ export function InformationPage() {
                       <div key={`${infoIndex}-${i}`} className={styles.infoItem}>
                         {infoIndex === "empty" || <><span className={styles.orange}>{infoIndex}</span> <span className={styles.gray}>-</span> </>}
                         {information[categoryName][infoIndex]}
-                        <span className={styles.gray}> Terro</span>
+                        <span className={styles.gray}> Teero</span>
                       </div>
                     )
                   }
