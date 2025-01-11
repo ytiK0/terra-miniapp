@@ -7,7 +7,7 @@ import {Spinner} from "@telegram-apps/telegram-ui";
 import {Avatar} from "@/components/Avatar/Avatar.tsx";
 
 export function WithdrawListPage() {
-  const [isLoading, cashOuts] = useLoading(getCashOuts)
+  const {isLoading, loadData: cashOuts} = useLoading(getCashOuts);
 
   return (
     <Page back={true}>

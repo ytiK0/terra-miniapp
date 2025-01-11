@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
-type LoadingState<T> =
-  | { isLoading: true; loadData: undefined }
+type LoadingState<T> = { isLoading: true; loadData: undefined }
   | { isLoading: false; loadData: T };
 
 export function useLoading<T>(
