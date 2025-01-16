@@ -19,7 +19,9 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const [enterValue, handleNumpadBtnClick] = useNumpad();
   const [isBalanceWarningVisible, toggleWarning] = useWarning(1500);
   const [isPaymentWarningVisible, togglePayment] = useWarning(null);
-  const [lostPayUrl, setLostPatUrl] = useState<string | null>(null)
+  const [lostPayUrl, setLostPatUrl] = useState<string | null>(null);
+
+  const [err, setErr] = useState<string|null>(null)
 
   if (user === undefined) {
     throw new Error("Invalid User")
@@ -36,9 +38,18 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       toggleWarning();
     }
     else {
-      await createWithdraw(user.id, enterValue)
+      try {
+        await createWithdraw(user.id, enterValue);
+      }
+      catch (err) {
+        console.log(err)
+        setErr((err as {message: string}).message);
+        setTimeout(() => {
+          setErr(null)
+        }, 3000)
+      }
     }
-  }, [])
+  }, [enterValue])
 
   const handelReceive = useCallback(async () => {
     const value = parseFloat(enterValue);
@@ -82,6 +93,23 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       </section>
       <BalanceWarning hidden={isBalanceWarningVisible} currency={"USDT"} />
       <AlreadyHasPaymentWarning hidden={isPaymentWarningVisible} payUrl={lostPayUrl} />
+      { err &&
+          <div style={
+            {
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              translate: "-50%",
+              backgroundColor: "#F89007",
+              borderRadius: "10px",
+              padding: 10,
+              width: "80%",
+              color: "black"
+            }
+          }>
+              {err}
+          </div>
+      }
     </Page>
   );
 }

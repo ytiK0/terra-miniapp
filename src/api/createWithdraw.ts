@@ -6,7 +6,11 @@ export async function createWithdraw(tgId: number, amount: string) {
       "Content-type":"application/json;charset=utf-8"
     }
   }).then((res) => res.json())
-    .catch((err) => {
-      throw new Error("Cannot create withdraw: " + err.toString())
+    .then((json) => {
+      if (json.error) {
+        throw json;
+      }
+
+      return json;
     })
 }

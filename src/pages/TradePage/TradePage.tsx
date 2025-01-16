@@ -1,9 +1,9 @@
 import {Page} from "@/components/Page.tsx";
 
 import style from "./TradePage.module.css"
-import {useCallback, useState} from "react";
+import {useCallback} from "react";
 import {ArrowUpArrowDown} from "@gravity-ui/icons";
-import {Currency, TradeInput} from "@/components/TradeInput/TradeInput.tsx";
+import {TradeInput} from "@/components/TradeInput/TradeInput.tsx";
 import {useAppStore} from "@/state/appState.ts";
 import {useNumpad} from "@/hooks/useNumpad.ts";
 import {Numpad} from "@/components/Numpad/Numpad.tsx";
@@ -13,52 +13,30 @@ import {makeExchange} from "@/api/makeExchange.ts";
 import {initData, useSignal} from "@telegram-apps/sdk-react";
 
 
-function getOppCurrency(currency: Currency): Currency {
-  if (currency === "TERRA") {
-    return "USDT"
-  }
-  return "TERRA"
-}
-
 export function TradePage() {
-  const user = useSignal(initData.user)
-  const { usdt, terroCoins } = useAppStore((s) => s.userWallet)
-  const setUserWallet = useAppStore((s) => s.setUserWallet)
-  const [enterCurrency, setEnterCurrency] = useState<Currency>("TERRA");
-  const [enterValue, handleNumpadBtnClick, setEnterValue] = useNumpad();
+  const user = useSignal(initData.user);
+  const { usdt, terroCoins } = useAppStore((s) => s.userWallet);
+  const setUserWallet = useAppStore((s) => s.setUserWallet);
+  const [enterValue, handleNumpadBtnClick] = useNumpad();
   const [isWarningVisible, toggleVisible] = useWarning(1500)
 
   if (user === undefined) {
     throw new Error("Invalid user")
   }
 
-  const toggleCurrency = useCallback(() => {
-    setEnterValue((parseFloat(enterValue) * (enterCurrency !== "TERRA" ? 0.5 : 2)).toString())
-
-    setEnterCurrency(getOppCurrency(enterCurrency))
-  }, [enterValue, enterCurrency]);
-
   const handleConfirmClick = useCallback(async () => {
     const value = parseFloat(enterValue);
     if (value === 0) {
-      toggleVisible()
-      return
+      toggleVisible();
+      return;
     }
 
-    if (enterCurrency === "USDT") {
-      if (value > usdt) {
-        toggleVisible()
-      } else {
-        setUserWallet(await makeExchange(user.id.toString(), value))
-      }
+    if (value > usdt) {
+      toggleVisible();
     } else {
-      if (value > terroCoins) {
-        toggleVisible()
-      } else {
-        // make request
-      }
+      setUserWallet(await makeExchange(user.id.toString(), value))
     }
-  }, [enterValue, enterCurrency, usdt, terroCoins])
+  }, [enterValue, usdt, terroCoins])
 
   return (
     <Page back={true}>
@@ -66,10 +44,10 @@ export function TradePage() {
         Trade
       </header>
       <section className={style.inputSection}>
-        <TradeInput value={enterValue} currency={enterCurrency}/>
-        <TradeInput value={parseFloat(enterValue) * (enterCurrency === "TERRA" ? 0.5 : 1)} currency={getOppCurrency(enterCurrency)}/>
+        <TradeInput value={enterValue} currency={"USDT"}/>
+        <TradeInput value={parseFloat(enterValue) * 0.5} currency={"TERRA"}/>
 
-        <div className={style.arrowsContainer} onClick={toggleCurrency}>
+        <div className={style.arrowsContainer}>
           <ArrowUpArrowDown className={style.arrows}/>
         </div>
       </section>
@@ -81,7 +59,7 @@ export function TradePage() {
         <Numpad onBtnClick={handleNumpadBtnClick}/>
         <div className={style.confirmBtn} onClick={handleConfirmClick}>CONFIRM THE EXCHANGE</div>
       </section>
-      <BalanceWarning hidden={isWarningVisible} currency={enterCurrency} />
+      <BalanceWarning hidden={isWarningVisible} currency={"USDT"} />
     </Page>
   );
 }

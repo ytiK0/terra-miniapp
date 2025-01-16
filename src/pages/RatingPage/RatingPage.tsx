@@ -22,13 +22,13 @@ export function RatingPage() {
 
   async function loadTop(signal?: AbortSignal) {
     if (userId === undefined) {
-      throw new Error("Telegram id is undefined!")
+      throw new Error("Telegram id is undefined!");
     }
 
-    const topUsers = await getTopUsers(signal)
-    const userPlace = await getUserPlace(userId)
-    setTopUsers(topUsers)
-    setUserPlace(userPlace)
+    const topUsers = await getTopUsers(signal);
+    const userPlace = await getUserPlace(userId);
+    setTopUsers(topUsers);
+    setUserPlace(userPlace);
   }
 
   useEffect(() => {
@@ -55,7 +55,6 @@ export function RatingPage() {
             <span style={{fontSize: 20}}>2</span>
           </Avatar>
           <span className={styles.topUsername}>
-
             { (topUsers[1] && topUsers[1].name) || "-" }
           </span>
         </div>
