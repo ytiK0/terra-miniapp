@@ -19,6 +19,7 @@ export interface UserBackend {
   createdAt: Date
   photoURL: string
   todayProfit: Profit | null
+  previousDayProfit: Profit | null
 }
 
 export async function getUserWallet(id: string, signal?: AbortSignal): Promise<UserWallet> {
@@ -28,10 +29,15 @@ export async function getUserWallet(id: string, signal?: AbortSignal): Promise<U
   return fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/user/findOneByTg?${params.toString()}`, {signal})
     .then((res) => res.json() as Promise<UserBackend>)
     .then((resJson) => {
-      if (resJson.coins === undefined) {
+      if (resJson.id === undefined) {
         throw resJson;
       }
-      return { usdt: resJson.usdt, terroCoins: resJson.coins, earnedUsdt: resJson.earnedUsdt, depositedUsdt: resJson.depositedUsdt };
+
+      const usdt = resJson.earnedUsdt + resJson.depositedUsdt;
+      const terroCoins =resJson.coins;
+      const earnedUsdt = resJson.earnedUsdt;
+      const depositedUsdt = resJson.depositedUsdt;
+      return { usdt, terroCoins, earnedUsdt, depositedUsdt };
     });
 
 

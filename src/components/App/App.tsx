@@ -30,15 +30,15 @@ export function App() {
     }
     catch (err) {
       if ((err as {message: string}).message === "User was not found") {
-        const createdUser = await createUser({
+        const { coins, usdt, depositedUsdt, earnedUsdt } = await createUser({
           telegramId: user.id,
           photoURL: user.photoUrl || "",
           link: user.username || "",
           name: user.firstName,
           referId: user.id
-        })
+        });
 
-        setUserWallet({terroCoins: createdUser.coins, usdt: createdUser.usdt})
+        setUserWallet({terroCoins: coins, usdt, depositedUsdt, earnedUsdt});
       }
       else {
         throw err
