@@ -27,6 +27,9 @@ export default defineConfig({
     modules: {
       generateScopedName: '[name]_[local]_[hash:base64:3]'
     }
+  },
+  build: {
+    sourcemap: true
   }
 });
 
