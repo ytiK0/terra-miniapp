@@ -2,7 +2,9 @@ import {create} from "zustand";
 
 export interface UserWallet {
   terroCoins: number,
-  usdt: number
+  usdt: number,
+  depositedUsdt: number,
+  earnedUsdt: number,
 }
 
 interface AppState {
@@ -11,6 +13,6 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>()((set) => ({
-  userWallet: {usdt: 0, terroCoins: 0},
+  userWallet: {usdt: 0, terroCoins: 0, depositedUsdt: 0, earnedUsdt: 0},
   setUserWallet: (userWallet) => set(() => ({ userWallet }))
 }))

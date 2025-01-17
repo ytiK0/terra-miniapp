@@ -12,7 +12,7 @@ import {useUpdateWallet} from "@/hooks/useUpdateWallet.ts";
 
 
 export function WalletPage() {
-  const {terroCoins, usdt} = useAppStore((s) => s.userWallet);
+  const {terroCoins, depositedUsdt, earnedUsdt, usdt} = useAppStore((s) => s.userWallet);
 
   useUpdateWallet();
 
@@ -76,10 +76,10 @@ export function WalletPage() {
                 USDT
               </div>
               <span className={style.gray}>Deposited</span>
-              <span className={style.gray} style={{textAlign: "right"}}>{usdt}USDT</span>
+              <span className={style.gray} style={{textAlign: "right"}}>{depositedUsdt}USDT</span>
               <span className={style.gray}></span>
               <span className={style.gray}>Earned</span>
-              <span className={style.gray} style={{textAlign: "right"}}>{usdt}USDT</span>
+              <span className={style.gray} style={{textAlign: "right"}}>{earnedUsdt}USDT</span>
             </div>
             <div className={style.line}></div>
             <div className={style.result}><span style={{color: "#F89007"}}>{usdt}</span>USDT</div>
