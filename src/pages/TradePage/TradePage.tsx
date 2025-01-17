@@ -11,6 +11,8 @@ import {useWarning} from "@/hooks/useWarning.ts";
 import {BalanceWarning} from "@/components/BalanceWarning/BalanceWarning.tsx";
 import {makeExchange} from "@/api/makeExchange.ts";
 import {initData, useSignal} from "@telegram-apps/sdk-react";
+import {useProcess} from "@/hooks/useProcess.ts";
+import {ProcessStatusModal} from "@/components/ProcessStatusModal/ProcessStatusModal.tsx";
 
 
 export function TradePage() {
@@ -18,7 +20,9 @@ export function TradePage() {
   const { usdt, terroCoins } = useAppStore((s) => s.userWallet);
   const setUserWallet = useAppStore((s) => s.setUserWallet);
   const [enterValue, handleNumpadBtnClick] = useNumpad();
-  const [isWarningVisible, toggleVisible] = useWarning(1500)
+  const [isWarningVisible, toggleVisible] = useWarning(1500);
+
+  const [status, startProcess] = useProcess()
 
   if (user === undefined) {
     throw new Error("Invalid user")
@@ -34,9 +38,10 @@ export function TradePage() {
     if (value > usdt) {
       toggleVisible();
     } else {
-      setUserWallet(await makeExchange(user.id.toString(), value))
+      const updatedWallet = await startProcess(makeExchange(user.id.toString(), value));
+      setUserWallet(updatedWallet);
     }
-  }, [enterValue, usdt, terroCoins])
+  }, [enterValue, usdt, terroCoins]);
 
   return (
     <Page back={true}>
@@ -60,6 +65,7 @@ export function TradePage() {
         <div className={style.confirmBtn} onClick={handleConfirmClick}>CONFIRM THE EXCHANGE</div>
       </section>
       <BalanceWarning hidden={isWarningVisible} currency={"USDT"} />
+      <ProcessStatusModal status={status} />
     </Page>
   );
 }

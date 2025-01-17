@@ -12,6 +12,8 @@ import {initData, openTelegramLink, useSignal} from "@telegram-apps/sdk-react";
 import {createTransaction} from "@/api/createTransaction.ts";
 import {getTransactionStatus} from "@/api/getTransactionStatus.ts";
 import {createWithdraw} from "@/api/createWithdraw.ts";
+import {useProcess} from "@/hooks/useProcess.ts";
+import {ProcessStatusModal} from "@/components/ProcessStatusModal/ProcessStatusModal.tsx";
 
 const prepareAmountToSend = (amount: number) => (Math.floor(amount * 1000) / 1000).toFixed(3);
 
@@ -23,7 +25,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const [isPaymentWarningVisible, togglePayment] = useWarning(null);
   const [lostPayUrl, setLostPatUrl] = useState<string | null>(null);
 
-  const [err, setErr] = useState<string|null>(null)
+  const [status, startProcess] = useProcess();
 
   if (user === undefined) {
     throw new Error("Invalid User")
@@ -41,17 +43,8 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       toggleWarning();
     }
     else {
-      try {
-        const amount = prepareAmountToSend(value);
-        await createWithdraw(user.id, amount);
-      }
-      catch (err) {
-        console.log(err)
-        setErr((err as {message: string}).message);
-        setTimeout(() => {
-          setErr(null)
-        }, 3000)
-      }
+      const amount = prepareAmountToSend(value);
+      await startProcess(createWithdraw(user.id, amount));
     }
   }, [enterValue]);
 
@@ -65,12 +58,12 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
     const transactionStatus = await getTransactionStatus(user.id.toString());
 
     if (transactionStatus.status === "active") {
-      setLostPatUrl(transactionStatus.payUrl)
-      togglePayment()
-      return
+      setLostPatUrl(transactionStatus.payUrl);
+      togglePayment();
+      return;
     }
 
-    const {payUrl} = await createTransaction(user.id, enterValue)
+    const {payUrl} = await startProcess(createTransaction(user.id, enterValue));
 
     if (openTelegramLink.isAvailable()) {
       openTelegramLink(payUrl);
@@ -97,23 +90,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       </section>
       <BalanceWarning hidden={isBalanceWarningVisible} currency={"USDT"} />
       <AlreadyHasPaymentWarning hidden={isPaymentWarningVisible} payUrl={lostPayUrl} />
-      { err &&
-          <div style={
-            {
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              translate: "-50%",
-              backgroundColor: "#F89007",
-              borderRadius: "10px",
-              padding: 10,
-              width: "80%",
-              color: "black"
-            }
-          }>
-              {err}
-          </div>
-      }
+      <ProcessStatusModal status={status} />
     </Page>
   );
 }

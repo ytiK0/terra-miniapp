@@ -9,13 +9,15 @@ import {getStatus} from "@/helpers/getStatus.ts";
 import {Avatar} from "@/components/Avatar/Avatar.tsx";
 import {useAppStore} from "@/state/appState.ts";
 
-const stacking: Record<string, number> = {
-  "young": 1.005,
-  "teen": 1.01,
-  "adult": 1.015,
-  "boss": 1.2,
-  "goodfather": 1.3
-}
+// const stacking: Record<string, number> = {
+//   "young": 1.005,
+//   "teen": 1.01,
+//   "adult": 1.015,
+//   "boss": 1.2,
+//   "goodfather": 1.3
+// }
+
+const addPercent = 1.04;
 
 export function ProfilePage() {
   const user = useSignal(initData.user)
@@ -23,7 +25,10 @@ export function ProfilePage() {
   const referralLink = `https://t.me/${import.meta.env.VITE_TERRA_BOTNAME}/?start=${user?.id}`;
 
   const status = getStatus(terroCoins);
-  const stackingPercent = stacking[status.toLowerCase()];
+
+  const depositedUsdt = 10;
+
+  console.log(parseFloat((depositedUsdt * Math.pow(addPercent, 30)).toFixed(2)))
 
   const copyRefLinkToClipboard = useCallback( async () => {
     try {
@@ -91,17 +96,17 @@ export function ProfilePage() {
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>1 Day</span>
-          <div className={styles.profitLabel}>{parseFloat((terroCoins * stackingPercent).toFixed(2))} USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((depositedUsdt * addPercent).toFixed(2))} USDT</div>
         </div>
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>7 Days</span>
-          <div className={styles.profitLabel}>{parseFloat((terroCoins * stackingPercent * 7).toFixed(2))} USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((depositedUsdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
         </div>
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>30 Days</span>
-          <div className={styles.profitLabel}>{parseFloat((terroCoins * stackingPercent * 30).toFixed(2))} USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((depositedUsdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
         </div>
       </section>
       <section className={styles.externResSection}>
