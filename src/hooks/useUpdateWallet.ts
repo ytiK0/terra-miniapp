@@ -5,23 +5,29 @@ import {initData, useSignal} from "@telegram-apps/sdk-react";
 
 
 export function useUpdateWallet() {
-  const setUserWallet = useAppStore((s) => s.setUserWallet)
-  const user = useSignal(initData.user)
+  const setUserWallet = useAppStore((s) => s.setUserWallet);
+  const user = useSignal(initData.user);
 
   if (user?.id === undefined) {
-    throw new Error("Invalid user")
+    throw new Error("Invalid user");
   }
 
-  async function updateWallet(id: string) {
+  async function updateWallet(id: string, signal: AbortSignal) {
     if (id === undefined) {
-      throw new Error("Invalid user")
+      throw new Error("Invalid user");
     }
-    const wallet = await getUserWallet(id);
+    const wallet = await getUserWallet(id, signal);
 
     setUserWallet(wallet);
   }
 
   useEffect(() => {
-    updateWallet(user.id.toString()).then()
-  }, [])
+    const abortController = new AbortController();
+
+    const signal = abortController.signal;
+
+    updateWallet(user.id.toString(), signal).then();
+
+    return () => abortController.abort("Component was unmount");
+  }, []);
 }

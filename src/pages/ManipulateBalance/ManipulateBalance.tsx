@@ -13,6 +13,8 @@ import {createTransaction} from "@/api/createTransaction.ts";
 import {getTransactionStatus} from "@/api/getTransactionStatus.ts";
 import {createWithdraw} from "@/api/createWithdraw.ts";
 
+const prepareAmountToSend = (amount: number) => (Math.floor(amount * 1000) / 1000).toFixed(3);
+
 function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const {usdt} = useAppStore((s) => s.userWallet);
   const user = useSignal(initData.user);
@@ -34,12 +36,14 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       return;
     }
 
+    console.log(value, usdt);
     if (value > usdt) {
       toggleWarning();
     }
     else {
       try {
-        await createWithdraw(user.id, enterValue);
+        const amount = prepareAmountToSend(value);
+        await createWithdraw(user.id, amount);
       }
       catch (err) {
         console.log(err)
@@ -49,7 +53,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
         }, 3000)
       }
     }
-  }, [enterValue])
+  }, [enterValue]);
 
   const handelReceive = useCallback(async () => {
     const value = parseFloat(enterValue);
