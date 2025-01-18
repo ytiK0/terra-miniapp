@@ -33,7 +33,7 @@ export async function getUserWallet(id: string, signal?: AbortSignal): Promise<U
         throw resJson;
       }
 
-      const usdt = resJson.earnedUsdt + resJson.depositedUsdt;
+      const usdt = resJson.usdt;
       const terroCoins =resJson.coins;
       const earnedUsdt = resJson.earnedUsdt;
       const depositedUsdt = resJson.depositedUsdt;

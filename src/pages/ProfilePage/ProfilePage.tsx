@@ -9,26 +9,14 @@ import {getStatus} from "@/helpers/getStatus.ts";
 import {Avatar} from "@/components/Avatar/Avatar.tsx";
 import {useAppStore} from "@/state/appState.ts";
 
-// const stacking: Record<string, number> = {
-//   "young": 1.005,
-//   "teen": 1.01,
-//   "adult": 1.015,
-//   "boss": 1.2,
-//   "goodfather": 1.3
-// }
-
 const addPercent = 1.04;
 
 export function ProfilePage() {
   const user = useSignal(initData.user)
-  const {terroCoins} = useAppStore((s) => s.userWallet);
+  const {terroCoins, depositedUsdt} = useAppStore((s) => s.userWallet);
   const referralLink = `https://t.me/${import.meta.env.VITE_TERRA_BOTNAME}/?start=${user?.id}`;
 
   const status = getStatus(terroCoins);
-
-  const depositedUsdt = 10;
-
-  console.log(parseFloat((depositedUsdt * Math.pow(addPercent, 30)).toFixed(2)))
 
   const copyRefLinkToClipboard = useCallback( async () => {
     try {
@@ -86,7 +74,6 @@ export function ProfilePage() {
           <div className={styles.referralCopyButton} onClick={copyRefLinkToClipboard}>
             <Copy width={30} height={30}/>
           </div>
-
         </div>
       </section>
       <section style={{textAlign:"left", marginLeft:"15px"}}>
