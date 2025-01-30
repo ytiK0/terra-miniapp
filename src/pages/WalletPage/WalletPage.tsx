@@ -9,8 +9,6 @@ import {ArrowDown, ArrowsRotateRight, ArrowUp} from "@gravity-ui/icons";
 import {Link} from "@/components/Link/Link.tsx";
 import {useUpdateWallet} from "@/hooks/useUpdateWallet.ts";
 
-
-
 export function WalletPage() {
   const {terroCoins, depositedUsdt, earnedUsdt, usdt} = useAppStore((s) => s.userWallet);
 
@@ -30,17 +28,17 @@ export function WalletPage() {
           {usdt}$
         </div>
         <div className={style.walletButtons}>
-          <Link to={"/send"} className={style.walletButton}>
-            <div className={style.walletBtnIconWrapper}>
-              <ArrowUp className={style.walletBtnIcon}/>
-            </div>
-            <span>Send</span>
-          </Link>
           <Link to={"/receive"} className={style.walletButton}>
             <div className={style.walletBtnIconWrapper}>
               <ArrowDown className={style.walletBtnIcon}/>
             </div>
             <span>Receive</span>
+          </Link>
+          <Link to={"/send"} className={style.walletButton}>
+            <div className={style.walletBtnIconWrapper}>
+              <ArrowUp className={style.walletBtnIcon}/>
+            </div>
+            <span>Send</span>
           </Link>
           <Link to={"/trade"} className={style.walletButton}>
             <div className={style.walletBtnIconWrapper}>
