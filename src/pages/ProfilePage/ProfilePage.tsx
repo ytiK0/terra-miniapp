@@ -13,7 +13,7 @@ const addPercent = 1.04;
 
 export function ProfilePage() {
   const user = useSignal(initData.user)
-  const {terroCoins, depositedUsdt} = useAppStore((s) => s.userWallet);
+  const {terroCoins, usdt} = useAppStore((s) => s.userWallet);
   const referralLink = `https://t.me/${import.meta.env.VITE_TERRA_BOTNAME}/?start=${user?.id}`;
 
   const status = getStatus(terroCoins);
@@ -83,17 +83,17 @@ export function ProfilePage() {
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>1 Day</span>
-          <div className={styles.profitLabel}>{parseFloat((depositedUsdt * addPercent).toFixed(2))} USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((usdt * addPercent).toFixed(2))} USDT</div>
         </div>
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>7 Days</span>
-          <div className={styles.profitLabel}>{parseFloat((depositedUsdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
         </div>
         <div className={styles.profitBox}>
           <span style={{color: "#989898", fontSize: "10px"}}>After</span>
           <span>30 Days</span>
-          <div className={styles.profitLabel}>{parseFloat((depositedUsdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
+          <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
         </div>
       </section>
       <section className={styles.externResSection}>
