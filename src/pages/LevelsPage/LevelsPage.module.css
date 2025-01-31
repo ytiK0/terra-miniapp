@@ -30,7 +30,7 @@
     align-items: center;
     background-color: #2A2E33;
     border-radius: 15px;
-    padding: 5px 0 5px 30px;
+    padding: 5px 0 5px 20px;
     margin: 0 20px;
 }
 
@@ -74,7 +74,7 @@
     padding: 5px 0;
 }
 
-@media (max-height: 600px) {
+@media (max-height: 650px) {
     .subtitle {
         margin-top: 10px;
     }
@@ -85,5 +85,13 @@
 
     .badge {
         font-size: 16px;
+    }
+
+    .subtitleHead {
+        font-size: 32px;
+    }
+
+    .levelBox {
+        height: 70px;
     }
 }
