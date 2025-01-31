@@ -21,7 +21,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const {usdt} = useAppStore((s) => s.userWallet);
   const user = useSignal(initData.user);
   const [enterValue, handleNumpadBtnClick] = useNumpad();
-  const [isBalanceWarningVisible, toggleWarning] = useWarning(1500);
+  const [isBalanceWarningVisible, toggleWarning, balanceWarningMessage] = useWarning(1500);
   const [isPaymentWarningVisible, togglePayment] = useWarning(null);
   const [lostPayUrl, setLostPatUrl] = useState<string | null>(null);
 
@@ -31,14 +31,13 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
     throw new Error("Invalid User")
   }
 
-  const handelSend= useCallback( async () => {
+  const handelSend = useCallback( async () => {
     const value = parseFloat(enterValue);
-    if (value === 0) {
-      toggleWarning();
+    if (value < 1.5) {
+      toggleWarning("Withdraw minimal is 1.5 USDT");
       return;
     }
 
-    console.log(value, usdt);
     if (value > usdt) {
       toggleWarning();
     }
@@ -88,7 +87,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
         <Numpad onBtnClick={handleNumpadBtnClick}/>
         <div className={style.confirmBtn} onClick={type === "receive" ? handelReceive : handelSend}>CONFIRM</div>
       </section>
-      <BalanceWarning hidden={isBalanceWarningVisible} currency={"USDT"} />
+      <BalanceWarning hidden={isBalanceWarningVisible} message={balanceWarningMessage} />
       <AlreadyHasPaymentWarning hidden={isPaymentWarningVisible} payUrl={lostPayUrl} />
       <ProcessStatusModal status={status} />
     </Page>
