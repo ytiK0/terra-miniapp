@@ -4,7 +4,8 @@ import {PropsWithChildren, useCallback} from "react";
 import {openTelegramLink} from "@telegram-apps/sdk-react";
 
 interface WarningProps {
-  hidden: boolean
+  hidden: boolean,
+  message?: string
 }
 
 function Warning({ hidden, children }: PropsWithChildren<WarningProps>) {
@@ -15,12 +16,14 @@ function Warning({ hidden, children }: PropsWithChildren<WarningProps>) {
   );
 }
 
-export function BalanceWarning({hidden, currency}: WarningProps & {currency: string}) {
+export function BalanceWarning({hidden, message}: WarningProps) {
+  const DEFAULT_MESSAGE = "Not enough USDT";
+
   return (
     <Warning hidden={hidden}>
       <CircleExclamationFill width={20} height={20}/>
       <div>
-        not enough {currency}
+        { message || DEFAULT_MESSAGE }
       </div>
     </Warning>
   );
