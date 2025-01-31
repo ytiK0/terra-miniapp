@@ -22,6 +22,11 @@ export interface UserBackend {
   previousDayProfit: Profit | null
 }
 
+export interface User {
+  name: string,
+  photoURL: string
+}
+
 export async function getUserWallet(id: string, signal?: AbortSignal): Promise<UserWallet> {
   const params = new URLSearchParams({
     tgId: id

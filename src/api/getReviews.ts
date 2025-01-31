@@ -1,6 +1,17 @@
-import {Review} from "@/pages/ReviewsPage/ReviewsPage.tsx";
+import {User} from "@/api/getUserWallet.ts";
 
-export async function getReviews(signal?: AbortSignal) {
-  return  fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/feedback/findAll`, {signal})
+export interface Review {
+  id: number,
+  text: string,
+  amount: number,
+  user: User
+}
+
+export async function getReviews(page: number, limit: number,  signal?: AbortSignal) {
+  const params = new URLSearchParams({
+    limit: limit.toString(), page: page.toString()
+  });
+
+  return  fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/feedback/findAll?${params.toString()}`, {signal})
     .then((res) => res.json() as Promise<Review[]>);
 }

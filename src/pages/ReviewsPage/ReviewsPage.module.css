@@ -5,6 +5,8 @@
 .reviewsWrapper {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    padding-right: 15px;
     overflow-y: scroll;
     margin: 0 50px;
     flex-grow: .8;
