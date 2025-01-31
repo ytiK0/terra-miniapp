@@ -51,6 +51,10 @@
     color: #EAEAEACC;
 }
 
+.dealsContainer::-webkit-scrollbar-thumb {
+    background-color: #F89007 !important;
+}
+
 .dealDate {
     text-align: left;
     color: #989898;
@@ -60,6 +64,7 @@
 .dealBox {
     background: #232527E5;
     border-radius: 14px;
+    padding: 6px 0;
 }
 
 .dealActualPrice {
@@ -68,6 +73,8 @@
 }
 
 .dealResultBox {
+    display: inline-block;
+    padding: 5px 15px;
     background-color: #232527E5;
     font-size: 21px;
     border-radius: 14px;

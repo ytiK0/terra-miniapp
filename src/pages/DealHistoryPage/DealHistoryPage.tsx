@@ -77,9 +77,10 @@ export function DealHistoryPage() {
           isLoading || isDataLoading ? <Spinner size={"l"} /> :
             <AutoSizer>
               {({width, height})=>
-                <List  width={width}
+                <List  className={style.dealsContainer}
+                       width={width}
                        height={height}
-                       itemSize={84}
+                       itemSize={105}
                        itemData={{deals, ethData}}
                        itemCount={deals.length}>
                   {DealListRow}
