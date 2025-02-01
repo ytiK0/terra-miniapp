@@ -8,6 +8,10 @@
   margin: 0;
 }
 
+body {
+  overscroll-behavior: none;
+}
+
 .orange {
   color: #F89007
 }
