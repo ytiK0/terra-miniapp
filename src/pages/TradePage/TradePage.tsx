@@ -64,7 +64,7 @@ export function TradePage() {
         <Numpad onBtnClick={handleNumpadBtnClick}/>
         <div className={style.confirmBtn} onClick={handleConfirmClick}>CONFIRM THE EXCHANGE</div>
       </section>
-      <BalanceWarning hidden={isWarningVisible} currency={"USDT"} />
+      <BalanceWarning hidden={isWarningVisible} />
       <ProcessStatusModal status={status} />
     </Page>
   );

@@ -52,7 +52,7 @@ export function App() {
     loadUser(signal).then(() => setIsLoading(false));
 
     return () => controller.abort("Page unmount");
-  }, [])
+  }, []);
 
   return (
     <AppRoot
