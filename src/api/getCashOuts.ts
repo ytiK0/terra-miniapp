@@ -9,8 +9,12 @@ interface CashOut {
   user: UserBackend
 }
 
-export async function getCashOuts(signal?:AbortSignal) {
-  return fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/cash-out/findAll`, {signal})
+export async function getCashOuts(page:number, limit: number, signal?:AbortSignal) {
+  const params = new URLSearchParams({
+    page: page.toString(), limit: limit.toString()
+  })
+
+  return fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/cash-out/findAll?${params.toString()}`, {signal})
     .then((res) => {
       return res.json() as Promise<CashOut[]>;
     })
