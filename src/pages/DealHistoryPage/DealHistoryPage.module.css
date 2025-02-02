@@ -62,6 +62,8 @@
 }
 
 .dealBox {
+    display: flex;
+    flex-direction: column;
     background: #232527E5;
     border-radius: 14px;
     padding: 6px 0;
@@ -72,17 +74,14 @@
     font-size: 27px;
 }
 
-.dealResultBox {
-    display: inline-block;
+.resultBox {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
     padding: 5px 15px;
     background-color: #232527E5;
     font-size: 21px;
     border-radius: 14px;
-}
-
-.failResultBox, .successResultBox{
-    display: flex;
-    justify-content: center;
 }
 
 .failResultBox > span {

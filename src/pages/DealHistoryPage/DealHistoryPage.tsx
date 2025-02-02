@@ -27,23 +27,21 @@ function DealListRow({ index, data, style: listItemStyles }: ListChildComponentP
       </div>
       <div className={style.dealBox}>
         <span className={style.dealActualPrice}><span style={{color: "white"}}>ETH</span> {parseFloat(ethData.open)}$</span>
-        <div className={style.dealResultBox}>
-          {
-            deal.profitPercent < 0 ?
-              <div className={style.failResultBox}>
-                <span>
-                  Failure {deal.profitPercent}%
-                </span>
-                <FailureArrow className={style.failArrow}/>
-              </div>
-              :
-              <div className={style.successResultBox}>
-                <span>Success</span>
-                <span className={style.percent}>{deal.profitPercent}%</span>
-                <SuccessArrow className={style.successArrow}/>
-              </div>
-          }
-        </div>
+        {
+          deal.profitPercent < 0 ?
+            <div className={style.resultBox} style={{color: "#989898"}}>
+              <span>
+                Failure {deal.profitPercent}%
+              </span>
+              <FailureArrow className={style.failArrow}/>
+            </div>
+            :
+            <div className={style.resultBox} >
+              <span>Success</span>
+              <span className={style.percent}>{deal.profitPercent}%</span>
+              <SuccessArrow className={style.successArrow}/>
+           </div>
+        }
       </div>
     </div>
   )
