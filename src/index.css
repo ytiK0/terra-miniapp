@@ -8,6 +8,14 @@
   margin: 0;
 }
 
+@supports not (overscroll-behavior: none) {
+  body {
+    width: 100vw;
+    position: fixed;
+    overflow: hidden;
+  }
+}
+
 body {
   overscroll-behavior: none;
 }

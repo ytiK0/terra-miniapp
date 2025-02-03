@@ -102,7 +102,13 @@
     background-color: #F89007;
 }
 
-.externResSection {
+.buttonsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.externResContainer {
     display: flex;
     gap: 10px;
     margin: 0 15px;
@@ -145,4 +151,10 @@
     color: black;
     cursor: pointer;
     overflow: hidden;
+}
+
+@media (min-height: 650px) {
+    .buttonsSection {
+        gap: 20px
+    }
 }

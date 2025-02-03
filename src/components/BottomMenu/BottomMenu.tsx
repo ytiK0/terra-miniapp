@@ -9,11 +9,13 @@ export function BottomMenu() {
         <MenuButton buttonName={"wallet"} />
         <MenuButton buttonName={"rating"} />
       </div>
-      <Link to={"/home"}>
-        <div className={"home-button"}>
-          <img className={"home-button_img"} src="menu-buttons/home.png" alt="menu button"/>
-        </div>
-      </Link>
+      <div className={"home-button-wrapper"}>
+        <Link to={"/home"}>
+          <div className={"home-button"}>
+            <img className={"home-button_img"} src="menu-buttons/home.png" alt="menu button"/>
+          </div>
+        </Link>
+      </div>
       <div className={"button-group"}>
         <MenuButton buttonName={"levels"} />
         <MenuButton buttonName={"profile"} width={25} />

@@ -37,6 +37,7 @@ export function ProfilePage() {
 
   const openSupport = () => {
     if (openTelegramLink.isAvailable()) {
+      console.log(import.meta.env.VITE_TERRA_SUPPORT_LINK)
       openTelegramLink(import.meta.env.VITE_TERRA_SUPPORT_LINK);
     }
     else {
@@ -76,60 +77,64 @@ export function ProfilePage() {
           </div>
         </div>
       </section>
-      <section style={{textAlign:"left", marginLeft:"15px"}}>
-        <span style={{fontSize: 24}}>Status: <span style={{color:"#F89007"}}>{status}</span></span>
-      </section>
-      <section className={styles.profitSection}>
-        <div className={styles.profitBox}>
-          <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-          <span>1 Day</span>
-          <div className={styles.profitLabel}>{parseFloat((usdt * addPercent).toFixed(2))} USDT</div>
+      <section>
+        <div style={{textAlign:"left", marginLeft:"15px", marginBottom: "10px"}}>
+          <span style={{fontSize: 24}}>Status: <span style={{color:"#F89007"}}>{status}</span></span>
         </div>
-        <div className={styles.profitBox}>
-          <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-          <span>7 Days</span>
-          <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
-        </div>
-        <div className={styles.profitBox}>
-          <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-          <span>30 Days</span>
-          <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
-        </div>
-      </section>
-      <section className={styles.externResSection}>
-        <Link to={"/reviews"}  className={styles.externResBtn}>
-          Reviews
-          <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}} />
-        </Link>
-        <Link to={"/withdraw"}  className={styles.externResBtn}>
-          with
-          <br/>
-          drawals
-          <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}} />
-        </Link>
-      </section>
-      <section className={styles.helpContainer} onClick={openChannel}>
-        <div className={styles.helpElement}>
-          <LogoTelegram />
-          @{import.meta.env.VITE_TERRA_CHANEL_NAME}
-        </div>
-        <div className={styles.helpElement} onClick={openX}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
-            <path
-              d="M15.7512 0H18.818L12.1179 8.4718L20 20H13.8284L8.99458 13.0082L3.46359 20H0.394938L7.5613 10.9385L0 0H6.32828L10.6976 6.39077L15.7512 0ZM14.6748 17.9692H16.3742L5.4049 1.9241H3.58133L14.6748 17.9692Z"
-              fill="black"/>
-          </svg>
-          @terrachannel
+        <div className={styles.profitSection}>
+          <div className={styles.profitBox}>
+            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+            <span>1 Day</span>
+            <div className={styles.profitLabel}>{parseFloat((usdt * addPercent).toFixed(2))} USDT</div>
+          </div>
+          <div className={styles.profitBox}>
+            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+            <span>7 Days</span>
+            <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
+          </div>
+          <div className={styles.profitBox}>
+            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+            <span>30 Days</span>
+            <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
+          </div>
         </div>
       </section>
-      <section className={styles.helpContainer}>
-        <div style={{flexGrow: 1, fontSize:16}}>
-          Technical
-          <br/>
-          Support
+      <section className={styles.buttonsSection}>
+        <div className={styles.externResContainer}>
+          <Link to={"/reviews"}  className={styles.externResBtn}>
+            Reviews
+            <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}} />
+          </Link>
+          <Link to={"/withdraw"}  className={styles.externResBtn}>
+            with
+            <br/>
+            drawals
+            <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}} />
+          </Link>
         </div>
-        <div className={styles.helpElement} onClick={openSupport}>
-          @support
+        <div className={styles.helpContainer}>
+          <div className={styles.helpElement} onClick={openChannel}>
+            <LogoTelegram />
+            @{import.meta.env.VITE_TERRA_CHANEL_NAME}
+          </div>
+          <div className={styles.helpElement} onClick={openX}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M15.7512 0H18.818L12.1179 8.4718L20 20H13.8284L8.99458 13.0082L3.46359 20H0.394938L7.5613 10.9385L0 0H6.32828L10.6976 6.39077L15.7512 0ZM14.6748 17.9692H16.3742L5.4049 1.9241H3.58133L14.6748 17.9692Z"
+                fill="black"/>
+            </svg>
+            @terrachannel
+          </div>
+        </div>
+        <div className={styles.helpContainer}>
+          <div style={{flexGrow: 1, fontSize:16}}>
+            Technical
+            <br/>
+            Support
+          </div>
+          <div className={styles.helpElement} onClick={openSupport}>
+            @support
+          </div>
         </div>
       </section>
     </Page>
