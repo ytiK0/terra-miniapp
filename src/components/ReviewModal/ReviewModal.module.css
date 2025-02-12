@@ -9,6 +9,10 @@
     border: none;
 }
 
+.reviewModalContainer::backdrop {
+    backdrop-filter: brightness(.3);
+}
+
 .reviewModalCloseButton {
     position: absolute;
     top: -12px;

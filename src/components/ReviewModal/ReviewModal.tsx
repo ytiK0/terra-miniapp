@@ -1,6 +1,6 @@
 import style from "./ReviewModal.module.css";
 import {LogoTelegram, Xmark} from "@gravity-ui/icons";
-import { RefObject, useCallback, useEffect, useState} from "react";
+import { RefObject, useCallback, useState} from "react";
 import {initData, useSignal} from "@telegram-apps/sdk-react";
 import {sendReview} from "@/api/sendReview.ts";
 
@@ -29,15 +29,14 @@ export default function ReviewModal({dialogRef, amount = "0"}: ReviewModalProps)
     }
 
     await sendReview(review)
+    setValue("")
+    dialogRef.current?.close()
+    location.reload()
   }, [value, amount])
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value)
   }, []);
-
-  useEffect(() => {
-    console.log(value)
-  }, [value]);
 
   return (
     <dialog className={style.reviewModalContainer} ref={dialogRef}>
