@@ -11,9 +11,9 @@ export interface UserBackend {
   name: string
   link: string
   coins: number
-  usdt: number
-  depositedUsdt: number
-  earnedUsdt: number
+  usdt: string
+  depositedUsdt: string
+  earnedUsdt: string
   level: number
   referId: number
   createdAt: Date
@@ -38,10 +38,10 @@ export async function getUserWallet(id: string, signal?: AbortSignal): Promise<U
         throw resJson;
       }
 
-      const usdt = resJson.usdt;
-      const terroCoins =resJson.coins;
-      const earnedUsdt = resJson.earnedUsdt;
-      const depositedUsdt = resJson.depositedUsdt;
+      const usdt = parseFloat(resJson.usdt);
+      const terroCoins = resJson.coins;
+      const earnedUsdt = parseFloat(resJson.earnedUsdt);
+      const depositedUsdt = parseFloat(resJson.depositedUsdt);
       return { usdt, terroCoins, earnedUsdt, depositedUsdt };
     });
 
