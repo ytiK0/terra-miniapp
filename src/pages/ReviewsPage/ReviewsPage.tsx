@@ -16,7 +16,7 @@ export function ReviewsPage() {
 
   const handleModalOpen = useCallback(() => {
     reviewModalRef.current?.showModal();
-  }, [])
+  }, []);
 
   return (
     <Page>
@@ -29,7 +29,7 @@ export function ReviewsPage() {
           </button>
         </div>
       </header>
-      <ReviewModal dialogRef={reviewModalRef} />
+      <ReviewModal dialogRef={reviewModalRef} amount={"0"} />
       <section className={style.reviewsWrapper}>
         { reviews.length === 0 ? <span style={{color: "gray"}}>No reviews to show</span>
             : reviews.map(({id, text, user, amount}) => (
@@ -39,9 +39,10 @@ export function ReviewsPage() {
                     <Avatar alt={"reviewer avatar"} imgUrl={user.photoURL} width={33} />
                     <span>{user.name}</span>
                   </div>
+
                   <div className={style.reviewWithdrawWrapper}>
                     <span style={{fontSize: 8, color: "#989898"}}>Withdraw</span>
-                    <div className={style.withdrawBadge}>{amount}$</div>
+                    <div className={style.withdrawBadge}>{+amount === 0 ? "-" : `${+amount}$`}</div>
                   </div>
                 </div>
                 <div className={style.reviewTextWrapper}>
