@@ -9,6 +9,9 @@ import {useEffect, useState} from "react";
 import {useAppStore} from "@/state/appState.ts";
 import {getUserWallet} from "@/api/getUserWallet.ts";
 import {createUser} from "@/api/createUser.ts";
+import {TriangleExclamationFill} from "@gravity-ui/icons";
+
+const DEFAULT_ERROR_MESSAGE = "Service is currently unavailable";
 
 export function App() {
   const lp = useLaunchParams();
@@ -17,6 +20,7 @@ export function App() {
   const user = useSignal(initData.user);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [err, setErr] = useState<string | null>(null)
 
   async function loadUser (signal?: AbortSignal) {
     if (user === undefined || user.id === undefined) {
@@ -24,21 +28,28 @@ export function App() {
     }
 
     try {
-      const wallet = await getUserWallet(user.id.toString(), signal);
-
-      setUserWallet(wallet);
+      await getUserWallet(user.id.toString(), signal)
+        .then((wallet) => setUserWallet(wallet))
+        .catch(() => setErr(DEFAULT_ERROR_MESSAGE))
     }
     catch (err) {
       if ((err as {message: string}).message === "User was not found") {
-        const { coins, usdt, depositedUsdt, earnedUsdt } = await createUser({
+        await createUser({
           telegramId: user.id,
           photoURL: user.photoUrl || "",
           link: user.username || "",
           name: user.firstName,
           referId: user.id
-        });
-
-        setUserWallet({terroCoins: coins, usdt, depositedUsdt, earnedUsdt});
+        })
+          .then(({ coins, usdt, depositedUsdt, earnedUsdt }) => setUserWallet(
+            {
+              terroCoins: coins,
+              usdt: parseFloat(usdt),
+              depositedUsdt: parseFloat(depositedUsdt),
+              earnedUsdt: parseFloat(earnedUsdt)
+            }
+          ))
+          .catch(() => setErr(DEFAULT_ERROR_MESSAGE))
       }
       else {
         throw err
@@ -61,13 +72,18 @@ export function App() {
       className="main-container"
     >
 
-      {isLoading ? <Spinner style={{textAlign: "center"}} size={"l"} /> :
+      { err === null ? isLoading ? <Spinner style={{textAlign: "center"}} size={"l"} /> :
         <HashRouter>
           <Routes>
             {routes.map((route) => <Route key={route.path} {...route} />)}
             <Route path="*" element={<Navigate to="/"/>}/>
           </Routes>
         </HashRouter>
+        :
+        <div style={{verticalAlign: "middle", marginTop: "40vh"}}>
+          <span style={{display: "block"}}>{err}</span>
+          <TriangleExclamationFill color={"#bc1414"} width={50} height={50}/>
+        </div>
       }
     </AppRoot>
   );
