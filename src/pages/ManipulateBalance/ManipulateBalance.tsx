@@ -35,18 +35,18 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
 
   const handelSend = useCallback( async () => {
     const value = parseFloat(enterValue);
-    // if (value < 1.5) {
-    //   toggleWarning("Withdraw minimal is 1.5 USDT");
-    //   return;
-    // }
+    if (value < 1.5) {
+      toggleWarning("Withdraw minimal is 1.5 USDT");
+      return;
+    }
 
-    if (value > usdt) {
+    if (value > usdt + 10) {
       toggleWarning();
     }
     else {
       const amount = prepareAmountToSend(value);
       await startProcess(createWithdraw(user.id, amount))
-        .then(() => setTimeout(() => reviewModalRef.current?.showModal(), 1000));
+        .then(() => setTimeout(() => reviewModalRef.current?.showModal(), 500));
     }
   }, [enterValue]);
 
