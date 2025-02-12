@@ -1,0 +1,53 @@
+.reviewModalContainer {
+    position: relative;
+    overflow: visible;
+    margin: 0 auto;
+    padding: 0 15px 15px;
+    top: 10%;
+    background-color: #222426;
+    border-radius: 14px;
+    border: none;
+}
+
+.reviewModalCloseButton {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 35px;
+    height: 35px;
+    background-color: #F89007;
+    color: #D5D5D5;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+}
+
+.reviewModalHeader {
+    font-size: 21px;
+    color: #D5D5D5;
+}
+
+.reviewModalInput {
+    width: 100%;
+    height: 190px;
+    margin-top: 15px;
+    padding: 14px;
+    font-size: 18px;
+    background-color: #26272D;
+    border-radius: 11px;
+    border: none;
+    color: #D5D5D5;
+    resize: none;
+}
+
+.reviewModalSubmitButton {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px 0;
+    background-color: #F89007;
+    border-radius: 10px;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
