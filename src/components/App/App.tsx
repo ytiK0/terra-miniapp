@@ -30,7 +30,10 @@ export function App() {
     try {
       await getUserWallet(user.id.toString(), signal)
         .then((wallet) => setUserWallet(wallet))
-        .catch(() => setErr(DEFAULT_ERROR_MESSAGE))
+        .catch((er) => {
+          if (er !== "Page unmount")
+            setErr(DEFAULT_ERROR_MESSAGE)
+        })
     }
     catch (err) {
       if ((err as {message: string}).message === "User was not found") {
