@@ -5,7 +5,7 @@ import { TradeInput } from "@/components/TradeInput/TradeInput.tsx";
 import {Numpad} from "@/components/Numpad/Numpad.tsx";
 import {useNumpad} from "@/hooks/useNumpad.ts";
 import {useWarning} from "@/hooks/useWarning.ts";
-import {useCallback, useState} from "react";
+import {useCallback, useRef, useState} from "react";
 import {useAppStore} from "@/state/appState.ts";
 import {AlreadyHasPaymentWarning, BalanceWarning} from "@/components/BalanceWarning/BalanceWarning.tsx";
 import {initData, openTelegramLink, useSignal} from "@telegram-apps/sdk-react";
@@ -14,6 +14,7 @@ import {getTransactionStatus} from "@/api/getTransactionStatus.ts";
 import {createWithdraw} from "@/api/createWithdraw.ts";
 import {useProcess} from "@/hooks/useProcess.ts";
 import {ProcessStatusModal} from "@/components/ProcessStatusModal/ProcessStatusModal.tsx";
+import ReviewModal from "@/components/ReviewModal/ReviewModal.tsx";
 
 const prepareAmountToSend = (amount: number) => (Math.floor(amount * 1000) / 1000).toFixed(3);
 
@@ -24,6 +25,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const [isBalanceWarningVisible, toggleWarning, balanceWarningMessage] = useWarning(1500);
   const [isPaymentWarningVisible, togglePayment] = useWarning(null);
   const [lostPayUrl, setLostPatUrl] = useState<string | null>(null);
+  const reviewModalRef = useRef<HTMLDialogElement>(null)
 
   const [status, startProcess] = useProcess();
 
@@ -33,17 +35,18 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
 
   const handelSend = useCallback( async () => {
     const value = parseFloat(enterValue);
-    if (value < 1.5) {
-      toggleWarning("Withdraw minimal is 1.5 USDT");
-      return;
-    }
+    // if (value < 1.5) {
+    //   toggleWarning("Withdraw minimal is 1.5 USDT");
+    //   return;
+    // }
 
     if (value > usdt) {
       toggleWarning();
     }
     else {
       const amount = prepareAmountToSend(value);
-      await startProcess(createWithdraw(user.id, amount));
+      await startProcess(createWithdraw(user.id, amount))
+        .then(() => setTimeout(() => reviewModalRef.current?.showModal(), 1000));
     }
   }, [enterValue]);
 
@@ -90,6 +93,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       <BalanceWarning hidden={isBalanceWarningVisible} message={balanceWarningMessage} />
       <AlreadyHasPaymentWarning hidden={isPaymentWarningVisible} payUrl={lostPayUrl} />
       <ProcessStatusModal status={status} />
+      <ReviewModal dialogRef={reviewModalRef} amount={enterValue} />
     </Page>
   );
 }

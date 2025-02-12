@@ -12,6 +12,17 @@
     flex-grow: .8;
 }
 
+.newReviewButton {
+    width: 35px;
+    height: 30px;
+    margin-left: 15px;
+    border-radius: 10px;
+    background-color: #F89007;
+    border: none;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
 .reviewBox {
     display: flex;
     flex-direction: column;
