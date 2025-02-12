@@ -7,6 +7,9 @@ export interface SendReviewPayload {
 export async function sendReview(payload: SendReviewPayload) {
   return fetch(`${import.meta.env.VITE_TERRA_API_BASEURL}/feedback/create`, {
     method: "POST",
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
   });
 }
