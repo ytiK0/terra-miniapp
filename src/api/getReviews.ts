@@ -3,7 +3,7 @@ import {User} from "@/api/getUserWallet.ts";
 export interface Review {
   id: number,
   text: string,
-  amount: number,
+  amount: string,
   user: User
 }
 
