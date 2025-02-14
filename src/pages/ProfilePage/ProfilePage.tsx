@@ -8,6 +8,7 @@ import {Link} from "@/components/Link/Link.tsx";
 import {getStatus} from "@/helpers/getStatus.ts";
 import {Avatar} from "@/components/Avatar/Avatar.tsx";
 import {useAppStore} from "@/state/appState.ts";
+import * as React from "react";
 
 const addPercent = 1.04;
 
@@ -18,9 +19,14 @@ export function ProfilePage() {
 
   const status = getStatus(terroCoins);
 
-  const copyRefLinkToClipboard = useCallback( async () => {
+  const copyRefLinkToClipboard = useCallback( async (event: React.MouseEvent) => {
     try {
-      await navigator.clipboard.writeText(referralLink)
+      const target = event.currentTarget as HTMLDivElement;
+      target.classList.add(styles.blink);
+      setTimeout(() => {
+        target.classList.remove(styles.blink)
+      }, 1000)
+      await navigator.clipboard.writeText(referralLink);
     } catch {
       console.log("failed to copy to clipboard!")
     }
@@ -73,7 +79,7 @@ export function ProfilePage() {
             {referralLink}
           </div>
           <div className={styles.referralCopyButton} onClick={copyRefLinkToClipboard}>
-            <Copy width={30} height={30}/>
+            <Copy className={styles.referralCopyIcon} width={30} height={30}/>
           </div>
         </div>
       </section>

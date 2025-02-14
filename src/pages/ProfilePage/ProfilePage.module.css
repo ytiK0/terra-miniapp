@@ -73,6 +73,13 @@
     background-color: #F89007;
     border-radius: 15px;
     padding: 10px;
+
+}
+
+.blink,
+.blink .referralCopyIcon{
+    animation: blinkContainer 1s ease-in-out infinite;
+
 }
 
 .profitSection {
@@ -156,5 +163,17 @@
 @media (min-height: 650px) {
     .buttonsSection {
         gap: 20px
+    }
+}
+
+@keyframes blinkContainer {
+    0%, 100% {
+        background: #F89007;
+        color: #eaeaea;
+    }
+
+    50% {
+        background: #EAEAEA;
+        color: #F89007;
     }
 }
