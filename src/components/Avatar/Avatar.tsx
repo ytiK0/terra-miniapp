@@ -11,7 +11,7 @@ interface AvatarProps {
 }
 
 export function Avatar({ imgUrl, alt, width, children, className }: PropsWithChildren<AvatarProps>) {
-  if (imgUrl === "") {
+  if (imgUrl === "" || imgUrl === null) {
     imgUrl = "#"
   }
 
