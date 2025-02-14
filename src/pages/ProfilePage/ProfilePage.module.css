@@ -157,7 +157,7 @@
     background-color: #F89007;
     color: black;
     cursor: pointer;
-    overflow: hidden;
+    font-size: 20px;
 }
 
 @media (min-height: 650px) {

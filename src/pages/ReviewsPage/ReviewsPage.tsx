@@ -19,7 +19,7 @@ export function ReviewsPage() {
   }, []);
 
   return (
-    <Page>
+    <Page back={true}>
       <header className={style.header}>
         <Logo />
         <div>
