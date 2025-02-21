@@ -34,12 +34,9 @@ export function WithdrawListPage() {
                       {date.getDate()}.{padDate(date.getMonth()+1)} {date.getHours()}:{padDate(date.getMinutes())}
                     </span>
                     <div className={style.withdrawElementWrapper}>
-                      <Avatar imgUrl={cashOut.user.photoURL} alt={"userpic"} width={50}/>
+                      <Avatar imgUrl={cashOut.user.photoURL} alt={"userpic"} width={40}/>
                       <div className={style.userWrapper}>
                         <span>{user.name}</span>
-                        <div className={style.userWalletWrapper}>
-                          <span>wallet number</span>
-                        </div>
                       </div>
                       <div className={style.amountBadge}>
                         <span>{cashOut.amount}$</span>

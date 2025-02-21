@@ -20,30 +20,21 @@
 
 .withdrawElementWrapper {
     display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 8px;
     background: #232527E5;
     border-radius: 14px;
-    padding: 10px 6px;
+    padding: 6px 10px;
 }
 
 .userWrapper {
+    background: #212326F2;
     color: #D5D5D5;
-    flex-grow: 1;
-
-}
-
-.userWalletWrapper {
-    max-width: 145px;
-    font-size: 10px;
-    background-color: #212326F2;
-    padding: 4px 6px;
+    font-size: 18px;
+    padding: 0 12px;
     border-radius: 12px;
-    backdrop-filter: blur(1px)
-}
-
-.userWalletWrapper > span {
-    background: linear-gradient(90deg, rgba(152, 152, 152, 0.2) 0%, rgba(62, 61, 61, 0.1788) 99.99%, rgba(52, 52, 52, 0) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    flex-grow: 1;
 }
 
 .amountBadge {
@@ -55,7 +46,7 @@
     line-height: 100%;
     font-size: 20px;
     border-radius: 10px;
-    padding: 9px 13px;
+    padding: 5px 13px;
 }
 
 .divideLine {
