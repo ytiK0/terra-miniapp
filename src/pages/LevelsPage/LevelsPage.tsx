@@ -8,25 +8,30 @@ import {getStatus} from "@/helpers/getStatus.ts";
 import {calcLevel, levels} from "@/helpers/calcLevel.ts";
 import {useAppStore} from "@/state/appState.ts";
 
-const statusStats: Record<string, {gain: string, level: string}> = {
+export const statusStats: Record<string, {gain: string, level: string, gainNum: number}> = {
   "Young": {
-    gain: "+0.5%T/DAILY",
+    gainNum: 0.5,
+    gain: "+0.5% +10T",
     level: "1-10"
   },
   "Teen": {
-    gain: "+1%T/DAILY",
+    gainNum: 1,
+    gain: "+1% +10T",
     level: "11-15"
   },
   "Adult": {
-    gain: "+1.5%T/DAILY",
+    gainNum: 1.5,
+    gain: "+1.5% +10T",
     level: "16-20"
   },
   "Boss": {
-    gain: "+2%T/DAILY",
+    gainNum: 2,
+    gain: "+2% +10T",
     level: "21-25"
   },
   "Godfather": {
-    gain: "+3%T/DAILY",
+    gainNum: 3,
+    gain: "+3% +10T",
     level: "26+"
   }
 }
@@ -64,11 +69,11 @@ export function LevelsPage() {
   return (
     <Page>
       <header className={styles.header}>
+        <span className={styles.headerTitle}>Levels</span>
+        <Badge className={styles.badge}>+{statusStats[userLevelName].gainNum}%/DAILY</Badge>
         <Link to={"/information"} className={styles.moreInformationBtn}>
           <CircleInfo width={30} height={30} color={"#F89007"}/>
         </Link>
-        <span className={styles.headerTitle}>Levels</span>
-        <Badge className={styles.badge}>{statusStats[userLevelName].gain.split("T/").join(" / ")}</Badge>
       </header>
 
       <section className={styles.progressBarSection}>
@@ -82,11 +87,9 @@ export function LevelsPage() {
           </div>
           <span>{isLastLevel ? "inf" : currentLevel + 1 }</span>
         </div>
-        <div className={styles.coinProgress} >
-          <div style={{textAlign: "right"}}>{coins}</div>
-          <div>/</div>
-          <div style={{textAlign: "left"}}>{nextLevel || "inf"}</div>
-        </div>
+        <span className={styles.progressHint}>
+          4 days hold / Deposit 20$
+        </span>
       </section>
 
       <section className={styles.levelsSection}>

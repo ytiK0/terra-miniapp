@@ -24,6 +24,18 @@
     font-size: 16px;
 }
 
+.profitArrow {
+    width: 14px;
+    height: 14px;
+
+    transform: rotate(-45deg);
+    vertical-align: middle;
+}
+
+.profitArrowFail {
+    transform: rotate(45deg);
+}
+
 .lionImg {
     width: 100%;
     max-height: max(40vh, 250px);

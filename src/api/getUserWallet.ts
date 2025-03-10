@@ -42,7 +42,8 @@ export async function getUserWallet(id: string, signal?: AbortSignal): Promise<U
       const terroCoins = resJson.coins;
       const earnedUsdt = parseFloat(resJson.earnedUsdt);
       const depositedUsdt = parseFloat(resJson.depositedUsdt);
-      return { usdt, terroCoins, earnedUsdt, depositedUsdt };
+      const todayProfit = parseFloat((usdt * (resJson.todayProfit?.percent || 0)).toFixed(2));
+      return { usdt, terroCoins, earnedUsdt, depositedUsdt, todayProfit };
     });
 
 

@@ -14,14 +14,15 @@
 }
 
 .withdrawSection {
-    margin: 10px 45px auto;
+    width: 80%;
     overflow-y: scroll;
+    margin: 10px 45px;
 }
 
 .withdrawElementWrapper {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 5px;
     margin-top: 8px;
     background: #232527E5;
     border-radius: 14px;
@@ -29,12 +30,18 @@
 }
 
 .userWrapper {
-    background: #212326F2;
     color: #D5D5D5;
     font-size: 18px;
-    padding: 0 12px;
     border-radius: 12px;
     flex-grow: 1;
+}
+
+.userStats {
+    width: auto;
+    padding: 1px 3px;
+    font-size: 12px;
+    background: #212326CC;
+    border-radius: 10px;
 }
 
 .amountBadge {
@@ -44,7 +51,7 @@
     color: #191B1F;
     background-color: #F89007;
     line-height: 100%;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 10px;
     padding: 5px 13px;
 }

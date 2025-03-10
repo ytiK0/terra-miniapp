@@ -5,6 +5,8 @@ import {getCashOuts} from "@/api/getCashOuts.ts";
 import {Avatar} from "@/components/Avatar/Avatar.tsx";
 import {useInfinityScroll} from "@/hooks/useInfinityScroll.ts";
 import {Spinner} from "@telegram-apps/telegram-ui";
+import {getStatus} from "@/helpers/getStatus.ts";
+import {calcLevel} from "@/helpers/calcLevel.ts";
 
 const padDate = (component: number) => component.toString().padStart(2, "0");
 
@@ -37,6 +39,10 @@ export function WithdrawListPage() {
                       <Avatar imgUrl={cashOut.user.photoURL} alt={"userpic"} width={40}/>
                       <div className={style.userWrapper}>
                         <span>{user.name}</span>
+                        <div className={style.userStats}>
+                          {getStatus(user.coins).toUpperCase()}
+                          <span className={"orange"}> {calcLevel(user.coins)}LVL</span>
+                        </div>
                       </div>
                       <div className={style.amountBadge}>
                         <span>{cashOut.amount}$</span>

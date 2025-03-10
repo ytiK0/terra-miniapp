@@ -69,13 +69,17 @@ details[open] .categoryHeader {
 .gridWrapper {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(5, auto);
     grid-auto-flow: column;
     justify-items: left;
     background-color: #1E2022;
     border-radius: 12px;
     padding: 15px 10px;
     margin: 0 10px 10px;
+}
+
+.oneLineGrid {
+    grid-template-columns: auto;
 }
 
 .categoryInformation {
@@ -87,7 +91,7 @@ details[open] .categoryHeader {
 }
 
 .infoItem {
-    font-size: 160%;
+    font-size: 150%;
     line-height: 24px;
     color: #D5D5D5;
 }

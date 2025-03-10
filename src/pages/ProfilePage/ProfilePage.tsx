@@ -19,6 +19,10 @@ export function ProfilePage() {
 
   const status = getStatus(terroCoins);
 
+  if (user === undefined) {
+    throw new Error("User is invalid");
+  }
+
   const copyRefLinkToClipboard = useCallback( async (event: React.MouseEvent) => {
     try {
       const target = event.currentTarget as HTMLDivElement;
@@ -67,60 +71,50 @@ export function ProfilePage() {
     <Page>
       <header className={styles.headWrapper}>
         <Avatar className={styles.headProfileImg} width={70} imgUrl={user?.photoUrl} alt="user profil photo"/>
-        <div className={styles.headSignWrapper}>
-          <span className={styles.headSign}>Personal</span>
-          <span className={styles.headSign}>cabinet</span>
-        </div>
+        <span className={styles.username}>
+          {
+            user.username ? `@${user.username}` : user.firstName
+          }
+        </span>
       </header>
-      <section className={styles.referralSection}>
-        <h3 className={styles.referralSectionHeader}>Referral link</h3>
-        <div className={styles.referralLinkWrapper}>
-          <div className={styles.referralLinkBox}>
-            {referralLink}
-          </div>
-          <div className={styles.referralCopyButton} onClick={copyRefLinkToClipboard}>
-            <Copy className={styles.referralCopyIcon} width={30} height={30}/>
-          </div>
-        </div>
-      </section>
       <section>
-        <div style={{textAlign:"left", marginLeft:"15px", marginBottom: "10px"}}>
-          <span style={{fontSize: 24}}>Status: <span style={{color:"#F89007"}}>{status}</span></span>
-        </div>
-        <div className={styles.profitSection}>
-          <div className={styles.profitBox}>
-            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-            <span>1 Day</span>
-            <div className={styles.profitLabel}>{parseFloat((usdt * addPercent).toFixed(2))} USDT</div>
-          </div>
-          <div className={styles.profitBox}>
-            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-            <span>7 Days</span>
-            <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
-          </div>
-          <div className={styles.profitBox}>
-            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-            <span>30 Days</span>
-            <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
-          </div>
-        </div>
+        <span style={{fontSize: 24}}>Status: <span style={{color: "#F89007"}}>{status}</span></span>
       </section>
       <section className={styles.buttonsSection}>
         <div className={styles.externResContainer}>
-          <Link to={"/reviews"}  className={styles.externResBtn}>
+          <Link to={"/reviews"} className={styles.externResBtn}>
             Reviews
-            <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}} />
+            <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}}/>
           </Link>
-          <Link to={"/withdraw"}  className={styles.externResBtn}>
+          <Link to={"/withdraw"} className={styles.externResBtn}>
             with
             <br/>
             drawals
-            <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}} />
+            <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}}/>
           </Link>
         </div>
+        <section>
+          <div className={styles.profitSection}>
+            <div className={styles.profitBox}>
+              <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+              <span>1 Day</span>
+              <div className={styles.profitLabel}>{parseFloat((usdt * addPercent).toFixed(2))} USDT</div>
+            </div>
+            <div className={styles.profitBox}>
+              <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+              <span>7 Days</span>
+              <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
+            </div>
+            <div className={styles.profitBox}>
+              <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+              <span>30 Days</span>
+              <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
+            </div>
+          </div>
+        </section>
         <div className={styles.helpContainer}>
           <div className={styles.helpElement} onClick={openChannel}>
-            <LogoTelegram />
+            <LogoTelegram/>
             {import.meta.env.VITE_TERRA_CHANEL_NAME}
           </div>
           <div className={styles.helpElement} onClick={openX}>
@@ -133,13 +127,23 @@ export function ProfilePage() {
           </div>
         </div>
         <div className={styles.helpContainer}>
-          <div style={{flexGrow: 1, fontSize:16}}>
+          <div style={{flexGrow: 1, fontSize: 16}}>
             Technical
             <br/>
             Support
           </div>
           <div className={styles.helpElement} onClick={openSupport}>
             @support
+          </div>
+        </div>
+      </section>
+      <section className={styles.referralSection}>
+        <div className={styles.referralLinkWrapper} onClick={copyRefLinkToClipboard}>
+          <div style={{color: "#F89007", display: "inline-block", width: "100%", backgroundColor: "#25272B", padding: " 5px 0", borderRadius: 10, cursor: "pointer"}}>
+            Invite Friends
+          </div>
+          <div className={styles.referralCopyButton}>
+            <Copy className={styles.referralCopyIcon} width={30} height={30}/>
           </div>
         </div>
       </section>

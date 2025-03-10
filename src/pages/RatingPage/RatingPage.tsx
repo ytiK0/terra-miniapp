@@ -94,11 +94,9 @@ export function RatingPage() {
               #{userPlace}
             </span>
           </Badge>
-          <Link to={"/balance"}>
-            <span className={styles.statBoxLink}>
-              RATING <ChevronRight width={21} height={21}/>
-            </span>
-          </Link>
+          <span className={styles.statBoxLink}>
+            RATING <ChevronRight width={21} height={21}/>
+          </span>
         </div>
       </section>
       <section className={styles.topListSection}>

@@ -1,11 +1,27 @@
 .warning {
     width: min(75vw, 400px);
     position: absolute;
+    flex-direction: column;
+    gap: 10px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #F89007;
+    background-color: #232527EE;
     border-radius: 16px;
-    color: black;
-    padding: 16px;
+    color: #EAEAEA;
+    padding: 0 16px 16px;
+}
+
+.warningMessageWrapper {
+    background: #1D1E21EE;
+    border-radius: 16px;
+}
+
+.closeBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    transform: translate(50%, -50%);
+    cursor: pointer;
 }

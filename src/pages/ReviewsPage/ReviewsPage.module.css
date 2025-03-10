@@ -9,18 +9,21 @@
     padding-right: 15px;
     overflow-y: scroll;
     margin: 0 50px;
-    flex-grow: .8;
+    flex-shrink: 1;
 }
 
 .newReviewButton {
-    width: 35px;
-    height: 30px;
-    margin-left: 15px;
+    padding: 10px 50px;
     border-radius: 10px;
     background-color: #F89007;
+    font-size: 21px;
     border: none;
-    vertical-align: middle;
     cursor: pointer;
+}
+
+.newReviewButtonSection {
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .reviewBox {

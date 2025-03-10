@@ -25,9 +25,11 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
   const [isBalanceWarningVisible, toggleWarning, balanceWarningMessage] = useWarning(1500);
   const [isPaymentWarningVisible, togglePayment] = useWarning(null);
   const [lostPayUrl, setLostPatUrl] = useState<string | null>(null);
-  const reviewModalRef = useRef<HTMLDialogElement>(null)
+  const reviewModalRef = useRef<HTMLDialogElement>(null);
 
   const [status, startProcess] = useProcess();
+
+  console.log(isPaymentWarningVisible)
 
   if (user === undefined) {
     throw new Error("Invalid User")
@@ -90,8 +92,8 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
         <Numpad onBtnClick={handleNumpadBtnClick}/>
         <div className={style.confirmBtn} onClick={type === "receive" ? handelReceive : handelSend}>CONFIRM</div>
       </section>
-      <BalanceWarning hidden={isBalanceWarningVisible} message={balanceWarningMessage} />
-      <AlreadyHasPaymentWarning hidden={isPaymentWarningVisible} payUrl={lostPayUrl} />
+      <BalanceWarning hidden={isBalanceWarningVisible} message={balanceWarningMessage} onClose={toggleWarning} />
+      <AlreadyHasPaymentWarning hidden={isPaymentWarningVisible} payUrl={lostPayUrl} onClose={togglePayment} />
       <ProcessStatusModal status={status} />
       <ReviewModal dialogRef={reviewModalRef} amount={enterValue} />
     </Page>
