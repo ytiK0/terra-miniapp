@@ -59,6 +59,27 @@
     padding: 18px 22px 8px;
 }
 
+.tourContainer {
+    position: absolute;
+
+    width: 100%;
+    height: 100vh;
+
+    border: none;
+    /*backdrop-filter: brightness(.5);*/
+
+    z-index: 20;
+}
+
+.hole {
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    background: transparent;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+    border-radius: 32px;
+}
+
 @media (max-height: 721px) {
     .value {
         font-size: 14px;

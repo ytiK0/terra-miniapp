@@ -40,12 +40,13 @@ export function App() {
             name: user.firstName,
             referId: user.id
           })
-            .then(({coins, usdt, depositedUsdt, earnedUsdt}) => setUserWallet(
+            .then(({coins, usdt, depositedUsdt, earnedUsdt, todayProfit}) => setUserWallet(
               {
                 terroCoins: coins,
                 usdt: parseFloat(usdt),
                 depositedUsdt: parseFloat(depositedUsdt),
-                earnedUsdt: parseFloat(earnedUsdt)
+                earnedUsdt: parseFloat(earnedUsdt),
+                todayProfit: parseFloat((+usdt * (todayProfit?.percent || 0)).toFixed(2))
               }
             ))
             .catch(() => setErr(DEFAULT_ERROR_MESSAGE))

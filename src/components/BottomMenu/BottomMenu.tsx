@@ -12,7 +12,7 @@ export function BottomMenu() {
       <div className={"home-button-wrapper"}>
         <Link to={"/home"}>
           <div className={"home-button"}>
-            <img className={"home-button_img"} src="menu-buttons/home.png" alt="menu button"/>
+            <img className={"home-button_img"} src="menu-buttons/home.png" id={"home"} alt="menu button"/>
           </div>
         </Link>
       </div>

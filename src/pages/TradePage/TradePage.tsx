@@ -39,7 +39,8 @@ export function TradePage() {
       toggleVisible();
     } else {
       const updatedWallet = await startProcess(makeExchange(user.id.toString(), value));
-      setUserWallet(updatedWallet);
+
+      setUserWallet({...updatedWallet, todayProfit: parseFloat((updatedWallet.usdt * (updatedWallet.todayProfit?.percent || 0)).toFixed(2)) });
     }
   }, [enterValue, usdt, terroCoins]);
 
@@ -64,7 +65,7 @@ export function TradePage() {
         <Numpad onBtnClick={handleNumpadBtnClick}/>
         <div className={style.confirmBtn} onClick={handleConfirmClick}>CONFIRM THE EXCHANGE</div>
       </section>
-      <BalanceWarning hidden={isWarningVisible} />
+      <BalanceWarning hidden={isWarningVisible} onClose={() => {}} />
       <ProcessStatusModal status={status} />
     </Page>
   );

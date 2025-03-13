@@ -11,7 +11,7 @@ export function MenuButton({ width, buttonName }: BottomMenuButtonProps) {
   const src = `menu-buttons/${buttonName}${pathName === `/${buttonName}` ? "-active":""}.png`
 
   return (
-    <Link to={`/${buttonName}`} className={"button"}>
+    <Link to={`/${buttonName}`} className={"button"} id={buttonName}>
       <img className={"button-img"} src={src} alt={"btn"} width={width || 30} />
     </Link>
   );

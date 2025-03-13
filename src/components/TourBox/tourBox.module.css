@@ -1,0 +1,98 @@
+.tourBox {
+    --box-width: 90%;
+    position: absolute;
+    width: var(--box-width);
+    left: 50%;
+    padding: 12px 12px 16px;
+    background-color: #222426;
+    border-radius: 14px;
+    z-index: 30;
+    margin-left: calc(var(--box-width) / -2);
+}
+
+.boxHeader {
+    font-size: 18px;
+}
+
+.tourInnerBox {
+    padding: 8px;
+
+    background-color: #1C1D20;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.lion {
+    --cut: 25%;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+
+    width: min(70%, 300px);
+    object-fit: contain;
+    clip-path: inset(0 0 var(--cut) 0);
+    transform: translate(-15%, var(--cut));
+}
+
+.lionRight {
+    transform: scale(-1, 1) translate(-15%, var(--cut));
+    left: unset;
+    right: 0;
+}
+
+.nextButton {
+    width: 100%;
+    padding: 5px 0;
+    font-size: 24px;
+    background-color: #F89007;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.closeButton {
+    position: absolute;
+    width: 35px;
+    top: 0;
+    right: 0;
+    aspect-ratio: 1 / 1;
+    background-color: #F89007;
+    border-radius: 50%;
+    transform: translate(40%, -50%);
+    cursor: pointer;
+}
+
+@media (max-height: 725px) {
+    .boxHeader {
+        font-size: 14px;
+    }
+
+    .tourInnerBox {
+        padding: 8px;
+
+        font-size: 12px;
+    }
+
+    /*.nextButton {*/
+    /*    font-size: 18px;*/
+    /*}*/
+}
+
+@media (max-height: 625px) {
+    .tourBox {
+        padding: 8px 8px 14px;
+    }
+
+    .boxHeader {
+        font-size: 14px;
+    }
+
+    .tourInnerBox {
+        padding: 6px;
+
+        font-size: 10px;
+    }
+
+    .nextButton {
+        font-size: 18px;
+    }
+}
