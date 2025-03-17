@@ -115,3 +115,9 @@
         height: 75px;
     }
 }
+
+@media (max-width: 360px) {
+  .headerTitle {
+    font-size: 28px;
+  }
+}

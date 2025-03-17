@@ -83,7 +83,7 @@
 .profitSection {
     display: flex;
     gap: 20px;
-    margin: 0 15px;
+    margin: 30px 15px;
 }
 
 .profitBox {
@@ -158,10 +158,18 @@
     font-size: 20px;
 }
 
-@media (min-height: 650px) {
+@media (max-height: 650px) {
+    .headWrapper {
+        margin-top: 10px;
+    }
+
     .buttonsSection {
         gap: 20px
     }
+
+  .profitSection {
+    margin: 10px 15px;
+  }
 }
 
 @keyframes blinkContainer {
