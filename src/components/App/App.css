@@ -9,7 +9,14 @@
     max-width: var(--container-max-width);
     height: 100vh;
     margin: 0 auto;
+    padding-top: 30px;
+    overflow: hidden;
     background: url("background.jpg");
     background-size: 100% 100%;
-    overflow: hidden;
+}
+
+@media (max-height: 660px) {
+  .main-container {
+    padding-top: 10px;
+  }
 }

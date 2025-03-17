@@ -16,7 +16,7 @@ export function WalletPage() {
 
   return (
     <Page>
-      <header style={{marginTop: 25}}>
+      <header>
         <Logo />
       </header>
       <main className={style.walletContainer}>

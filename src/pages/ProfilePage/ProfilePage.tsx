@@ -80,8 +80,8 @@ export function ProfilePage() {
       <section>
         <span style={{fontSize: 24}}>Status: <span style={{color: "#F89007"}}>{status}</span></span>
       </section>
-      <section className={styles.buttonsSection}>
-        <div className={styles.externResContainer}>
+      <section>
+        <section className={styles.externResContainer}>
           <Link to={"/reviews"} className={styles.externResBtn}>
             Reviews
             <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}}/>
@@ -92,54 +92,52 @@ export function ProfilePage() {
             drawals
             <ArrowShapeTurnUpRight color={"#F89007"} style={{marginLeft: "10px"}}/>
           </Link>
-        </div>
-        <section>
-          <div className={styles.profitSection}>
-            <div className={styles.profitBox}>
-              <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-              <span>1 Day</span>
-              <div className={styles.profitLabel}>{parseFloat((usdt * addPercent).toFixed(2))} USDT</div>
-            </div>
-            <div className={styles.profitBox}>
-              <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-              <span>7 Days</span>
-              <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
-            </div>
-            <div className={styles.profitBox}>
-              <span style={{color: "#989898", fontSize: "10px"}}>After</span>
-              <span>30 Days</span>
-              <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
-            </div>
+        </section>
+        <section className={styles.profitSection}>
+          <div className={styles.profitBox}>
+            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+            <span>1 Day</span>
+            <div className={styles.profitLabel}>{parseFloat((usdt * addPercent).toFixed(2))} USDT</div>
+          </div>
+          <div className={styles.profitBox}>
+            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+            <span>7 Days</span>
+            <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 7)).toFixed(2))} USDT</div>
+          </div>
+          <div className={styles.profitBox}>
+            <span style={{color: "#989898", fontSize: "10px"}}>After</span>
+            <span>30 Days</span>
+            <div className={styles.profitLabel}>{parseFloat((usdt * Math.pow(addPercent, 30)).toFixed(2))} USDT</div>
           </div>
         </section>
-        <div className={styles.helpContainer}>
-          <div className={styles.helpElement} onClick={openChannel}>
-            <LogoTelegram/>
-            {import.meta.env.VITE_TERRA_CHANEL_NAME}
-          </div>
-          <div className={styles.helpElement} onClick={openX}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M15.7512 0H18.818L12.1179 8.4718L20 20H13.8284L8.99458 13.0082L3.46359 20H0.394938L7.5613 10.9385L0 0H6.32828L10.6976 6.39077L15.7512 0ZM14.6748 17.9692H16.3742L5.4049 1.9241H3.58133L14.6748 17.9692Z"
-                fill="black"/>
-            </svg>
-            TeeroApp
-          </div>
+      </section>
+      <section className={styles.helpContainer}>
+        <div className={styles.helpElement} onClick={openChannel}>
+          <LogoTelegram/>
+          {import.meta.env.VITE_TERRA_CHANEL_NAME}
         </div>
-        <div className={styles.helpContainer}>
-          <div style={{flexGrow: 1, fontSize: 16}}>
-            Technical
-            <br/>
-            Support
-          </div>
-          <div className={styles.helpElement} onClick={openSupport}>
-            @support
-          </div>
+        <div className={styles.helpElement} onClick={openX}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M15.7512 0H18.818L12.1179 8.4718L20 20H13.8284L8.99458 13.0082L3.46359 20H0.394938L7.5613 10.9385L0 0H6.32828L10.6976 6.39077L15.7512 0ZM14.6748 17.9692H16.3742L5.4049 1.9241H3.58133L14.6748 17.9692Z"
+              fill="black"/>
+          </svg>
+          TeeroApp
+        </div>
+      </section>
+      <section className={styles.helpContainer}>
+        <div style={{flexGrow: 1, fontSize: 16}}>
+          Technical
+          <br/>
+          Support
+        </div>
+        <div className={styles.helpElement} onClick={openSupport}>
+          @support
         </div>
       </section>
       <section className={styles.referralSection}>
         <div className={styles.referralLinkWrapper} onClick={copyRefLinkToClipboard}>
-          <div style={{color: "#F89007", display: "inline-block", width: "100%", backgroundColor: "#25272B", padding: " 5px 0", borderRadius: 10, cursor: "pointer"}}>
+          <div style={{fontSize: 27, color: "#F89007", display: "inline-block", width: "100%", backgroundColor: "#25272B", padding: "5px 0", borderRadius: 10, cursor: "pointer"}}>
             Invite Friends
           </div>
           <div className={styles.referralCopyButton}>
