@@ -9,7 +9,7 @@ import {UsdtIcon} from "@/components/UsdtIcon.tsx";
 import {useAppStore} from "@/state/appState.ts";
 import {calcLevel} from "@/helpers/calcLevel.ts";
 import {getStatus} from "@/helpers/getStatus.ts";
-import {CircleInfo, CircleQuestion} from "@gravity-ui/icons";
+import {BookOpen, CircleInfo, CircleQuestion} from "@gravity-ui/icons";
 import {Link} from "@/components/Link/Link.tsx";
 import {useUpdateWallet} from "@/hooks/useUpdateWallet.ts";
 import ActiveDeal from "@/components/ActiveDeal/ActiveDeal.tsx";
@@ -19,6 +19,7 @@ import FailureArrow from "@/components/FailureArrow.tsx";
 import {classNames as clx, cloudStorage, initData, useSignal} from "@telegram-apps/sdk-react";
 import {statusStats} from "@/pages/LevelsPage/LevelsPage.tsx";
 import TourBox, {TourBoxProps} from "@/components/TourBox/TourBox.tsx";
+import {useSearchParams} from "react-router-dom";
 
 type TourHole = {
   top: number,
@@ -182,6 +183,7 @@ const tourSteps: TourStep[] = [
 
 export const HomePage: FC = () => {
   const user = useSignal(initData.user);
+  const [searchParams, setSerchParams] = useSearchParams();
   const {terroCoins, usdt, todayProfit} = useAppStore((s) => s.userWallet);
   const level = calcLevel(terroCoins);
   const lion = terroCoins === 0 ? "0" : getStatus(terroCoins).toLowerCase();
@@ -198,7 +200,12 @@ export const HomePage: FC = () => {
 
   const [tourStep, setTourStep] = useState(0);
   const [hole, setHole] = useState<TourHole|null>(null);
-  const [isTourStart, setIsTourStart] = useState(false)
+  const [isTourStart, setIsTourStart] = useState(false);
+
+  const startTour = useCallback((event: React.MouseEvent) => {
+    event.stopPropagation();
+    setIsTourStart(true);
+  }, [])
 
   const close = useCallback(() => {
     if (cloudStorage.setItem.isAvailable())
@@ -206,13 +213,13 @@ export const HomePage: FC = () => {
     else
       localStorage.setItem("is-tour-done", "true")
     setIsTourStart(false);
+    setTourStep(0);
   }, [])
 
-  const next = useCallback(() => {
+  const next = useCallback((ev: React.MouseEvent) => {
+    ev.stopPropagation();
     if (tourStep === tourSteps.length - 1) {
       close();
-      setTourStep(0);
-
       return;
     }
     setTourStep((p) => p+1);
@@ -246,32 +253,36 @@ export const HomePage: FC = () => {
     async function startTour() {
       let startTour = true;
 
-      if (cloudStorage.isSupported()) {
-        const keys = await cloudStorage.getKeys();
+      if (searchParams.get("start-tour") === null) {
+        if (cloudStorage.isSupported()) {
+          const keys = await cloudStorage.getKeys();
 
-        if (keys.includes("is-tour-done")) {
-          console.log("inc")
-          startTour = (await cloudStorage.getItem("is-tour-done")) !== "true";
+          if (keys.includes("is-tour-done")) {
+            startTour = (await cloudStorage.getItem("is-tour-done")) !== "true";
+          }
+          else {
+            await cloudStorage.setItem("is-tour-done", "false");
+          }
         }
-        else
-          await cloudStorage.setItem("is-tour-done", "false");
+        else {
+           const item = localStorage.getItem("is-tour-done");
+           if (item === null)
+             localStorage.setItem("is-tour-done", "false");
+           else
+             startTour = item !== "true"
+        }
       }
       else {
-         const item = localStorage.getItem("is-tour-done");
-         if (item === null)
-           localStorage.setItem("is-tour-done", "false");
-         else
-           startTour = item !== "true"
+        searchParams.delete("start-tour");
+        setSerchParams(searchParams)
       }
 
-      console.log(startTour)
 
       setIsTourStart(startTour)
     }
 
-    const timeout = setTimeout(startTour, 1000);
-    return () => clearTimeout(timeout);
-  }, []);
+    startTour();
+  }, [searchParams]);
 
   return (
     <Page>
@@ -290,57 +301,61 @@ export const HomePage: FC = () => {
           ethPrice &&
             <div id={"deals"}>
                 <Link to={"/deals"} className={style.dealContainer}>
-                    <ActiveDeal ethPrice={ethPrice} />
+                    <ActiveDeal ethPrice={ethPrice}/>
                 </Link>
             </div>
         }
-        <div className={style.statisticContainer} >
-          <div className={style.statisticBox} id={"usdt-statistic-box"}>
-            <Link to={"/wallet"}>
-              <Badge className={style.badge}>
-                <UsdtIcon />
-                <span>
+        <Link to={"/faq"} className={style.faqLink} id={"faq"}>
+          <CircleQuestion color={"#F88F07"} width={40} height={40}/>
+        </Link>
+        <button className={style.startTourBtn} onClick={startTour}>
+          <BookOpen />
+        </button>
+      </header>
+      <section className={style.statisticContainer}>
+        <div className={style.statisticBox} id={"usdt-statistic-box"}>
+          <Link to={"/wallet"}>
+            <Badge className={style.badge}>
+              <UsdtIcon/>
+              <span>
                   USDT
                 </span>
-              </Badge>
-            </Link>
-            <div className={style.value}>
-              <span style={{fontSize:"2.75em", lineHeight: "100%"}}>
+            </Badge>
+          </Link>
+          <div className={style.value}>
+              <span style={{fontSize: "2.75em", lineHeight: "100%"}}>
                 {usdt}<span style={{fontSize: "0.75em"}}>$</span>
               </span>
-              <span style={{fontSize: "0.875em", lineHeight: "110%", color: todayProfit > 0 ? "#F89007" : "#989898"}}>
+            <span style={{fontSize: "0.875em", lineHeight: "110%", color: todayProfit > 0 ? "#F89007" : "#989898"}}>
                 {todayProfit >= 0 ? "+" : "-"}
-                {todayProfit}$
-                {todayProfit > 0 ? <SuccessArrow className={style.profitArrow} /> : <FailureArrow className={clx(style.profitArrow, style.profitArrowFail)} />}
+              {todayProfit}$
+              {todayProfit > 0 ? <SuccessArrow className={style.profitArrow}/> :
+                <FailureArrow className={clx(style.profitArrow, style.profitArrowFail)}/>}
               </span>
-            </div>
-          </div>
-          <div className={style.statisticBox} id={"teero-statistic-box"}>
-            <Link to={"/levels"}>
-              <Badge className={style.badge}>
-                <span>TERRA</span>
-              </Badge>
-            </Link>
-            <div className={style.value}>
-              <span style={{fontSize: "2.625em", lineHeight: "100%"}}>{terroCoins}</span>
-              <span style={{fontSize: "1em"}}>POINTS</span>
-              <span style={{fontSize: "0.875em", color: "#F89007"}}>
-                +{statusStats[userStatus].gainNum}%
-                <SuccessArrow className={style.profitArrow} /></span>
-            </div>
           </div>
         </div>
-        <Link to={"/faq"} className={style.faqLink} id={"faq"}>
-          <CircleQuestion color={"#F88F07"} width={40} height={40} />
-        </Link>
-      </header>
+        <div className={style.statisticBox} id={"teero-statistic-box"}>
+          <Link to={"/levels"}>
+            <Badge className={style.badge}>
+              <span>TERRA</span>
+            </Badge>
+          </Link>
+          <div className={style.value}>
+            <span style={{fontSize: "2.625em", lineHeight: "100%"}}>{terroCoins}</span>
+            <span style={{fontSize: "1em"}}>POINTS</span>
+            <span style={{fontSize: "0.875em", color: "#F89007"}}>
+                +{statusStats[userStatus].gainNum}%
+                <SuccessArrow className={style.profitArrow}/></span>
+          </div>
+        </div>
+      </section>
       <section className={style.lionSection} id={"lion"}>
         <img className={style.lionImg} src={`lions/${lion}.png`} alt="lion"/>
         <span style={{fontSize: 22, lineHeight: "100%"}}>
-          <span style={{fontSize: 44,  color: "#F88F07"}}>{level}</span>
+          <span style={{fontSize: 44, color: "#F88F07"}}>{level}</span>
           <span style={{display: "inline-block", marginLeft: 5}}>LVL</span>
           <Link to={"/information"} style={{marginLeft: 5}}>
-            <CircleInfo color={"#F88F07"} width={25} height={25} />
+            <CircleInfo color={"#F88F07"} width={25} height={25}/>
           </Link>
         </span>
       </section>

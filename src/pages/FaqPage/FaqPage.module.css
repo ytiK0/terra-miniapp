@@ -1,4 +1,5 @@
 .headWrapper {
+    position: relative;
     text-align: center;
 }
 
@@ -63,4 +64,23 @@ details[open] .marker::after {
     color: #989898;
     border-radius: 0 0 16px 16px;
     text-align: left;
+}
+
+.startTourBtn {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    background-color: #232527;
+    color: #F89007;
+    border: #F89007 4px solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.startTourBtn > svg {
+    margin-top: -4px;
+    vertical-align: middle;
+    scale: 1.2;
 }

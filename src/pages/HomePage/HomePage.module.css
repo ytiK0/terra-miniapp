@@ -46,7 +46,6 @@
 .lionSection {
     display: flex;
     flex-direction: column;
-    margin-bottom: auto;
 }
 
 .badge {
@@ -61,12 +60,12 @@
 
 .tourContainer {
     position: absolute;
+    top: 0;
 
     width: 100%;
     height: 100vh;
 
     border: none;
-    /*backdrop-filter: brightness(.5);*/
 
     z-index: 20;
 }
@@ -78,6 +77,27 @@
     background: transparent;
     box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
     border-radius: 32px;
+}
+
+
+
+.startTourBtn {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    background-color: #232527;
+    color: #F89007;
+    border: #F89007 4px solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.startTourBtn > svg {
+  margin-top: -4px;
+  vertical-align: middle;
+  scale: 1.2;
 }
 
 @media (max-height: 721px) {
@@ -97,7 +117,7 @@
     }
 
     .statisticContainer {
-        margin-top: 0;
+        margin-top: 8px;
     }
 
     .statisticBox {
@@ -106,5 +126,9 @@
 
     .lionImg {
         max-height: 38vh;
+    }
+
+    .lionSection {
+        margin-bottom: 15px;
     }
 }

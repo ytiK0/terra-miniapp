@@ -1,7 +1,10 @@
 import {Page} from "@/components/Page.tsx";
 import {Logo} from "@/components/Logo/Logo.tsx";
 
-import styles from "./FaqPage.module.css"
+import style from "./FaqPage.module.css"
+import {BookOpen} from "@gravity-ui/icons";
+import {useCallback} from "react";
+import {useNavigate} from "react-router-dom";
 
 const questions: Record<string, string> = {
   "What is the main purpose of the app?": "Our app is designed for depositing and withdrawing funds with a profit calculation of 0.25% to 0.4% per day. We aim to provide our users with stable income by using their funds for trading on various exchanges.",
@@ -18,24 +21,33 @@ const questions: Record<string, string> = {
 
 
 export function FaqPage() {
+  const nav = useNavigate();
+
+  const startTour = useCallback(() => {
+    nav("/?start-tour=true");
+  }, [])
+
   return (
     <Page back={true}>
-      <div className={ styles.headWrapper }>
-        <Logo />
+      <div className={style.headWrapper}>
+        <Logo/>
         <h1>FAQ</h1>
+        <button className={style.startTourBtn} onClick={startTour}>
+          <BookOpen/>
+        </button>
       </div>
 
-      <div className={styles.questionsContainer}>
+      <div className={style.questionsContainer}>
         {
           Object.keys(questions).map((question, i) =>
             <details name={"faq"} key={i}>
-              <summary className={styles.faqHeader} >
-                <div className={styles.faqQuestion}>
+              <summary className={style.faqHeader} >
+                <div className={style.faqQuestion}>
                   {question}
                 </div>
-                <div className={styles.marker}></div>
+                <div className={style.marker}></div>
               </summary>
-              <p className={styles.faqAnswer}>
+              <p className={style.faqAnswer}>
                 {questions[question]}
               </p>
             </details>
