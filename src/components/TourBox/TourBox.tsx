@@ -2,12 +2,13 @@ import style from "./tourBox.module.css"
 import {classNames} from "@telegram-apps/sdk-react";
 import {XmarkShapeFill} from "@gravity-ui/icons";
 import {TypingEffect} from "@/components/TypingEffect.tsx";
+import React from "react";
 
 export interface TourBoxProps {
   topHeading: string | null
   innerBox: string
   lionAlign: "left" | "right" | "none"
-  next: () => void
+  next: (ev: React.MouseEvent) => void
   onclose: () => void
   top: number | string
 }
@@ -20,7 +21,7 @@ export default function TourBox({innerBox, lionAlign, topHeading, top, onclose, 
         {topHeading && <TypingEffect speed={0} text={topHeading} />}
       </div>
       <div className={style.tourInnerBox}>
-        {<TypingEffect text={innerBox} />}
+        <TypingEffect text={innerBox} />
       </div>
       <button className={style.nextButton} onClick={next}>NEXT</button>
       <button className={style.closeButton} onClick={onclose}>
