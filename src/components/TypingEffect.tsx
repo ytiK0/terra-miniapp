@@ -1,32 +1,46 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, {useState, useEffect, useMemo, useRef, ReactNode} from "react";
+import {CircleInfo} from "@gravity-ui/icons";
 
-const parseText = (text: string, palette: Record<string, string>) => {
-  const regex = /<([a-z]+)>(.*?)<\/\1>|<br\s*\/?>/gi;
-  const result: { text: string; color?: string; isBreak?: boolean }[] = [];
+type Palette = Record<string, string | JSX.Element>;
+
+
+const parseText = (text: string, palette: Palette) => {
+  const regex = /<([a-zA-Z0-9_-]+)(?:\/|>(.*?)<\/\1)?>/gi;
+  const result: { text?: string; color?: string; component?: ReactNode }[] = [];
   let lastIndex = 0;
 
   for (const match of text.matchAll(regex)) {
-    const [fullMatch, color, content] = match;
+    const [fullMatch, tag, content] = match;
     const offset = match.index ?? 0;
 
-    if (offset > lastIndex) result.push({ text: text.slice(lastIndex, offset) });
+    if (offset > lastIndex) {
+      result.push({text: text.slice(lastIndex, offset)});
+    }
 
-    if (fullMatch.toLowerCase().startsWith("<br")) {
-      result.push({ text: "", isBreak: true });
+    if (tag in palette) {
+      if (typeof palette[tag] === "string" && content) {
+        result.push({text: content, color: palette[tag] as string});
+      } else {
+        result.push({component: palette[tag]});
+      }
     } else {
-      result.push({ text: content, color: palette[color] || color });
+      result.push({text: fullMatch});
     }
 
     lastIndex = offset + fullMatch.length;
   }
 
-  if (lastIndex < text.length) result.push({ text: text.slice(lastIndex) });
+  if (lastIndex < text.length) {
+    result.push({text: text.slice(lastIndex)});
+  }
 
   return result;
 };
 
-export const TypingEffect: React.FC<{ text: string; speed?: number }> = ({ text, speed = 50 }) => {
-  const parsedText = useMemo(() => parseText(text, { orange: "#F89007" }), [text]);
+const infoIcon = <CircleInfo color={"#F88F07"} width={20} height={20}/>
+
+export const TypingEffect: React.FC<{ text: string; speed?: number; }> = ({ text, speed = 25}) => {
+  const parsedText = useMemo(() => parseText(text, {br: <br/>, orange: "#F89007", info: infoIcon}), [text]);
   const [displayedText, setDisplayedText] = useState<typeof parsedText>([]);
   const isTypingRef = useRef(true);
   const charIndexRef = useRef(0);
@@ -42,7 +56,8 @@ export const TypingEffect: React.FC<{ text: string; speed?: number }> = ({ text,
     if (speed === 0) {
       setDisplayedText(parsedText);
       isTypingRef.current = false;
-      return () => {};
+      return () => {
+      };
     }
 
     const animate = (time: number) => {
@@ -52,21 +67,21 @@ export const TypingEffect: React.FC<{ text: string; speed?: number }> = ({ text,
         const newDisplayed: typeof parsedText = [];
 
         for (const part of parsedText) {
-          if (part.isBreak) {
+          if (part.component) {
             newDisplayed.push(part);
             continue;
           }
 
-          if (currentCharCount + part.text.length <= charIndexRef.current + 1) {
+          if (currentCharCount + (part.text?.length || 0) <= charIndexRef.current + 1) {
             newDisplayed.push(part);
           } else {
             newDisplayed.push({
-              text: part.text.slice(0, charIndexRef.current - currentCharCount + 1),
+              text: part.text?.slice(0, charIndexRef.current - currentCharCount + 1),
               color: part.color,
             });
             break;
           }
-          currentCharCount += part.text.length;
+          currentCharCount += part.text?.length || 0;
         }
 
         setDisplayedText(newDisplayed);
@@ -102,7 +117,8 @@ export const TypingEffect: React.FC<{ text: string; speed?: number }> = ({ text,
   return (
     <span>
       {displayedText.map((part, i) =>
-        part.isBreak ? <br key={i} /> : <span key={i} style={{ color: part.color }}>{part.text}</span>
+        part.component ? <React.Fragment key={i}>{part.component}</React.Fragment> :
+          part.text ? <span key={i} style={{color: part.color}}>{part.text}</span> : null
       )}
     </span>
   );
