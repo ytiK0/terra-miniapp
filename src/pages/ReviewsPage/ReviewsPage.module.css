@@ -6,10 +6,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-right: 15px;
+    padding-right: 10px;
     overflow-y: scroll;
-    margin: 0 50px;
-    flex-shrink: 1;
+    margin: 0 30px;
+    flex-grow: 0.9;
 }
 
 .newReviewButton {

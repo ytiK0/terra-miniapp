@@ -4,9 +4,7 @@
     background-color: #26272d;
     border-radius: 20px;
     padding: 15px 20px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 20px 10px 10px;
 }
 
 .button-group {
@@ -40,6 +38,5 @@
     align-items: center;
 }
 
-@media (min-width: 450px) {
-
+@media (min-width: 650px) {
 }

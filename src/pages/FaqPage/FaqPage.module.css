@@ -8,7 +8,7 @@
     flex-direction: column;
     gap: 10px;
     overflow-y: scroll;
-    margin: 0 30px 30px 30px;
+    margin: 0 30px;
 }
 
 .questionsContainer::-webkit-scrollbar-thumb {

@@ -15,7 +15,7 @@ export function WithdrawListPage() {
 
   return (
     <Page back={true}>
-      <header className={style.header}>
+      <header>
         <Logo />
         <span className={style.headerSubtitle}>
           Withdrawal List

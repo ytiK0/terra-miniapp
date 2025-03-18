@@ -46,7 +46,7 @@ export function RatingPage() {
 
   return (
     <Page>
-      <header style={{marginTop: 25}}>
+      <header>
         <Logo />
       </header>
       <section className={styles.topSection}>

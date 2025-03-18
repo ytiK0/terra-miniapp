@@ -73,7 +73,8 @@
 .levelsSection {
     display: flex;
     flex-direction: column;
-    gap: .7vh;
+    justify-content: space-between;
+    flex-grow: 0.5;
 }
 
 .levelName {
@@ -96,6 +97,12 @@
     border-radius: 20px;
     color: black;
     padding: 5px 0;
+}
+
+@media (max-height: 650px) {
+    .levelsSection {
+        gap: 1px;
+    }
 }
 
 @media (max-height: 750px) {

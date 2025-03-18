@@ -1,7 +1,7 @@
 .header {
     font-size: 50px;
     line-height: 50px;
-    margin-top: 25px;
+    margin-bottom: 5px;
 }
 
 .inputSection {
@@ -113,7 +113,6 @@
     .header {
         font-size: 38px;
         line-height: 38px;
-        margin-top: 15px;
     }
 
     .inputSection {
