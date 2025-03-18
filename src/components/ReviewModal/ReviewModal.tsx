@@ -3,13 +3,15 @@ import {LogoTelegram, Xmark} from "@gravity-ui/icons";
 import { RefObject, useCallback, useState} from "react";
 import {initData, useSignal} from "@telegram-apps/sdk-react";
 import {sendReview} from "@/api/sendReview.ts";
+import {Review} from "@/api/getReviews.ts";
 
 interface ReviewModalProps {
   dialogRef: RefObject<HTMLDialogElement>,
+  onClose?: (review: Review) => void,
   amount?: string
 }
 
-export default function ReviewModal({dialogRef, amount = "0"}: ReviewModalProps) {
+export default function ReviewModal({dialogRef, amount = "0", onClose}: ReviewModalProps) {
   const [value, setValue] = useState("");
   const user = useSignal(initData.user)
 
@@ -28,10 +30,18 @@ export default function ReviewModal({dialogRef, amount = "0"}: ReviewModalProps)
       text: value
     }
 
-    await sendReview(review)
     setValue("")
     dialogRef.current?.close()
-    location.reload()
+    onClose && onClose({
+      id: Date.now(),
+      text: value,
+      amount,
+      user: {
+        name: user.firstName,
+        photoURL: user.photoUrl || ""
+      }
+    })
+    await sendReview(review)
   }, [value, amount])
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {

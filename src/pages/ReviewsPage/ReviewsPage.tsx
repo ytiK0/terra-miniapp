@@ -3,19 +3,23 @@ import {Logo} from "@/components/Logo/Logo.tsx";
 
 import style from "./ReviewsPage.module.css";
 import {Spinner} from "@telegram-apps/telegram-ui";
-import {getReviews} from "@/api/getReviews.ts";
+import {getReviews, Review} from "@/api/getReviews.ts";
 import {Avatar} from "@/components/Avatar/Avatar.tsx";
 import {useInfinityScroll} from "@/hooks/useInfinityScroll.ts";
 import ReviewModal from "@/components/ReviewModal/ReviewModal.tsx";
 import {useCallback, useRef} from "react";
 
 export function ReviewsPage() {
-  const [spinnerRef, reviews, isLast] = useInfinityScroll(getReviews);
+  const [spinnerRef, reviews, isLast, setReviews] = useInfinityScroll(getReviews);
   const reviewModalRef = useRef<HTMLDialogElement>(null);
 
   const handleModalOpen = useCallback(() => {
     reviewModalRef.current?.showModal();
   }, []);
+
+  const handleNewReview = useCallback((review: Review) => {
+    setReviews((prev) => [review, ...prev]);
+  }, [])
 
   return (
     <Page back={true}>
@@ -25,7 +29,7 @@ export function ReviewsPage() {
           Reviews
         </div>
       </header>
-      <ReviewModal dialogRef={reviewModalRef} amount={"0"}/>
+      <ReviewModal dialogRef={reviewModalRef} amount={"0"} onClose={handleNewReview}/>
       <section className={style.reviewsWrapper}>
         {reviews.length === 0 ? <span style={{color: "gray"}}>No reviews to show</span>
           : reviews.map(({id, text, user, amount}) => (
