@@ -5,6 +5,7 @@ import style from "./FaqPage.module.css"
 import {BookOpen} from "@gravity-ui/icons";
 import {useCallback} from "react";
 import {useNavigate} from "react-router-dom";
+import {START_TOUR_PARAM_NAME} from "@/pages/HomePage/HomePage.tsx";
 
 const questions: Record<string, string> = {
   "What is the main purpose of the app?": "Our app is designed for depositing and withdrawing funds with a profit calculation of 0.25% to 0.4% per day. We aim to provide our users with stable income by using their funds for trading on various exchanges.",
@@ -24,7 +25,7 @@ export function FaqPage() {
   const nav = useNavigate();
 
   const startTour = useCallback(() => {
-    nav("/?start-tour=true");
+    nav(`/?${START_TOUR_PARAM_NAME}=true`);
   }, [])
 
   return (
