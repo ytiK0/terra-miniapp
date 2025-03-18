@@ -59,7 +59,7 @@ const tourSteps: TourStep[] = [
     tourBox: {
       lionAlign: "none",
       top: 50,
-      innerBox: "By clicking on you can see how many points you need to earn to reach a <orange>new level</orange>.<br/>" +
+      innerBox: "By clicking on <info/> you can see how many points you need to earn to reach a <orange>new level</orange>.<br/>" +
         "When you top up your USDT balance, you get <orange>2 times more</orange> dash points.",
       topHeading: "This is your <orange>Teero</orange> - it grows as your glasses grow."
     }
@@ -181,6 +181,8 @@ const tourSteps: TourStep[] = [
   }
 ];
 
+export const START_TOUR_PARAM_NAME = "start-tour";
+
 export const HomePage: FC = () => {
   const user = useSignal(initData.user);
   const [searchParams, setSerchParams] = useSearchParams();
@@ -208,10 +210,16 @@ export const HomePage: FC = () => {
   }, [])
 
   const close = useCallback(() => {
-    if (cloudStorage.setItem.isAvailable())
-      cloudStorage.setItem("is-tour-done", "true")
-    else
-      localStorage.setItem("is-tour-done", "true")
+    if (searchParams.has(START_TOUR_PARAM_NAME)) {
+      searchParams.delete(START_TOUR_PARAM_NAME);
+      setSerchParams(searchParams);
+    }
+    else if (cloudStorage.setItem.isAvailable()) {
+      cloudStorage.setItem("is-tour-done", "true");
+    }
+    else {
+      localStorage.setItem("is-tour-done", "true");
+    }
     setIsTourStart(false);
     setTourStep(0);
   }, [])
@@ -253,7 +261,7 @@ export const HomePage: FC = () => {
     async function startTour() {
       let startTour = true;
 
-      if (searchParams.get("start-tour") === null) {
+      if (searchParams.get(START_TOUR_PARAM_NAME) === null) {
         if (cloudStorage.isSupported()) {
           const keys = await cloudStorage.getKeys();
 
@@ -272,17 +280,12 @@ export const HomePage: FC = () => {
              startTour = item !== "true"
         }
       }
-      else {
-        searchParams.delete("start-tour");
-        setSerchParams(searchParams)
-      }
-
 
       setIsTourStart(startTour)
     }
 
     startTour();
-  }, [searchParams]);
+  }, []);
 
   return (
     <Page>
@@ -295,8 +298,14 @@ export const HomePage: FC = () => {
       }
 
 
-      <header className={style.header} style={{marginTop: 15}}>
+      <header className={style.header}>
         <Logo/>
+        <Link to={"/faq"} className={style.faqLink} id={"faq"}>
+          <CircleQuestion color={"#F88F07"} width={40} height={40}/>
+        </Link>
+        <button className={style.startTourBtn} onClick={startTour}>
+          <BookOpen />
+        </button>
         {
           ethPrice &&
             <div id={"deals"}>
@@ -305,12 +314,6 @@ export const HomePage: FC = () => {
                 </Link>
             </div>
         }
-        <Link to={"/faq"} className={style.faqLink} id={"faq"}>
-          <CircleQuestion color={"#F88F07"} width={40} height={40}/>
-        </Link>
-        <button className={style.startTourBtn} onClick={startTour}>
-          <BookOpen />
-        </button>
       </header>
       <section className={style.statisticContainer}>
         <div className={style.statisticBox} id={"usdt-statistic-box"}>
