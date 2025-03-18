@@ -30,8 +30,10 @@ export function App() {
     await getUserWallet(user.id.toString(), signal)
       .then((wallet) => setUserWallet(wallet))
       .catch(async (err) => {
-        if (err !== "Page unmount")
-          setErr(DEFAULT_ERROR_MESSAGE)
+        if (err === "Page unmount") {
+          return;
+        }
+
         if ((err as { message: string }).message === "User was not found") {
           await createUser({
             telegramId: user.id,
@@ -49,9 +51,8 @@ export function App() {
                 todayProfit: parseFloat((+usdt * (todayProfit?.percent || 0)).toFixed(2))
               }
             ))
-            .catch(() => setErr(DEFAULT_ERROR_MESSAGE))
         } else {
-          throw err
+          throw err;
         }
       })
   }
@@ -59,7 +60,9 @@ export function App() {
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
-    loadUser(signal).then(() => setIsLoading(false));
+    loadUser(signal)
+      .then(() => setIsLoading(false))
+      .catch(() => setErr(DEFAULT_ERROR_MESSAGE));
 
     return () => controller.abort("Page unmount");
   }, []);
