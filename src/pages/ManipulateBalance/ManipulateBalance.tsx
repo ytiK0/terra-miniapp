@@ -81,7 +81,7 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
   return (
     <Page back={true}>
       <header className={style.header}>
-        {type == "receive" ? "Receive" : "Send"}
+        {type == "receive" ? "Deposit" : "Withdrawal"}
         <br/>
         USDT
       </header>

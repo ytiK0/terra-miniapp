@@ -47,7 +47,7 @@ export function TradePage() {
   return (
     <Page back={true}>
       <header className={style.header}>
-        Trade
+        Exchange
       </header>
       <section className={style.inputSection}>
         <TradeInput value={enterValue} currency={"USDT"}/>
