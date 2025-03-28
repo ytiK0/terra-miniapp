@@ -29,8 +29,6 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
 
   const [status, startProcess] = useProcess();
 
-  console.log(isPaymentWarningVisible)
-
   if (user === undefined) {
     throw new Error("Invalid User")
   }

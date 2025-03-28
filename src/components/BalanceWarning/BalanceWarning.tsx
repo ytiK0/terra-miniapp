@@ -10,7 +10,6 @@ interface WarningProps {
 }
 
 function Warning({ hidden, children, onClose }: PropsWithChildren<WarningProps>) {
-  console.log(hidden)
   return (
     <div className={style.warning} hidden={!hidden}>
       <span>Sorry</span>
