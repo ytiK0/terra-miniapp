@@ -71,7 +71,6 @@
 
 .hole {
     position: absolute;
-    transform: translate(-50%, -50%);
 
     background: transparent;
     box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
