@@ -20,6 +20,7 @@ body {
   overscroll-behavior: none;
   height: 100vh;
   background-color: #232527;
+  user-select: none;
 }
 
 .orange {

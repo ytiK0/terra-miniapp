@@ -63,9 +63,16 @@ export function App() {
     loadUser(signal)
       .then(() => setIsLoading(false))
       .catch(() => setErr(DEFAULT_ERROR_MESSAGE));
-
-    return () => controller.abort("Page unmount");
   }, []);
+
+  useEffect(() => {
+    const onTouchStart = (ev: TouchEvent) => {
+      ev.preventDefault();
+    }
+    document.body.addEventListener("touchstart", onTouchStart);
+
+    return () => document.body.removeEventListener("touchstart", onTouchStart);
+  }, [])
 
   return (
     <AppRoot
