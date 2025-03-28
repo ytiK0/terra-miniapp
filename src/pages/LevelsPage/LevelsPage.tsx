@@ -7,6 +7,8 @@ import {Badge} from "@/components/Badge/Badge.tsx";
 import {getStatus} from "@/helpers/getStatus.ts";
 import {calcLevel, levels} from "@/helpers/calcLevel.ts";
 import {useAppStore} from "@/state/appState.ts";
+import {useMemo} from "react";
+import {binarySearch} from "@/helpers/binarySearch.ts";
 
 export const statusStats: Record<string, {gain: string, level: string, gainNum: number}> = {
   "Young": {
@@ -36,9 +38,10 @@ export const statusStats: Record<string, {gain: string, level: string, gainNum: 
   }
 }
 
+const DAYS_COUNTING_PERCENT = 1.04
 
 export function LevelsPage() {
-  const coins = useAppStore((s) => s.userWallet?.terroCoins)
+  const coins = useAppStore((s) => s.userWallet.terroCoins);
 
 
   if (coins === undefined) {
@@ -52,19 +55,27 @@ export function LevelsPage() {
   const levelIndex = levels.findIndex(({level}) => level == currentLevel);
 
   let progressPercent = 100;
+  let coinsToNextLevel = 0;
 
-  let nextLevel: number | null = null;
 
   if (!isLastLevel) {
     const levelProgressStart = levels[levelIndex].coins;
-    nextLevel = levels[levelIndex+1].coins;
+    const nextLevel = levels[levelIndex+1].coins;
 
+    coinsToNextLevel = nextLevel - coins;
     const stageVolume = nextLevel - levelProgressStart;
     const stageCoinsCount = coins - levelProgressStart;
 
     progressPercent = (stageCoinsCount / stageVolume) * 100
   }
 
+  const holdDays = useMemo(() => {
+    if (!isLastLevel && coins !== 0) {
+      return binarySearch((mid) => levels[levelIndex+1].coins >= coins * DAYS_COUNTING_PERCENT ** mid, 1, 5 * 365);
+    }
+
+    return "inf";
+  }, [coins])
 
   return (
     <Page>
@@ -88,7 +99,7 @@ export function LevelsPage() {
           <span>{isLastLevel ? "inf" : currentLevel + 1 }</span>
         </div>
         <span className={styles.progressHint}>
-          4 days hold / Deposit 20$
+          {holdDays} days hold / Deposit {coinsToNextLevel}$
         </span>
       </section>
 
