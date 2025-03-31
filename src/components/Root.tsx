@@ -4,8 +4,8 @@ import '@gravity-ui/uikit/styles/styles.css';
 
 function ErrorBoundaryError({ error }: { error: unknown }) {
   return (
-    <div style={{backgroundColor:"white", color: "red"}}>
-      <p>An unhandled error occurred:</p>
+    <div style={{color: "#e6400d"}}>
+      <p>An unhandled fatal error occurred, please contact with support:</p>
       <blockquote>
         <code>
           {error instanceof Error
