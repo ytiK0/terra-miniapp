@@ -7,13 +7,11 @@ import {
   $debug,
   init as initSDK,
 } from '@telegram-apps/sdk-react';
-import eruda from "eruda";
 
 /**
  * Initializes the application and configures its dependencies.
  */
 export function init(debug: boolean): void {
-  eruda.init()
   // Set @telegram-apps/sdk-react debug mode.
   $debug.set(debug);
 
