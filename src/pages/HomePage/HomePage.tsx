@@ -30,8 +30,6 @@ type TourHole = {
   borderRadius?: number | string
 }
 
-
-
 export const START_TOUR_PARAM_NAME = "start-tour";
 
 export const HomePage: FC = () => {
@@ -99,7 +97,6 @@ export const HomePage: FC = () => {
       console.error("target not found", tourSteps[tourStep].targetId);
       return;
     }
-    console.log(target)
 
     const rect = target.getBoundingClientRect();
     console.log("bounding rect", rect)
@@ -112,15 +109,17 @@ export const HomePage: FC = () => {
 
     setHole({
       left, top, height , width, borderRadius
-    })
+    });
   }, [tourStep, isTourStart]);
 
   useEffect(() => {
-    console.log(hole)
+    console.log("hole", hole)
   }, [hole]);
 
 
   useEffect(() => {
+    ["lion", "usdt-statistic-box", "teero-statistic-box", "deals", "faq", "wallet", "rating", "home", "levels", "profile"]. forEach(id=>console.log(id, document.getElementById(id)?.getBoundingClientRect()))
+
     async function startTour() {
       let startTour = true;
 
