@@ -99,7 +99,6 @@ export const HomePage: FC = () => {
     }
 
     const rect = target.getBoundingClientRect();
-    console.log("bounding rect", rect)
 
     const borderRadius = tourSteps[tourStep].borderRadius
     const width = rect.width * (tourSteps[tourStep].widthTransform || 1);
@@ -113,13 +112,6 @@ export const HomePage: FC = () => {
   }, [tourStep, isTourStart]);
 
   useEffect(() => {
-    console.log("hole", hole)
-  }, [hole]);
-
-
-  useEffect(() => {
-    ["lion", "usdt-statistic-box", "teero-statistic-box", "deals", "faq", "wallet", "rating", "home", "levels", "profile"]. forEach(id=>console.log(id, document.getElementById(id)?.getBoundingClientRect()))
-
     async function startTour() {
       let startTour = true;
 
