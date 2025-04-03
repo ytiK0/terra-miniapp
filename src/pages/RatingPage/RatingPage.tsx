@@ -16,7 +16,7 @@ import {initData, useSignal} from "@telegram-apps/sdk-react";
 export function RatingPage() {
   const userId = useSignal(initData.user)?.id;
   const userCoins = useAppStore((s) => s.userWallet?.terroCoins) || 0;
-  const [topUsers, setTopUsers] = useState<{name: string, coins: number, id: string, photoURL: string}[]>([]);
+  const [topUsers, setTopUsers] = useState<{name: string, id: string, coins: number, photoURL: string}[]>([]);
   const [userPlace, setUserPlace] = useState<number | string>("+999");
   const [isLoading, setIsLoading] = useState(true)
 

@@ -40,8 +40,8 @@ export function WithdrawListPage() {
                       <div className={style.userWrapper}>
                         <span>{user.name}</span>
                         <div className={style.userStats}>
-                          {getStatus(user.coins).toUpperCase()}
-                          <span className={"orange"}> {calcLevel(user.coins)}LVL</span>
+                          {getStatus(Number(user.coins)).toUpperCase()}
+                          <span className={"orange"}> {calcLevel(Number(user.coins))}LVL</span>
                         </div>
                       </div>
                       <div className={style.amountBadge}>

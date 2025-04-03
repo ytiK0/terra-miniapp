@@ -44,7 +44,7 @@ export function App() {
           })
             .then(({coins, usdt, depositedUsdt, earnedUsdt, todayProfit}) => setUserWallet(
               {
-                terroCoins: coins,
+                terroCoins: parseFloat(coins),
                 usdt: parseFloat(usdt),
                 depositedUsdt: parseFloat(depositedUsdt),
                 earnedUsdt: parseFloat(earnedUsdt),
