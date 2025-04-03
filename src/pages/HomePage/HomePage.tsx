@@ -35,7 +35,7 @@ export const START_TOUR_PARAM_NAME = "start-tour";
 export const HomePage: FC = () => {
   const user = useSignal(initData.user);
   const [searchParams, useSearchParam] = useSearchParams();
-  const {terroCoins, usdt, todayProfit} = useAppStore((s) => s.userWallet);
+  const {terroCoins, usdt, todayProfit, earnedUsdt} = useAppStore((s) => s.userWallet);
   const level = calcLevel(terroCoins);
   const lion = terroCoins === 0 ? "0" : getStatus(terroCoins).toLowerCase();
   useUpdateWallet()
@@ -185,8 +185,8 @@ export const HomePage: FC = () => {
               </span>
             <span style={{fontSize: "0.875em", lineHeight: "110%", color: todayProfit > 0 ? "#F89007" : "#989898"}}>
                 {todayProfit >= 0 ? "+" : "-"}
-              {todayProfit}$
-              {todayProfit > 0 ? <SuccessArrow className={style.profitArrow}/> :
+              {todayProfit || earnedUsdt}$
+              {(todayProfit || earnedUsdt) > 0 ? <SuccessArrow className={style.profitArrow}/> :
                 <FailureArrow className={clx(style.profitArrow, style.profitArrowFail)}/>}
               </span>
           </div>
