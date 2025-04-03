@@ -10,7 +10,7 @@ export interface UserBackend {
   telegramId: string
   name: string
   link: string
-  coins: number
+  coins: string
   usdt: string
   depositedUsdt: string
   earnedUsdt: string
@@ -39,7 +39,7 @@ export async function getUserWallet(id: string, signal?: AbortSignal): Promise<U
       }
 
       const usdt = parseFloat(resJson.usdt);
-      const terroCoins = resJson.coins;
+      const terroCoins = parseFloat(resJson.coins);
       const earnedUsdt = parseFloat(resJson.earnedUsdt);
       const depositedUsdt = parseFloat(resJson.depositedUsdt);
       const todayProfit = parseFloat((usdt * (resJson.previousDayProfit?.percent || 0)).toFixed(2));
