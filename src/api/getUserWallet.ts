@@ -1,4 +1,5 @@
 import {UserWallet} from "@/state/appState.ts";
+import {mapUserToWallet} from "@/helpers/mapUserToWallet.ts";
 
 export interface Profit {
   date: string,
@@ -27,10 +28,6 @@ export interface User {
   photoURL: string
 }
 
-function parseFloatToFixed(string: string, fractionDigits: number) {
-  return parseFloat(parseFloat(string).toFixed(fractionDigits));
-}
-
 export async function getUserWallet(id: string, signal?: AbortSignal): Promise<UserWallet> {
   const params = new URLSearchParams({
     tgId: id
@@ -42,12 +39,7 @@ export async function getUserWallet(id: string, signal?: AbortSignal): Promise<U
         throw resJson;
       }
 
-      const usdt = parseFloatToFixed(resJson.usdt, 2);
-      const terroCoins = parseFloatToFixed(resJson.coins, 2);
-      const earnedUsdt = parseFloatToFixed(resJson.earnedUsdt, 2);
-      const depositedUsdt = parseFloatToFixed(resJson.depositedUsdt, 2);
-      const todayProfit = parseFloat((usdt * (resJson.previousDayProfit?.percent || 0)).toFixed(2));
-      return { usdt, terroCoins, earnedUsdt, depositedUsdt, todayProfit };
+      return mapUserToWallet(resJson);
     });
 
 

@@ -8,9 +8,11 @@ import {useAppStore} from "@/state/appState.ts";
 import {ArrowDown, ArrowsRotateRight, ArrowUp} from "@gravity-ui/icons";
 import {Link} from "@/components/Link/Link.tsx";
 import {useUpdateWallet} from "@/hooks/useUpdateWallet.ts";
+import {prettifyFloat} from "@/helpers/pretifyFlat.ts";
 
 export function WalletPage() {
   const {terroCoins, depositedUsdt, earnedUsdt, usdt} = useAppStore((s) => s.userWallet);
+
 
   useUpdateWallet();
 
@@ -69,13 +71,13 @@ export function WalletPage() {
                 USDT
               </div>
               <span className={style.gray}>Deposited</span>
-              <span className={style.gray} style={{textAlign: "right"}}>{depositedUsdt}USDT</span>
+              <span className={style.gray} style={{textAlign: "right"}}>{depositedUsdt} USDT</span>
               <span className={style.gray}></span>
               <span className={style.gray}>Earned</span>
-              <span className={style.gray} style={{textAlign: "right"}}>{earnedUsdt}USDT</span>
+              <span className={style.gray} style={{textAlign: "right"}}>{prettifyFloat(earnedUsdt)}USDT</span>
             </div>
             <div className={style.line}></div>
-            <div className={style.result}><span style={{color: "#F89007"}}>{usdt}</span>USDT</div>
+            <div className={style.result}><span style={{color: "#F89007"}}>{usdt} </span>USDT</div>
           </div>
         </div>
       </main>

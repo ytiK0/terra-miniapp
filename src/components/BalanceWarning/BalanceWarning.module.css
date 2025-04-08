@@ -9,10 +9,10 @@
     background-color: #232527EE;
     border-radius: 16px;
     color: #EAEAEA;
-    padding: 0 16px 16px;
 }
 
 .warningMessageWrapper {
+    padding: 0 16px 16px;
     background: #1D1E21EE;
     border-radius: 16px;
 }

@@ -31,11 +31,11 @@ function Warning({ hidden, children, onClose }: PropsWithChildren<WarningProps>)
   );
 }
 
-export function BalanceWarning({hidden, message, onClose}: WarningProps) {
+export function BalanceWarning({hidden, message}: Omit<WarningProps, "onClose">) {
   const DEFAULT_MESSAGE = "Not enough USDT";
 
   return (
-    <Warning hidden={hidden} onClose={onClose}>
+    <Warning hidden={hidden} onClose={() => {}}>
       <CircleExclamationFill width={20} height={20}/>
       <div>
         { message || DEFAULT_MESSAGE }

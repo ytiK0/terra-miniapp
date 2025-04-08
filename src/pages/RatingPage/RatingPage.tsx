@@ -9,16 +9,16 @@ import {getTopUsers} from "@/api/getTopUsers.ts";
 import {useAppStore} from "@/state/appState.ts";
 import {Badge} from "@/components/Badge/Badge.tsx";
 import {Link} from "@/components/Link/Link.tsx";
-import {ChevronRight} from "@gravity-ui/icons";
 import {getUserPlace} from "@/api/getUserPlace.ts";
 import {initData, useSignal} from "@telegram-apps/sdk-react";
+import {shortNumber} from "@/helpers/shortNumber.ts";
 
 export function RatingPage() {
   const userId = useSignal(initData.user)?.id;
   const userCoins = useAppStore((s) => s.userWallet?.terroCoins) || 0;
   const [topUsers, setTopUsers] = useState<{name: string, id: string, coins: number, photoURL: string}[]>([]);
   const [userPlace, setUserPlace] = useState<number | string>("+999");
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   async function loadTop(signal?: AbortSignal) {
     if (userId === undefined) {
@@ -38,7 +38,7 @@ export function RatingPage() {
     loadTop(signal).then(() => {setIsLoading(() => false)});
 
     return () => controller.abort("Load canceled")
-  }, [])
+  }, []);
 
   if (isLoading) {
     return <Page><Logo/><Spin className={styles.spinner} size={"l"}/></Page>
@@ -78,13 +78,13 @@ export function RatingPage() {
       <section className={styles.userStatSection}>
         <div className={styles.userStatBox}>
           <Badge className={styles.statBoxBadge}>
-            <span >
-              {userCoins}T
+            <span>
+              {shortNumber(userCoins, 0)}T
             </span>
           </Badge>
           <Link to={"/wallet"}>
             <span className={styles.statBoxLink}>
-              BALANCE <ChevronRight width={21} height={21}/>
+              BALANCE {">"}
             </span>
           </Link>
         </div>
@@ -95,7 +95,7 @@ export function RatingPage() {
             </span>
           </Badge>
           <span className={styles.statBoxLink}>
-            RATING <ChevronRight width={21} height={21}/>
+            RATING {">"}
           </span>
         </div>
       </section>
@@ -105,7 +105,7 @@ export function RatingPage() {
             <div className={styles.topLine} key={user.name}>
               <div className={"orange"} style={{textAlign: "right"}}>{i+1}</div>
               <span className={styles.topLineName}>{user.name}</span>
-              <div className={styles.topLineCoins}>{user.coins}T</div>
+              <div className={styles.topLineCoins} >{user.coins}T</div>
             </div>
           ))
         }

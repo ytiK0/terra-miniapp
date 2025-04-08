@@ -86,7 +86,7 @@
     height: 1px;
     background-color: #989898;
     border-radius: 1px;
-    margin: min(20px, .1vh) 0;
+    margin: min(20px, .15vh) 0;
 }
 
 .result {

@@ -21,6 +21,8 @@ import {statusStats} from "@/pages/LevelsPage/LevelsPage.tsx";
 import TourBox from "@/components/TourBox/TourBox.tsx";
 import {useSearchParams} from "react-router-dom";
 import {tourSteps} from "@/pages/HomePage/tourConfig.ts";
+import {shortNumber} from "@/helpers/shortNumber.ts";
+import {prettifyFloat} from "@/helpers/pretifyFlat.ts";
 
 type TourHole = {
   top: number,
@@ -176,16 +178,17 @@ export const HomePage: FC = () => {
               <UsdtIcon/>
               <span>
                   USDT
-                </span>
+              </span>
             </Badge>
           </Link>
-          <div className={style.value}>
-              <span style={{fontSize: "2.75em", lineHeight: "100%"}}>
-                {usdt}<span style={{fontSize: "0.75em"}}>$</span>
+          <div className={style.value} style={{marginTop: 10}}>
+              <span style={{fontSize: "2.25em", lineHeight: "100%"}}>
+                {prettifyFloat(usdt )}
+                <span style={{fontSize: "0.75em"}}>$</span>
               </span>
             <span style={{fontSize: "0.875em", lineHeight: "110%", color: todayProfit > 0 ? "#F89007" : "#989898"}}>
                 {todayProfit >= 0 ? "+" : "-"}
-              {todayProfit || earnedUsdt}$
+              {shortNumber(todayProfit || earnedUsdt)}$
               {(todayProfit || earnedUsdt) > 0 ? <SuccessArrow className={style.profitArrow}/> :
                 <FailureArrow className={clx(style.profitArrow, style.profitArrowFail)}/>}
               </span>
@@ -198,7 +201,7 @@ export const HomePage: FC = () => {
             </Badge>
           </Link>
           <div className={style.value}>
-            <span style={{fontSize: "2.625em", lineHeight: "100%"}}>{terroCoins}</span>
+            <span style={{fontSize: "2.25em", lineHeight: "100%"}}>{prettifyFloat(terroCoins)}</span>
             <span style={{fontSize: "1em"}}>POINTS</span>
             <span style={{fontSize: "0.875em", color: "#F89007"}}>
                 +{statusStats[userStatus].gainNum}%
@@ -208,7 +211,7 @@ export const HomePage: FC = () => {
       </section>
       <section className={style.lionSection} id={"lion"}>
         <img className={style.lionImg} src={`lions/${lion}.png`} alt="lion"/>
-        <span style={{fontSize: 22, lineHeight: "100%"}}>
+        <span style={{fontSize: 22, lineHeight: "42px"}}>
           <span style={{fontSize: 44, color: "#F88F07"}}>{level}</span>
           <span style={{display: "inline-block", marginLeft: 5}}>LVL</span>
           <Link to={"/information"} style={{marginLeft: 5}}>

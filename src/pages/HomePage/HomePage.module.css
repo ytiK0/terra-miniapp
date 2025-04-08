@@ -10,9 +10,7 @@
 
 .statisticContainer {
     display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin: 10px 30px 0;
+    justify-content: space-evenly;
 }
 
 .value {

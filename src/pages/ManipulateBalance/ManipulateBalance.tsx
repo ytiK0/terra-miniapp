@@ -88,9 +88,9 @@ function ManipulateBalance({type}: {type: "receive"|"send"}) {
       </section>
       <section className={style.numpadWrapper}>
         <Numpad onBtnClick={handleNumpadBtnClick}/>
-        <div className={style.confirmBtn} onClick={type === "receive" ? handelReceive : handelSend}>CONFIRM</div>
+        <button className={style.confirmBtn} onClick={type === "receive" ? handelReceive : handelSend}>CONFIRM</button>
       </section>
-      <BalanceWarning hidden={isBalanceWarningVisible} message={balanceWarningMessage} onClose={toggleWarning} />
+      <BalanceWarning hidden={isBalanceWarningVisible} message={balanceWarningMessage} />
       <AlreadyHasPaymentWarning hidden={isPaymentWarningVisible} payUrl={lostPayUrl} onClose={togglePayment} />
       <ProcessStatusModal status={status} />
       <ReviewModal dialogRef={reviewModalRef} amount={enterValue} />
